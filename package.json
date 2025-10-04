@@ -1,0 +1,42 @@
+{
+  "name": "appahouse-portfolio",
+  "version": "1.0.0",
+  "description": "A minimalist portfolio website showcasing full-stack Tanstack Start apps and Docker-deployed applications",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./css/input.css -o ./css/output.css --watch",
+    "build": "tailwindcss -i ./css/input.css -o ./css/output.css",
+    "dev": "node start-dev.js",
+    "dev:css": "npm run build:css",
+    "dev:server": "node dev-server.js",
+    "start": "npm run build"
+  },
+  "keywords": ["portfolio", "tanstack", "docker", "full-stack"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "handlebars": "^4.7.8"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.0",
+    "postcss": "^8.4.21",
+    "autoprefixer": "^10.4.14",
+    "@tailwindcss/typography": "^0.5.9"
+  },
+  "scripts": {
+    "build:css": "tailwindcss -i ./css/input.css -o ./css/output.css --watch",
+    "build": "tailwindcss -i ./css/input.css -o ./css/output.css",
+    "dev": "node start-dev.js",
+    "dev:css": "npm run build:css",
+    "dev:server": "node dev-server.js",
+    "start": "npm run build",
+    "blog:new": "node scripts/blog-generator.js new",
+    "blog:from-code": "node scripts/blog-generator.js from-code",
+    "blog:list": "node scripts/blog-generator.js list",
+    "blog:quick-md": "node scripts/create-blog.js from-md",
+    "blog:quick-code": "node scripts/create-blog.js from-code",
+    "blog:batch": "node scripts/create-blog.js batch",
+    "blog:update-index": "node scripts/update-blog-index.js"
+  }
+}

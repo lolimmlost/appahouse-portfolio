@@ -1,0 +1,77 @@
+{
+  "blog": {
+    "title": "AppaHouse Blog",
+    "description": "A blog about web development, Tanstack Start, Docker, and modern technologies",
+    "author": "AppaHouse Team",
+    "baseUrl": "https://appahouse.com",
+    "postsDirectory": "blog",
+    "templatesDirectory": "templates",
+    "outputDirectory": "blog"
+  },
+  "postTemplate": {
+    "frontmatter": {
+      "title": "",
+      "date": "",
+      "excerpt": "",
+      "tags": [],
+      "author": "",
+      "featuredImage": "",
+      "published": true,
+      "category": "",
+      "readTime": true
+    },
+    "content": {
+      "includeTableOfContents": true,
+      "includeCodeBlockCopy": true,
+      "includeRelatedPosts": true,
+      "includeAuthorBio": true,
+      "includeSocialSharing": true
+    }
+  },
+  "categories": [
+    {
+      "name": "Tutorial",
+      "description": "Step-by-step guides and tutorials"
+    },
+    {
+      "name": "Case Study",
+      "description": "Real-world examples and case studies"
+    },
+    {
+      "name": "Best Practices",
+      "description": "Best practices and recommendations"
+    },
+    {
+      "name": "News",
+      "description": "Latest news and updates"
+    }
+  ],
+  "tags": [
+    "Tanstack Start",
+    "Docker",
+    "React",
+    "TypeScript",
+    "JavaScript",
+    "DevOps",
+    "Tutorial",
+    "WebSocket",
+    "Real-time",
+    "CSS",
+    "Tailwind",
+    "Performance",
+    "Security"
+  ],
+  "social": {
+    "twitter": "https://twitter.com/appahouse",
+    "github": "https://github.com/appahouse",
+    "linkedin": "https://linkedin.com/in/appahouse"
+  },
+  "features": {
+    "syntaxHighlighting": true,
+    "darkMode": true,
+    "rssFeed": true,
+    "search": true,
+    "comments": false,
+    "analytics": true
+  }
+}

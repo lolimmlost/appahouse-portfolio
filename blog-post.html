@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Post - AppaHouse Portfolio</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="description" content="A minimalist portfolio showcasing full-stack Tanstack Start apps and Docker-deployed applications">
+  <link rel="stylesheet" href="css/output.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="font-sans antialiased">
+  <!-- Header/Navigation -->
+  <header class="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-sm dark:border-gray-700 dark:bg-gray-900/80">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <div class="flex items-center">
+          <a href="index.html" class="text-xl font-bold text-primary-600 dark:text-primary-400">AppaHouse</a>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex md:items-center md:space-x-6">
+          <a href="index.html#home" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Home</a>
+          <a href="index.html#projects" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Projects</a>
+          <a href="index.html#skills" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Skills</a>
+          <a href="index.html#case-studies" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Case Studies</a>
+          <a href="index.html#demos" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Demos</a>
+          <a href="index.html#blog" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Blog</a>
+          <a href="index.html#contact" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Contact</a>
+          
+          <!-- Dark Mode Toggle -->
+          <button id="dark-mode-toggle" class="p-2 text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">
+            <svg class="hidden h-6 w-6 dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <svg class="h-6 w-6 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          </button>
+        </nav>
+        
+        <!-- Mobile menu button -->
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="p-2 text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="hidden md:hidden">
+      <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+        <a href="index.html#home" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Home</a>
+        <a href="index.html#projects" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Projects</a>
+        <a href="index.html#skills" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Skills</a>
+        <a href="index.html#case-studies" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Case Studies</a>
+        <a href="index.html#demos" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Demos</a>
+        <a href="index.html#blog" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Blog</a>
+        <a href="index.html#contact" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Contact</a>
+        
+        <!-- Dark Mode Toggle for Mobile -->
+        <div class="flex items-center px-3 py-2">
+          <button id="mobile-dark-mode-toggle" class="p-2 text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">
+            <svg class="hidden h-6 w-6 dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <svg class="h-6 w-6 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          </button>
+          <span class="ml-2 text-gray-700 dark:text-gray-300">Dark Mode</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <!-- Loading indicator -->
+        <div id="loading" class="text-center py-12">
+          <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+          <p class="mt-4 text-gray-600 dark:text-gray-400">Loading blog post...</p>
+        </div>
+        
+        <!-- Blog post content -->
+        <div id="blog-post" class="hidden">
+          <!-- Blog post will be rendered here -->
+        </div>
+        
+        <!-- Related posts -->
+        <div id="related-posts" class="hidden">
+          <!-- Related posts will be rendered here -->
+        </div>
+        
+        <!-- Error message -->
+        <div id="error-message" class="hidden">
+          <!-- Error will be shown here -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="md:col-span-2">
+          <h3 class="text-lg font-semibold mb-4">AppaHouse</h3>
+          <p class="text-gray-400 mb-4">
+            A minimalist portfolio showcasing full-stack Tanstack Start apps and Docker-deployed applications.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white">
+              <span class="sr-only">GitHub</span>
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+              </svg>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white">
+              <span class="sr-only">LinkedIn</span>
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+              </svg>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white">
+              <span class="sr-only">Twitter</span>
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html#home" class="text-gray-400 hover:text-white">Home</a></li>
+            <li><a href="index.html#projects" class="text-gray-400 hover:text-white">Projects</a></li>
+            <li><a href="index.html#skills" class="text-gray-400 hover:text-white">Skills</a></li>
+            <li><a href="index.html#case-studies" class="text-gray-400 hover:text-white">Case Studies</a></li>
+            <li><a href="index.html#demos" class="text-gray-400 hover:text-white">Demos</a></li>
+            <li><a href="index.html#blog" class="text-gray-400 hover:text-white">Blog</a></li>
+            <li><a href="index.html#contact" class="text-gray-400 hover:text-white">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Technologies</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white">Tanstack Start</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Docker</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">React</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">TypeScript</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Tailwind CSS</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+        <p>&copy; 2023 AppaHouse. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
+  <script src="js/dark-mode.js"></script>
+  <script src="components/blog-renderer.js"></script>
+  <script src="js/blog.js"></script>
+  
+  <script>
+    // Handle blog post loading
+    document.addEventListener('DOMContentLoaded', async function() {
+      const loading = document.getElementById('loading');
+      const blogPost = document.getElementById('blog-post');
+      const relatedPosts = document.getElementById('related-posts');
+      const errorMessage = document.getElementById('error-message');
+      
+      // Extract post ID from URL hash
+      const hash = window.location.hash;
+      const postId = hash.replace('#blog/', '');
+      
+      if (!postId) {
+        // No post ID, redirect to blog page
+        window.location.href = 'index.html#blog';
+        return;
+      }
+      
+      try {
+        // Initialize blog manager
+        await blogManager.init();
+        
+        // Get the blog post
+        const post = blogManager.blogRenderer.getBlogPost(postId);
+        
+        if (!post) {
+          throw new Error('Blog post not found');
+        }
+        
+        // Render the blog post
+        await blogManager.blogRenderer.renderBlogPost(postId, blogPost);
+        
+        // Render related posts
+        blogManager.renderRelatedPosts(postId, relatedPosts);
+        
+        // Hide loading and show content
+        loading.classList.add('hidden');
+        blogPost.classList.remove('hidden');
+        relatedPosts.classList.remove('hidden');
+        
+        // Update page title
+        document.title = `${post.title} - AppaHouse Portfolio`;
+        
+        // Update meta description
+        const metaDescription = document.querySelector('meta[name="description"]');
+        if (metaDescription) {
+          metaDescription.content = post.excerpt;
+        }
+        
+      } catch (error) {
+        console.error('Error loading blog post:', error);
+        
+        // Show error message
+        loading.classList.add('hidden');
+        errorMessage.innerHTML = `
+          <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6 text-center">
+            <div class="text-red-600 dark:text-red-400 text-lg font-medium mb-2">Error</div>
+            <div class="text-red-500 dark:text-red-300 mb-4">Failed to load the blog post. It may not exist or there was an error loading it.</div>
+            <a href="index.html#blog" class="inline-block px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors">
+              Back to Blog
+            </a>
+          </div>
+        `;
+        errorMessage.classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
