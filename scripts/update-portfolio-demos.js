@@ -187,24 +187,54 @@ class PortfolioDemoUpdater {
         </a>`
       : '';
 
+    // Generate status badge
+    const statusBadge = this.generateStatusBadge(demo.status);
+
     return `
           <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
             <div class="p-6">
-              <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">${demo.title}</h3>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white">${demo.title}</h3>
+                ${statusBadge}
+              </div>
               <p class="text-base text-gray-500 dark:text-gray-400 mb-4">
                 ${demo.description}
               </p>
               
               ${embedContent}
               
-              <div class="flex justify-between items-center">
-                <div class="flex space-x-2">
+              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <div class="flex flex-wrap gap-2">
                   ${techBadges}
                 </div>
                 ${fullscreenLink}
               </div>
             </div>
           </div>`;
+  }
+
+  /**
+   * Generate status badge HTML
+   */
+  generateStatusBadge(status) {
+    switch(status) {
+      case 'active':
+        return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+          🟢 Active
+        </span>`;
+      case 'in-progress':
+        return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+          🟡 In Progress
+        </span>`;
+      case 'inactive':
+        return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
+          🔴 Inactive
+        </span>`;
+      default:
+        return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+          ⚪ ${status}
+        </span>`;
+    }
   }
 }
 

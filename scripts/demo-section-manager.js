@@ -325,11 +325,25 @@ class DemoSectionManager {
     }
 
     this.sections.forEach((section, index) => {
-      const status = section.status === 'active' ? '🟢' : '🔴';
+      let statusIcon;
+      switch(section.status) {
+        case 'active':
+          statusIcon = '🟢';
+          break;
+        case 'in-progress':
+          statusIcon = '🟡';
+          break;
+        case 'inactive':
+          statusIcon = '🔴';
+          break;
+        default:
+          statusIcon = '⚪';
+      }
+      
       const featured = section.featured ? '⭐' : '  ';
       const techs = section.technologies.length > 0 ? section.technologies.slice(0, 3).join(', ') : 'None';
       
-      console.log(`${index + 1}. ${status} ${featured} ${chalk.bold(section.title)}`);
+      console.log(`${index + 1}. ${statusIcon} ${featured} ${chalk.bold(section.title)}`);
       console.log(`   ID: ${section.id}`);
       console.log(`   Category: ${section.category}`);
       console.log(`   Technologies: ${techs}`);
@@ -497,12 +511,15 @@ if (require.main === module) {
       const technologiesInput = await question('Technologies (comma-separated): ');
       const technologies = technologiesInput.split(',').map(t => t.trim()).filter(t => t);
       
-      const embedUrl = await question('Embed URL (optional): ');
-      const fullscreenUrl = await question('Fullscreen URL (optional): ');
+      const embedUrl = await question('Embed URL (optional, defaults to https://hk.appahouse.com if empty): ') || 'https://hk.appahouse.com';
+      const fullscreenUrl = await question('Fullscreen URL (optional, defaults to https://hk.appahouse.com if empty): ') || 'https://hk.appahouse.com';
       const thumbnail = await question('Thumbnail path (optional): ');
       
       const featuredInput = await question('Feature this demo? (y/N): ');
       const featured = featuredInput.toLowerCase() === 'y' || featuredInput.toLowerCase() === 'yes';
+      
+      console.log(chalk.gray('\nAvailable statuses: active, in-progress, inactive'));
+      const statusInput = await question('Status (active): ') || 'active';
       
       // Create the demo section
       const demoSection = await manager.createDemoSection({
@@ -513,7 +530,8 @@ if (require.main === module) {
         embedUrl: embedUrl.trim(),
         fullscreenUrl: fullscreenUrl.trim(),
         thumbnail: thumbnail.trim(),
-        featured
+        featured,
+        status: statusInput.trim()
       });
       
       console.log(chalk.green('\n✅ Demo section created successfully!'));
@@ -625,14 +643,17 @@ if (require.main === module) {
         ? technologiesInput.split(',').map(t => t.trim()).filter(t => t)
         : demoToUpdate.technologies;
       
-      const embedUrl = await question(`Embed URL (${demoToUpdate.embedUrl}): `) || demoToUpdate.embedUrl;
-      const fullscreenUrl = await question(`Fullscreen URL (${demoToUpdate.fullscreenUrl}): `) || demoToUpdate.fullscreenUrl;
+      const embedUrl = await question(`Embed URL (${demoToUpdate.embedUrl}): `) || demoToUpdate.embedUrl || 'https://hk.appahouse.com';
+      const fullscreenUrl = await question(`Fullscreen URL (${demoToUpdate.fullscreenUrl}): `) || demoToUpdate.fullscreenUrl || 'https://hk.appahouse.com';
       const thumbnail = await question(`Thumbnail path (${demoToUpdate.thumbnail}): `) || demoToUpdate.thumbnail;
       
       const featuredInput = await question(`Featured (${demoToUpdate.featured ? 'y' : 'n'}): `);
       const featured = featuredInput.trim()
         ? featuredInput.toLowerCase() === 'y' || featuredInput.toLowerCase() === 'yes'
         : demoToUpdate.featured;
+      
+      console.log(chalk.gray('\nAvailable statuses: active, in-progress, inactive'));
+      const statusInput = await question(`Status (${demoToUpdate.status}): `) || demoToUpdate.status;
       
       // Update the demo section
       const updatedDemo = await manager.updateDemoSection(demoId.trim(), {
@@ -643,7 +664,8 @@ if (require.main === module) {
         embedUrl: embedUrl.trim(),
         fullscreenUrl: fullscreenUrl.trim(),
         thumbnail: thumbnail.trim(),
-        featured
+        featured,
+        status: statusInput.trim()
       });
       
       console.log(chalk.green('\n✅ Demo section updated successfully!'));

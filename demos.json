@@ -17,17 +17,38 @@
         "PostCSS",
         "Cloudflare Tunnel"
       ],
-      "embedUrl": "http://10.0.0.30:4173",
+      "embedUrl": "https://hk.appahouse.com",
       "fullscreenUrl": "https://hk.appahouse.com",
       "thumbnail": "",
       "featured": true,
       "status": "active",
       "createdAt": "2025-10-05T04:23:04.631Z",
-      "updatedAt": "2025-10-05T04:23:04.631Z"
+      "updatedAt": "2025-10-05T04:38:59.437Z"
+    },
+    {
+      "id": "indigo-sun-florals",
+      "title": "Indigo Sun Florals",
+      "description": "Web-Based E-commerce Platform",
+      "category": "E-commerce",
+      "technologies": [
+        "React 19 + React Compiler",
+        "TanStack Start + Router + Query",
+        "Tailwind CSS v4 + shadcn/ui",
+        "Drizzle ORM + PostgreSQL",
+        "Better Auth"
+      ],
+      "embedUrl": "https://dev1.appahouse.com/products",
+      "fullscreenUrl": "https://dev1.appahouse.com/products",
+      "thumbnail": "",
+      "featured": true,
+      "status": "active",
+      "createdAt": "2025-10-05T04:54:42.855Z",
+      "updatedAt": "2025-10-05T04:57:16.996Z"
     }
   ],
   "categories": [
-    "Productivity"
+    "Productivity",
+    "E-commerce"
   ],
-  "lastUpdated": "2025-10-05T04:23:04.632Z"
+  "lastUpdated": "2025-10-05T04:57:16.996Z"
 }

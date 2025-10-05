@@ -15,11 +15,11 @@
     "PostCSS",
     "Cloudflare Tunnel"
   ],
-  "embedUrl": "http://10.0.0.30:4173",
+  "embedUrl": "https://hk.appahouse.com",
   "fullscreenUrl": "https://hk.appahouse.com",
   "thumbnail": "",
   "featured": true,
   "status": "active",
   "createdAt": "2025-10-05T04:23:04.631Z",
-  "updatedAt": "2025-10-05T04:23:04.631Z"
+  "updatedAt": "2025-10-05T04:38:59.437Z"
 }
