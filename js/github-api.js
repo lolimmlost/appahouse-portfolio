@@ -3,20 +3,19 @@ const githubActivityContainer = document.getElementById('github-activity');
 
 if (!githubActivityContainer) return;
 
-// Replace with your GitHub username
-const githubUsername = 'Lolimmlost';
-
-// GitHub API URLs
-const userApiUrl = `https://api.github.com/users/${githubUsername}`;
-const eventsApiUrl = `https://api.github.com/users/${githubUsername}/events/public`;
-const reposApiUrl = `https://api.github.com/users/${githubUsername}/repos?per_page=100&sort=updated`;
+// Get GitHub configuration
+const githubUsername = window.GITHUB_CONFIG ? window.GITHUB_CONFIG.username : 'YOUR_GITHUB_USERNAME';
+const userApiUrl = window.GITHUB_CONFIG ? window.GITHUB_CONFIG.userApiUrl : `https://api.github.com/users/${githubUsername}`;
+const eventsApiUrl = window.GITHUB_CONFIG ? window.GITHUB_CONFIG.eventsApiUrl : `https://api.github.com/users/${githubUsername}/events/public`;
+const reposApiUrl = window.GITHUB_CONFIG ? window.GITHUB_CONFIG.reposApiUrl : `https://api.github.com/users/${githubUsername}/repos?per_page=100&sort=updated`;
 
 // Cache configuration
-const CACHE_KEY_PREFIX = `github-${githubUsername}`;
+const cacheConfig = window.GITHUB_CONFIG ? window.GITHUB_CONFIG.cache : { duration: 30 * 60 * 1000, keyPrefix: `github-${githubUsername}` };
+const CACHE_KEY_PREFIX = cacheConfig.keyPrefix;
 const USER_CACHE_KEY = `${CACHE_KEY_PREFIX}-user`;
 const EVENTS_CACHE_KEY = `${CACHE_KEY_PREFIX}-events`;
 const REPOS_CACHE_KEY = `${CACHE_KEY_PREFIX}-repos`;
-const CACHE_DURATION = 30 * 60 * 1000; // 30 minutes in milliseconds
+const CACHE_DURATION = cacheConfig.duration;
 
 // Function to get cached data
 function getCachedData(cacheKey) {
@@ -119,8 +118,8 @@ return colors[language] || '#586069';
 
 // Function to create contribution graph
 function createContributionGraph(events) {
-// Get the last 52 weeks (1 year)
-const weeks = 52;
+// Get the last 12 weeks (3 months) - GitHub API limitation
+const weeks = 12;
 const daysInWeek = 7;
 const graph = [];
 
@@ -135,7 +134,7 @@ for (let i = 0; i < weeks; i++) {
 
 // Count contributions for each day
 events.forEach(event => {
-  if (event.type === 'PushEvent' || event.type === 'IssuesEvent' || 
+  if (event.type === 'PushEvent' || event.type === 'IssuesEvent' ||
       event.type === 'PullRequestEvent' || event.type === 'CreateEvent') {
     const eventDate = new Date(event.created_at);
     const daysAgo = Math.floor((new Date() - eventDate) / (1000 * 60 * 60 * 24));
@@ -161,16 +160,17 @@ graph.forEach(week => {
 
 // Generate HTML for the graph
 let html = '<div class="mt-4">';
-html += '<div class="text-xs text-gray-500 dark:text-gray-400 mb-2">Contributions in the last year</div>';
+html += '<div class="text-xs text-gray-500 dark:text-gray-400 mb-2">Contributions in the last 3 months</div>';
+html += '<div class="text-xs text-gray-400 dark:text-gray-500 mb-2 italic">Note: GitHub API only shows recent activity</div>';
 html += '<div class="flex flex-wrap gap-1">';
 
 // Month labels
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const currentMonth = new Date().getMonth();
 html += '<div class="w-full flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">';
-for (let i = 0; i < 12; i++) {
+for (let i = 0; i < 3; i++) {
   const monthIndex = (currentMonth - i + 12) % 12;
-  html += `<span class="w-8 text-right">${months[monthIndex]}</span>`;
+  html += `<span class="w-24 text-right">${months[monthIndex]}</span>`;
 }
 html += '</div>';
 
@@ -230,6 +230,11 @@ async function fetchGitHubUser() {
     return cachedData;
   }
 
+  return fetchGitHubUserUncached();
+}
+
+// Function to fetch GitHub user data without cache
+async function fetchGitHubUserUncached() {
   try {
     const response = await fetch(userApiUrl);
     
@@ -257,6 +262,11 @@ async function fetchGitHubRepos() {
     return cachedData;
   }
 
+  return fetchGitHubReposUncached();
+}
+
+// Function to fetch GitHub repositories without cache
+async function fetchGitHubReposUncached() {
   try {
     const response = await fetch(reposApiUrl);
     
@@ -277,24 +287,31 @@ async function fetchGitHubRepos() {
 }
 
 // Function to fetch GitHub activity
-async function fetchGitHubActivity() {
+async function fetchGitHubActivity(forceRefresh = false) {
   // Show loading state
   showLoading();
 
-  // Check if we have cached data
-  const cachedEvents = getCachedData(EVENTS_CACHE_KEY);
-
   try {
+    // If forceRefresh is true, clear the cache
+    if (forceRefresh) {
+      localStorage.removeItem(USER_CACHE_KEY);
+      localStorage.removeItem(REPOS_CACHE_KEY);
+      localStorage.removeItem(EVENTS_CACHE_KEY);
+    }
+
+    // Check if we have cached data (only if not forcing refresh)
+    const cachedEvents = forceRefresh ? null : getCachedData(EVENTS_CACHE_KEY);
+
     // Fetch user data and repositories in parallel
     const [userData, reposData] = await Promise.all([
-      fetchGitHubUser(),
-      fetchGitHubRepos()
+      forceRefresh ? fetchGitHubUserUncached() : fetchGitHubUser(),
+      forceRefresh ? fetchGitHubReposUncached() : fetchGitHubRepos()
     ]);
     
     // If we have cached events, use them
     let events = cachedEvents;
     
-    // If no cached events, fetch them
+    // If no cached events or forcing refresh, fetch them
     if (!events) {
       const response = await fetch(eventsApiUrl);
       
@@ -340,7 +357,7 @@ async function fetchGitHubActivity() {
         <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">Unable to load GitHub activity</h3>
         <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">${error.message}</p>
         <div class="mt-6">
-          <button onclick="fetchGitHubActivity()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+          <button onclick="fetchGitHubActivity(true)" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
             Try Again
           </button>
         </div>
@@ -686,12 +703,19 @@ html += `
 // Add a link to the GitHub profile
 html += `
   <div class="mt-6 text-center">
-    <a href="https://github.com/${githubUsername}" target="_blank" rel="noopener noreferrer" 
+    <a href="https://github.com/${githubUsername}" target="_blank" rel="noopener noreferrer"
        class="inline-flex items-center text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
       <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 24 24">
         <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
       </svg>
       View GitHub Profile
+    </a>
+    <a href="https://github.com/${githubUsername}?tab=contributions" target="_blank" rel="noopener noreferrer"
+       class="inline-flex items-center ml-4 text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+      <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 24 24">
+        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+      </svg>
+      Full Contribution Graph
     </a>
   </div>
 `;
@@ -709,7 +733,7 @@ html += `
 // Add refresh button
 html += `
   <div class="mt-4 text-center">
-    <button onclick="fetchGitHubActivity()" class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-primary-700 bg-primary-100 hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:text-primary-200 dark:bg-primary-900 dark:hover:bg-primary-800">
+    <button onclick="fetchGitHubActivity(true)" class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-primary-700 bg-primary-100 hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:text-primary-200 dark:bg-primary-900 dark:hover:bg-primary-800">
       <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
       </svg>

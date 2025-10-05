@@ -1,0 +1,32 @@
+{
+  "caseStudies": [
+    {
+      "title": "Test case study",
+      "client": "Indigo Sun florals",
+      "date": "2025-10-05",
+      "category": "Development",
+      "technologies": [
+        "Tanstack"
+      ],
+      "featured": true,
+      "thumbnail": "/assets/images/test-case-study-thumb.jpg",
+      "liveDemo": "dev1.appahouse.com/products",
+      "repository": "",
+      "developmentTime": "2 weeks for base functionality",
+      "linesOfCode": "8341",
+      "images": "[",
+      "thechallenge": "allow for locally sourced flower arangements to be sold as available by season and availablilty",
+      "thesolution": "Website to display all stock and custom arrangement's as well as ability to subscible for future arrangements and increase customer retention and cash flow",
+      "developmentprocess": "done",
+      "technicalimplementation": "done",
+      "results&outcomes": "Higher customer retention, click thorugh, payments",
+      "lessonslearned": "Take your time with devel"
+    }
+  ],
+  "categories": [
+    "Development"
+  ],
+  "technologies": [
+    ""
+  ]
+}

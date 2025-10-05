@@ -11,20 +11,41 @@ appahouse-portfolio/
 │   └── images/            # Image files
 ├── blog/                  # Blog posts (markdown files)
 ├── components/            # Reusable components
-│   └── blog-renderer.js   # Blog post rendering component
+│   ├── blog-renderer.js   # Blog post rendering component
+│   ├── contact-section.js # Contact form and information component
+│   ├── project-card.js    # Project card component
+│   └── project-gallery.js # Project gallery component
+├── config/                # Configuration files
+│   └── contact-config.js  # Contact form and social media configuration
 ├── css/                   # Stylesheets
 │   ├── input.css         # Tailwind CSS input file
 │   └── output.css        # Compiled CSS (generated)
+├── docs/                  # Documentation
+│   └── FORMSPREE_SETUP.md # Formspree setup guide
 ├── js/                    # JavaScript files
+│   ├── blog.js           # Blog functionality
 │   ├── dark-mode.js      # Dark mode toggle functionality
-│   ├── form-handler.js   # Contact form handling
+│   ├── form-handler.js   # Contact form handling with validation
 │   ├── github-api.js     # GitHub API integration
-│   └── main.js           # Main JavaScript functionality
+│   ├── main.js           # Main JavaScript functionality
+│   ├── project-detail.js # Project detail page functionality
+│   └── projects.js       # Projects listing functionality
 ├── projects/              # Project documentation and assets
+├── scripts/               # Build and utility scripts
+│   ├── blog-generator.js # Blog post generator
+│   ├── create-blog.js    # Create new blog posts
+│   ├── project-generator.js # Project generator
+│   └── update-*.js       # Various update scripts
+├── templates/             # Content templates
+│   ├── blog-post-template.md # Blog post template
+│   └── project-template.md   # Project template
 ├── .gitignore            # Git ignore rules
+├── 404.html              # 404 error page
+├── blog-post.html        # Blog post page
 ├── index.html            # Main HTML file
 ├── package.json          # NPM package configuration
 ├── postcss.config.js     # PostCSS configuration
+├── project.html          # Project detail page
 ├── README.md             # Project documentation
 ├── setup.js              # Setup script
 └── tailwind.config.js    # Tailwind CSS configuration
@@ -86,9 +107,27 @@ JavaScript file that integrates with the GitHub API to:
 
 ### `js/form-handler.js`
 JavaScript file that handles the contact form:
-- Form validation
-- Form submission
+- Form validation with real-time feedback
+- Form submission with loading states
+- Spam protection using honeypot field
 - Success/error message display
+- Formspree integration
+
+### `components/contact-section.js`
+Component that renders the contact section:
+- Contact form with enhanced validation
+- Contact information display
+- Professional networking links with hover effects
+- "Let's Connect" call-to-action section
+- Download Resume button
+- Smooth transitions and micro-interactions
+
+### `config/contact-config.js`
+Configuration file for contact-related settings:
+- Formspree form ID and endpoint
+- Contact information (email, location, availability)
+- Social media links (GitHub, LinkedIn, Twitter)
+- Resume download configuration
 
 ### `components/blog-renderer.js`
 Component that renders blog posts:
@@ -119,6 +158,7 @@ Specifies files and directories that should be ignored by Git.
 Update the following files with your personal information:
 - `index.html`: Update name, hero section content, skills, projects, etc.
 - `js/github-api.js`: Replace `your-username` with your GitHub username
+- `config/contact-config.js`: Update contact information, social links, and Formspree ID
 
 ### Styling
 - Modify `tailwind.config.js` to customize the color scheme and other theme settings
@@ -135,9 +175,15 @@ The portfolio can be deployed to any static hosting service:
 1. Build the project: `npm run build`
 2. Upload the following files to your hosting provider:
    - `index.html`
+   - `blog-post.html`
+   - `project.html`
+   - `404.html`
    - `css/output.css`
    - `js/` directory
-   - `assets/` directory
    - `components/` directory
+   - `config/` directory
+   - `assets/` directory
+   - `blog/` directory
+   - `projects/` directory
 
 For more detailed deployment instructions, see the README.md file.

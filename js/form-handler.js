@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
   const contactForm = document.getElementById('contact-form');
   const formMessage = document.getElementById('form-message');
+  const submitBtn = document.getElementById('submit-btn');
+  const submitText = document.getElementById('submit-text');
+  const submitSpinner = document.getElementById('submit-spinner');
   
   if (!contactForm) return;
   
@@ -8,29 +11,89 @@ document.addEventListener('DOMContentLoaded', function() {
   contactForm.addEventListener('submit', function(event) {
     event.preventDefault();
     
+    // Check honeypot field for spam protection
+    const honeypot = document.getElementById('honeypot');
+    if (honeypot && honeypot.value) {
+      // If honeypot is filled, it's likely a bot
+      showFormMessage('Submission blocked for security reasons.', 'error');
+      return;
+    }
+    
+    // Validate all inputs before submission
+    const formInputs = contactForm.querySelectorAll('input[required], textarea[required]');
+    let isFormValid = true;
+    
+    formInputs.forEach(input => {
+      if (!validateInput(input)) {
+        isFormValid = false;
+      }
+    });
+    
+    if (!isFormValid) {
+      showFormMessage('Please fix the errors in the form', 'error');
+      return;
+    }
+    
+    // Show loading state
+    setLoadingState(true);
+    
     // Get form data
     const formData = new FormData(contactForm);
     const formObject = {};
     
     formData.forEach((value, key) => {
-      formObject[key] = value;
+      if (key !== 'honeypot') { // Don't include honeypot in the data
+        formObject[key] = value;
+      }
     });
     
     // Show loading message
     showFormMessage('Sending your message...', 'info');
     
-    // Simulate form submission (replace with actual Formspree integration)
-    setTimeout(() => {
-      // In a real implementation, you would send the data to Formspree
-      // For now, we'll simulate a successful submission
-      
+    // Submit to Formspree
+    fetch(contactForm.action, {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Network response was not ok');
+      }
+    })
+    .then(data => {
       // Reset form
       contactForm.reset();
       
       // Show success message
       showFormMessage('Thank you for your message! I\'ll get back to you soon.', 'success');
-    }, 1500);
+    })
+    .catch(error => {
+      console.error('Form submission error:', error);
+      // Show error message
+      showFormMessage('Oops! Something went wrong. Please try again later.', 'error');
+    })
+    .finally(() => {
+      // Reset loading state
+      setLoadingState(false);
+    });
   });
+  
+  // Function to set loading state
+  function setLoadingState(isLoading) {
+    if (!submitBtn || !submitText || !submitSpinner) return;
+    
+    if (isLoading) {
+      submitBtn.disabled = true;
+      submitText.textContent = 'Sending...';
+      submitSpinner.classList.remove('hidden');
+    } else {
+      submitBtn.disabled = false;
+      submitText.textContent = 'Send Message';
+      submitSpinner.classList.add('hidden');
+    }
+  }
   
   // Function to show form messages
   function showFormMessage(message, type) {
@@ -79,6 +142,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const formInputs = contactForm.querySelectorAll('input, textarea');
   
   formInputs.forEach(input => {
+    // Skip honeypot field
+    if (input.id === 'honeypot') return;
+    
     // Add validation on blur
     input.addEventListener('blur', function() {
       validateInput(this);
@@ -117,12 +183,44 @@ document.addEventListener('DOMContentLoaded', function() {
       errorMessage = 'This field is required';
     }
     
+    // Name validation (min length)
+    if (input.id === 'name' && value) {
+      if (value.length < 2) {
+        isValid = false;
+        errorMessage = 'Name must be at least 2 characters long';
+      }
+    }
+    
     // Email validation
     if (input.type === 'email' && value) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(value)) {
         isValid = false;
         errorMessage = 'Please enter a valid email address';
+      }
+    }
+    
+    // Subject validation (min length)
+    if (input.id === 'subject' && value) {
+      if (value.length < 3) {
+        isValid = false;
+        errorMessage = 'Subject must be at least 3 characters long';
+      }
+    }
+    
+    // Message validation (min length)
+    if (input.id === 'message' && value) {
+      if (value.length < 10) {
+        isValid = false;
+        errorMessage = 'Message must be at least 10 characters long';
+      }
+    }
+    
+    // Privacy checkbox validation
+    if (input.id === 'privacy' && input.hasAttribute('required')) {
+      if (!input.checked) {
+        isValid = false;
+        errorMessage = 'You must agree to the privacy policy';
       }
     }
     
@@ -139,20 +237,4 @@ document.addEventListener('DOMContentLoaded', function() {
     
     return isValid;
   }
-  
-  // Validate all inputs on form submission
-  contactForm.addEventListener('submit', function(event) {
-    let isFormValid = true;
-    
-    formInputs.forEach(input => {
-      if (!validateInput(input)) {
-        isFormValid = false;
-      }
-    });
-    
-    if (!isFormValid) {
-      event.preventDefault();
-      showFormMessage('Please fix the errors in the form', 'error');
-    }
-  });
 });

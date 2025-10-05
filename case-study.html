@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Study - AppaHouse Portfolio</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="description" content="Detailed case study from AppaHouse portfolio">
+  <link rel="stylesheet" href="css/output.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="font-sans antialiased">
+  <!-- Header/Navigation -->
+  <header class="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-sm dark:border-gray-700 dark:bg-gray-900/80">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <div class="flex items-center">
+          <a href="index.html" class="text-xl font-bold text-primary-600 dark:text-primary-400">AppaHouse</a>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex md:items-center md:space-x-6">
+          <a href="index.html#home" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Home</a>
+          <a href="index.html#projects" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Projects</a>
+          <a href="index.html#skills" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Skills</a>
+          <a href="index.html#case-studies" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Case Studies</a>
+          <a href="index.html#demos" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Demos</a>
+          <a href="index.html#blog" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Blog</a>
+          <a href="index.html#contact" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Contact</a>
+          
+          <!-- Dark Mode Toggle -->
+          <button id="dark-mode-toggle" class="p-2 text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">
+            <svg class="hidden h-6 w-6 dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <svg class="h-6 w-6 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          </button>
+        </nav>
+        
+        <!-- Mobile menu button -->
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="p-2 text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="hidden md:hidden">
+      <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+        <a href="index.html#home" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Home</a>
+        <a href="index.html#projects" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Projects</a>
+        <a href="index.html#skills" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Skills</a>
+        <a href="index.html#case-studies" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Case Studies</a>
+        <a href="index.html#demos" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Demos</a>
+        <a href="index.html#blog" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Blog</a>
+        <a href="index.html#contact" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Contact</a>
+        
+        <!-- Dark Mode Toggle for Mobile -->
+        <div class="flex items-center px-3 py-2">
+          <button id="mobile-dark-mode-toggle" class="p-2 text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">
+            <svg class="hidden h-6 w-6 dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <svg class="h-6 w-6 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          </button>
+          <span class="ml-2 text-gray-700 dark:text-gray-300">Dark Mode</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Case Study Content -->
+    <section class="py-16">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Loading State -->
+        <div id="loading-state" class="max-w-4xl mx-auto">
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
+          <p class="mt-4 text-gray-500 dark:text-gray-400 text-center">Loading case study...</p>
+        </div>
+        
+        <!-- Error State -->
+        <div id="error-state" class="max-w-4xl mx-auto hidden">
+          <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6 text-center">
+            <div class="text-red-600 dark:text-red-400 text-lg font-medium mb-2">Error</div>
+            <div class="text-red-500 dark:text-red-300 mb-4">Failed to load case study. Please try again later.</div>
+            <a href="index.html#case-studies" class="btn btn-primary">Back to Case Studies</a>
+          </div>
+        </div>
+        
+        <!-- Case Study Content -->
+        <div id="case-study-content" class="max-w-4xl mx-auto hidden">
+          <!-- Content will be dynamically loaded here -->
+        </div>
+      </div>
+    </section>
+    
+    <!-- Related Case Studies -->
+    <section id="related-case-studies" class="py-16 bg-gray-50 dark:bg-gray-800 hidden">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">Related Case Studies</h2>
+          <div id="related-case-studies-container" class="grid gap-8 md:grid-cols-2">
+            <!-- Related case studies will be dynamically loaded here -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="md:col-span-2">
+          <h3 class="text-lg font-semibold mb-4">AppaHouse</h3>
+          <p class="text-gray-400 mb-4">
+            A minimalist portfolio showcasing full-stack Tanstack Start apps and Docker-deployed applications.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white">
+              <span class="sr-only">GitHub</span>
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+              </svg>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white">
+              <span class="sr-only">LinkedIn</span>
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html#home" class="text-gray-400 hover:text-white">Home</a></li>
+            <li><a href="index.html#projects" class="text-gray-400 hover:text-white">Projects</a></li>
+            <li><a href="index.html#skills" class="text-gray-400 hover:text-white">Skills</a></li>
+            <li><a href="index.html#case-studies" class="text-gray-400 hover:text-white">Case Studies</a></li>
+            <li><a href="index.html#demos" class="text-gray-400 hover:text-white">Demos</a></li>
+            <li><a href="index.html#blog" class="text-gray-400 hover:text-white">Blog</a></li>
+            <li><a href="index.html#contact" class="text-gray-400 hover:text-white">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Technologies</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white">Tanstack Start</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Docker</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">React</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">TypeScript</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Tailwind CSS</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+        <p>&copy; 2025 AppaHouse. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
+  <script src="js/dark-mode.js"></script>
+  <script src="js/case-studies.js"></script>
+  <script>
+    // Handle case study display
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Get case study ID from URL parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const caseStudyId = urlParams.get('id');
+      
+      if (!caseStudyId) {
+        showError('No case study ID specified.');
+        return;
+      }
+      
+      try {
+        // Wait for case studies manager to initialize
+        if (window.caseStudiesManager) {
+          await window.caseStudiesManager.init();
+          displayCaseStudy(caseStudyId);
+        } else {
+          // Initialize manually if not already done
+          const manager = new CaseStudiesManager();
+          await manager.init();
+          window.caseStudiesManager = manager;
+          displayCaseStudy(caseStudyId);
+        }
+      } catch (error) {
+        console.error('Error loading case study:', error);
+        showError('Failed to load case study. Please try again later.');
+      }
+    });
+    
+    function displayCaseStudy(caseStudyId) {
+      const caseStudy = window.caseStudiesManager.getCaseStudyById(caseStudyId);
+      
+      if (!caseStudy) {
+        showError('Case study not found.');
+        return;
+      }
+      
+      // Update page title
+      document.title = `${caseStudy.title} - AppaHouse Portfolio`;
+      
+      // Hide loading state
+      document.getElementById('loading-state').classList.add('hidden');
+      
+      // Display case study content
+      const contentContainer = document.getElementById('case-study-content');
+      contentContainer.innerHTML = createCaseStudyHTML(caseStudy);
+      contentContainer.classList.remove('hidden');
+      
+      // Display related case studies
+      displayRelatedCaseStudies(caseStudyId);
+    }
+    
+    function createCaseStudyHTML(caseStudy) {
+      const technologies = caseStudy.technologies.map(tech => 
+        `<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+          ${tech}
+        </span>`
+      ).join('');
+      
+      return `
+        <div class="mb-8">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
+            <div class="mb-2 sm:mb-0">
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+                ${caseStudy.category}
+              </span>
+              ${caseStudy.featured ? '<span class="ml-2 inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">Featured</span>' : ''}
+            </div>
+            <div class="text-sm text-gray-500 dark:text-gray-400">
+              <time datetime="${caseStudy.date}">${new Date(caseStudy.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+            </div>
+          </div>
+          
+          <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">${caseStudy.title}</h1>
+          
+          <div class="prose prose-lg max-w-none dark:prose-invert mb-6">
+            <p class="text-xl text-gray-600 dark:text-gray-300">${caseStudy.excerpt}</p>
+          </div>
+          
+          <div class="flex flex-wrap gap-2 mb-8">
+            ${technologies}
+          </div>
+          
+          ${caseStudy.image ? `
+            <div class="mb-8">
+              <img src="${caseStudy.image}" alt="${caseStudy.title}" class="w-full h-auto rounded-lg shadow-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="hidden w-full h-64 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                <span class="text-gray-500 dark:text-gray-400">Case Study Image</span>
+              </div>
+            </div>
+          ` : ''}
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            ${caseStudy.client ? `
+              <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Client</h3>
+                <p class="text-gray-600 dark:text-gray-300">${caseStudy.client}</p>
+              </div>
+            ` : ''}
+            
+            ${caseStudy.developmentTime ? `
+              <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Development Time</h3>
+                <p class="text-gray-600 dark:text-gray-300">${caseStudy.developmentTime}</p>
+              </div>
+            ` : ''}
+            
+            ${caseStudy.linesOfCode ? `
+              <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Lines of Code</h3>
+                <p class="text-gray-600 dark:text-gray-300">${caseStudy.linesOfCode}</p>
+              </div>
+            ` : ''}
+            
+            <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Links</h3>
+              <div class="flex flex-wrap gap-3">
+                ${caseStudy.liveDemo ? `
+                  <a href="${caseStudy.liveDemo.startsWith('http') ? caseStudy.liveDemo : 'https://' + caseStudy.liveDemo}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                    Live Demo
+                  </a>
+                ` : ''}
+                ${caseStudy.repository ? `
+                  <a href="${caseStudy.repository.startsWith('http') ? caseStudy.repository : 'https://' + caseStudy.repository}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                    View Code
+                  </a>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="prose prose-lg max-w-none dark:prose-invert">
+          <h2>Project Overview</h2>
+          <p>${caseStudy.overview}</p>
+          
+          <h2>The Challenge</h2>
+          <p>${caseStudy.challenge}</p>
+          
+          <h2>The Solution</h2>
+          <p>${caseStudy.solution}</p>
+          
+          <h2>Development Process</h2>
+          <p>${caseStudy.developmentProcess}</p>
+          
+          <h2>Technical Implementation</h2>
+          <p>${caseStudy.technicalImplementation}</p>
+          
+          <h2>Results & Outcomes</h2>
+          <p>${caseStudy.results}</p>
+          
+          <h2>Lessons Learned</h2>
+          <p>${caseStudy.lessonsLearned}</p>
+        </div>
+        
+        <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+          <a href="index.html#case-studies" class="btn btn-secondary">
+            ← Back to Case Studies
+          </a>
+        </div>
+      `;
+    }
+    
+    function displayRelatedCaseStudies(caseStudyId) {
+      const relatedCaseStudies = window.caseStudiesManager.getRelatedCaseStudies(caseStudyId);
+      
+      if (relatedCaseStudies.length === 0) {
+        return;
+      }
+      
+      const container = document.getElementById('related-case-studies');
+      const relatedContainer = document.getElementById('related-case-studies-container');
+      
+      relatedContainer.innerHTML = relatedCaseStudies.map(caseStudy => `
+        <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+          <div class="p-6">
+            <div class="uppercase tracking-wide text-sm text-primary-600 dark:text-primary-400 font-semibold mb-2">
+              ${caseStudy.category}
+            </div>
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">
+              <a href="case-study.html?id=${caseStudy.id}" class="hover:text-primary-600 dark:hover:text-primary-400">
+                ${caseStudy.title}
+              </a>
+            </h3>
+            <p class="text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">
+              ${caseStudy.excerpt}
+            </p>
+            <a href="case-study.html?id=${caseStudy.id}" class="text-sm font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+              Read Case Study →
+            </a>
+          </div>
+        </div>
+      `).join('');
+      
+      container.classList.remove('hidden');
+    }
+    
+    function showError(message) {
+      document.getElementById('loading-state').classList.add('hidden');
+      document.getElementById('error-state').classList.remove('hidden');
+      const errorText = document.querySelector('#error-state .text-red-500');
+      if (errorText) {
+        errorText.textContent = message;
+      }
+    }
+  </script>
+</body>
+</html>

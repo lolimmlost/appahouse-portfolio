@@ -246,101 +246,56 @@
           </p>
         </div>
         
-        <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <!-- Project Card 1 -->
-          <div class="card overflow-hidden">
-            <div class="h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-              <span class="text-gray-500 dark:text-gray-400">Project Image</span>
-            </div>
-            <div class="p-6">
-              <h3 class="text-lg font-medium text-gray-900 dark:text-white">E-commerce Platform</h3>
-              <p class="mt-2 text-base text-gray-500 dark:text-gray-400">
-                A full-featured e-commerce platform built with Tanstack Start and Docker.
-              </p>
-              <div class="mt-4 flex flex-wrap gap-2">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-                  Tanstack Start
-                </span>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-                  Docker
-                </span>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-                  PostgreSQL
-                </span>
+        <!-- Project Filters and Search -->
+        <div class="mt-8 max-w-4xl mx-auto">
+          <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+            <div class="flex flex-col md:flex-row gap-4">
+              <!-- Search -->
+              <div class="flex-1">
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="project-search"
+                    placeholder="Search projects..."
+                    class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                  >
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                  </div>
+                </div>
               </div>
-              <div class="mt-6 flex space-x-3">
-                <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
-                  View Details
-                </a>
-                <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
-                  Live Demo
-                </a>
+              
+              <!-- Sort -->
+              <div class="md:w-48">
+                <select
+                  id="project-sort"
+                  class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                >
+                  <option value="recent">Most Recent</option>
+                  <option value="featured">Featured First</option>
+                  <option value="technology">By Technology</option>
+                </select>
               </div>
             </div>
-          </div>
-          
-          <!-- Project Card 2 -->
-          <div class="card overflow-hidden">
-            <div class="h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-              <span class="text-gray-500 dark:text-gray-400">Project Image</span>
-            </div>
-            <div class="p-6">
-              <h3 class="text-lg font-medium text-gray-900 dark:text-white">Task Management App</h3>
-              <p class="mt-2 text-base text-gray-500 dark:text-gray-400">
-                A collaborative task management application with real-time updates.
-              </p>
-              <div class="mt-4 flex flex-wrap gap-2">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-                  Tanstack Start
-                </span>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-                  WebSocket
-                </span>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-                  MongoDB
-                </span>
-              </div>
-              <div class="mt-6 flex space-x-3">
-                <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
-                  View Details
-                </a>
-                <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
-                  Live Demo
-                </a>
+            
+            <!-- Technology Filters -->
+            <div class="mt-4">
+              <h3 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Filter by Technology:</h3>
+              <div id="project-filters" class="flex flex-wrap gap-2">
+                <!-- Filters will be dynamically added here -->
               </div>
             </div>
           </div>
-          
-          <!-- Project Card 3 -->
-          <div class="card overflow-hidden">
-            <div class="h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-              <span class="text-gray-500 dark:text-gray-400">Project Image</span>
-            </div>
-            <div class="p-6">
-              <h3 class="text-lg font-medium text-gray-900 dark:text-white">Analytics Dashboard</h3>
-              <p class="mt-2 text-base text-gray-500 dark:text-gray-400">
-                A comprehensive analytics dashboard with data visualization.
-              </p>
-              <div class="mt-4 flex flex-wrap gap-2">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-                  Tanstack Start
-                </span>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-                  D3.js
-                </span>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-                  Redis
-                </span>
-              </div>
-              <div class="mt-6 flex space-x-3">
-                <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
-                  View Details
-                </a>
-                <a href="#" class="text-sm font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
-                  Live Demo
-                </a>
-              </div>
-            </div>
+        </div>
+        
+        <!-- Projects Grid -->
+        <div id="projects-container" class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <!-- Projects will be dynamically loaded here -->
+          <div class="col-span-full text-center py-12">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
+            <p class="mt-4 text-gray-500 dark:text-gray-400">Loading projects...</p>
           </div>
         </div>
       </div>
@@ -358,55 +313,11 @@
           </p>
         </div>
         
-        <div class="mt-12 space-y-12">
-          <!-- Case Study 1 -->
-          <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
-            <div class="md:flex">
-              <div class="md:shrink-0">
-                <div class="h-48 w-full object-cover md:h-full md:w-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                  <span class="text-gray-500 dark:text-gray-400">Case Study Image</span>
-                </div>
-              </div>
-              <div class="p-8">
-                <div class="uppercase tracking-wide text-sm text-primary-600 dark:text-primary-400 font-semibold">
-                  E-commerce Platform
-                </div>
-                <a href="#" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline dark:text-white">
-                  Building a Scalable E-commerce Solution with Tanstack Start
-                </a>
-                <p class="mt-2 text-gray-500 dark:text-gray-400">
-                  A detailed case study on developing a high-performance e-commerce platform that handles thousands of concurrent users.
-                </p>
-                <div class="mt-4">
-                  <a href="#" class="btn btn-primary">Read Case Study</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Case Study 2 -->
-          <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
-            <div class="md:flex">
-              <div class="md:shrink-0">
-                <div class="h-48 w-full object-cover md:h-full md:w-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                  <span class="text-gray-500 dark:text-gray-400">Case Study Image</span>
-                </div>
-              </div>
-              <div class="p-8">
-                <div class="uppercase tracking-wide text-sm text-primary-600 dark:text-primary-400 font-semibold">
-                  Real-time Collaboration
-                </div>
-                <a href="#" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline dark:text-white">
-                  Implementing Real-time Features in a Task Management App
-                </a>
-                <p class="mt-2 text-gray-500 dark:text-gray-400">
-                  How we built a real-time collaboration system using WebSockets and Tanstack Start for seamless user experience.
-                </p>
-                <div class="mt-4">
-                  <a href="#" class="btn btn-primary">Read Case Study</a>
-                </div>
-              </div>
-            </div>
+        <div id="case-studies-container" class="mt-12 space-y-12">
+          <!-- Case studies will be dynamically loaded here -->
+          <div class="text-center py-12">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
+            <p class="mt-4 text-gray-500 dark:text-gray-400">Loading case studies...</p>
           </div>
         </div>
       </div>
@@ -428,9 +339,9 @@
           <!-- Demo 1 -->
           <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
             <div class="p-6">
-              <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">E-commerce Platform Demo</h3>
+              <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Florist Website Demo</h3>
               <p class="text-base text-gray-500 dark:text-gray-400 mb-4">
-                Explore the features of our e-commerce platform built with Tanstack Start.
+                Explore the custom website built for Indigo Sun Florals with online ordering capabilities.
               </p>
               <div class="aspect-w-16 aspect-h-9 bg-gray-200 dark:bg-gray-700 rounded-md mb-4 flex items-center justify-center">
                 <span class="text-gray-500 dark:text-gray-400">Demo Embed</span>
@@ -569,12 +480,6 @@
                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
               </svg>
             </a>
-            <a href="#" class="text-gray-400 hover:text-white">
-              <span class="sr-only">Twitter</span>
-              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-              </svg>
-            </a>
           </div>
         </div>
         
@@ -604,17 +509,24 @@
       </div>
       
       <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
-        <p>&copy; 2023 AppaHouse. All rights reserved.</p>
+        <p>&copy; 2025 AppaHouse. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
   <!-- JavaScript -->
+  <script src="config/contact-config.js"></script>
   <script src="js/main.js"></script>
   <script src="js/dark-mode.js"></script>
+  <script src="config/github-config.js"></script>
   <script src="js/github-api.js"></script>
   <script src="js/form-handler.js"></script>
+  <script src="components/contact-section.js"></script>
   <script src="components/blog-renderer.js"></script>
   <script src="js/blog.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="components/project-card.js"></script>
+  <script src="components/project-gallery.js"></script>
+  <script src="js/case-studies.js"></script>
 </body>
 </html>

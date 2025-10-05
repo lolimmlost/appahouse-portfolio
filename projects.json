@@ -1,0 +1,39 @@
+{
+  "projects": [
+    {
+      "id": "test-case-study",
+      "title": "test case study",
+      "description": "# Project Overview",
+      "thumbnail": "/assets/images/placeholder.jpg",
+      "featured": true,
+      "date": "2025-10-04",
+      "category": "Web Development",
+      "technologies": [
+        "Tanstack Start",
+        "Postgres",
+        "Drizzle ORM"
+      ],
+      "liveDemo": "dev1.appahouse.com",
+      "repository": null,
+      "developmentTime": "2 Weeks",
+      "linesOfCode": "10000",
+      "images": [],
+      "client": "Indigo Sun Florals",
+      "overview": "full website design and hosting",
+      "challenge": "Detailed description of the problem or challenge.",
+      "solution": "Explanation of the technical solution and approach.",
+      "developmentProcess": "Step-by-step breakdown of the development process.",
+      "technicalImplementation": "Detailed technical information about the implementation.",
+      "results": "Metrics, results, and impact of the project.",
+      "lessonsLearned": "Key takeaways and insights from the project."
+    }
+  ],
+  "categories": [
+    "Web Development"
+  ],
+  "technologies": [
+    "Drizzle ORM",
+    "Postgres",
+    "Tanstack Start"
+  ]
+}
