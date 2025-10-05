@@ -445,12 +445,20 @@ if (require.main === module) {
         }
         rl.close();
         break;
+      case 'delete':
+        deleteInteractiveDemo();
+        break;
+      case 'update':
+        updateInteractiveDemo();
+        break;
       default:
         console.log(chalk.blue('Available commands:'));
         console.log('  create     - Create a new demo section interactively');
         console.log('  list       - List all demo sections');
         console.log('  categories - List all categories');
         console.log('  featured   - List featured demo sections');
+        console.log('  delete     - Delete a demo section');
+        console.log('  update     - Update an existing demo section');
         rl.close();
     }
   }).catch(error => {
@@ -524,6 +532,133 @@ if (require.main === module) {
       
     } catch (error) {
       console.error(chalk.red('Error creating demo section:'), error.message);
+    }
+    
+    rl.close();
+  }
+  
+  async function deleteInteractiveDemo() {
+    console.log(chalk.blue('\n🗑️  Delete Demo Section\n'));
+    
+    try {
+      // List all demos first
+      manager.listDemoSections();
+      
+      if (manager.sections.length === 0) {
+        console.log(chalk.yellow('No demo sections to delete.'));
+        rl.close();
+        return;
+      }
+      
+      const demoId = await question('Enter the ID of the demo to delete: ');
+      if (!demoId.trim()) {
+        console.log(chalk.red('Demo ID is required'));
+        rl.close();
+        return;
+      }
+      
+      // Confirm deletion
+      const demoToDelete = manager.sections.find(s => s.id === demoId.trim());
+      if (!demoToDelete) {
+        console.log(chalk.red(`Demo with ID '${demoId.trim()}' not found`));
+        rl.close();
+        return;
+      }
+      
+      const confirm = await question(`Are you sure you want to delete "${demoToDelete.title}"? (y/N): `);
+      if (confirm.toLowerCase() === 'y' || confirm.toLowerCase() === 'yes') {
+        await manager.deleteDemoSection(demoId.trim());
+        console.log(chalk.green('\n✅ Demo section deleted successfully!'));
+        console.log(chalk.blue('\nNext steps:'));
+        console.log('1. Rebuild demo pages with: npm run demo:build-all');
+      } else {
+        console.log(chalk.yellow('Deletion cancelled.'));
+      }
+      
+    } catch (error) {
+      console.error(chalk.red('Error deleting demo section:'), error.message);
+    }
+    
+    rl.close();
+  }
+  
+  async function updateInteractiveDemo() {
+    console.log(chalk.blue('\n✏️  Update Demo Section\n'));
+    
+    try {
+      // List all demos first
+      manager.listDemoSections();
+      
+      if (manager.sections.length === 0) {
+        console.log(chalk.yellow('No demo sections to update.'));
+        rl.close();
+        return;
+      }
+      
+      const demoId = await question('Enter the ID of the demo to update: ');
+      if (!demoId.trim()) {
+        console.log(chalk.red('Demo ID is required'));
+        rl.close();
+        return;
+      }
+      
+      // Find the demo
+      const demoToUpdate = manager.sections.find(s => s.id === demoId.trim());
+      if (!demoToUpdate) {
+        console.log(chalk.red(`Demo with ID '${demoId.trim()}' not found`));
+        rl.close();
+        return;
+      }
+      
+      console.log(chalk.blue(`\nUpdating: ${demoToUpdate.title}`));
+      console.log(chalk.gray('Current values shown in parentheses. Press Enter to keep current value.\n'));
+      
+      // Get updated values
+      const title = await question(`Title (${demoToUpdate.title}): `) || demoToUpdate.title;
+      const description = await question(`Description (${demoToUpdate.description}): `) || demoToUpdate.description;
+      
+      console.log(chalk.gray('\nExisting categories: ' + manager.getCategories().join(', ')));
+      const category = await question(`Category (${demoToUpdate.category}): `) || demoToUpdate.category;
+      
+      const technologiesInput = await question(`Technologies (${demoToUpdate.technologies.join(', ')}): `);
+      const technologies = technologiesInput.trim()
+        ? technologiesInput.split(',').map(t => t.trim()).filter(t => t)
+        : demoToUpdate.technologies;
+      
+      const embedUrl = await question(`Embed URL (${demoToUpdate.embedUrl}): `) || demoToUpdate.embedUrl;
+      const fullscreenUrl = await question(`Fullscreen URL (${demoToUpdate.fullscreenUrl}): `) || demoToUpdate.fullscreenUrl;
+      const thumbnail = await question(`Thumbnail path (${demoToUpdate.thumbnail}): `) || demoToUpdate.thumbnail;
+      
+      const featuredInput = await question(`Featured (${demoToUpdate.featured ? 'y' : 'n'}): `);
+      const featured = featuredInput.trim()
+        ? featuredInput.toLowerCase() === 'y' || featuredInput.toLowerCase() === 'yes'
+        : demoToUpdate.featured;
+      
+      // Update the demo section
+      const updatedDemo = await manager.updateDemoSection(demoId.trim(), {
+        title: title.trim(),
+        description: description.trim(),
+        category: category.trim(),
+        technologies,
+        embedUrl: embedUrl.trim(),
+        fullscreenUrl: fullscreenUrl.trim(),
+        thumbnail: thumbnail.trim(),
+        featured
+      });
+      
+      console.log(chalk.green('\n✅ Demo section updated successfully!'));
+      console.log(chalk.gray('\nUpdated demo details:'));
+      console.log(`  ID: ${updatedDemo.id}`);
+      console.log(`  Title: ${updatedDemo.title}`);
+      console.log(`  Category: ${updatedDemo.category}`);
+      console.log(`  Technologies: ${updatedDemo.technologies.join(', ')}`);
+      console.log(`  Featured: ${updatedDemo.featured ? 'Yes' : 'No'}`);
+      
+      console.log(chalk.blue('\nNext steps:'));
+      console.log('1. Rebuild demo pages with: npm run demo:build-all');
+      
+    } catch (error) {
+      console.error(chalk.red('Error updating demo section:'), error.message);
     }
     
     rl.close();

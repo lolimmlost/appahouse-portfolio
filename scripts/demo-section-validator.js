@@ -208,7 +208,10 @@ class DemoSectionValidator {
 
       // Check structure
       if (!demoData.sections || !Array.isArray(demoData.sections)) {
-        this.validationResults.errors.push('demos.json must have a sections array');
+        this.validationResults.invalid.push({
+          type: 'index-error',
+          error: 'demos.json must have a sections array'
+        });
         return;
       }
 
@@ -245,7 +248,10 @@ class DemoSectionValidator {
       }
 
     } catch (error) {
-      this.validationResults.errors.push(`Error parsing demos.json: ${error.message}`);
+      this.validationResults.invalid.push({
+        type: 'index-error',
+        error: `Error parsing demos.json: ${error.message}`
+      });
     }
   }
 
@@ -298,7 +304,11 @@ class DemoSectionValidator {
         this.validationResults.warnings.push(...result.warnings.map(w => `${file}: ${w}`));
 
       } catch (error) {
-        this.validationResults.errors.push(`Error parsing demo file ${file}: ${error.message}`);
+      this.validationResults.invalid.push({
+        type: 'file-error',
+        file: file,
+        error: `Error parsing demo file ${file}: ${error.message}`
+      });
       }
     }
   }

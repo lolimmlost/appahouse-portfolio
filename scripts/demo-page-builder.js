@@ -309,8 +309,11 @@ class DemoPageBuilder {
       `<span class="tech-badge">${tech}</span>`
     ).join(' ');
 
-    const fullscreenLink = section.fullscreenUrl 
-      ? `<a href="${section.fullscreenUrl}" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+    const fullscreenLink = section.fullscreenUrl || section.embedUrl
+      ? `<a href="${section.fullscreenUrl || section.embedUrl}" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300 flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+          </svg>
           Full Screen
         </a>`
       : '';
@@ -464,12 +467,7 @@ if (require.main === module) {
     
     switch (command) {
       case 'build':
-        builder.buildDemoPage().then(() => {
-          console.log(chalk.green('Demo page built successfully'));
-        }).catch(error => {
-          console.error(chalk.red('Error building demo page:'), error.message);
-          process.exit(1);
-        });
+        buildInteractiveDemo();
         break;
       case 'build-all':
         builder.buildAllDemoPages().then(() => {
@@ -491,7 +489,7 @@ if (require.main === module) {
         break;
       default:
         console.log(chalk.blue('Available commands:'));
-        console.log('  build      - Build a demo page with featured sections');
+        console.log('  build      - Build a demo page interactively');
         console.log('  build-all  - Build all demo pages (featured, by category, all)');
         console.log('  index      - Generate demo index page');
     }
@@ -499,4 +497,72 @@ if (require.main === module) {
     console.error(chalk.red('Error:'), error.message);
     process.exit(1);
   });
+  
+  async function buildInteractiveDemo() {
+    const readline = require('readline');
+    
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+    
+    const question = (prompt) => {
+      return new Promise((resolve) => {
+        rl.question(prompt, resolve);
+      });
+    };
+    
+    console.log(chalk.blue('\n🏗️  Build Demo Page\n'));
+    
+    try {
+      // Get page options
+      const title = await question('Page title (Featured Demos): ') || 'Featured Demos';
+      const description = await question('Page description (Interactive demos of featured projects and experiments): ') || 'Interactive demos of featured projects and experiments';
+      
+      console.log(chalk.gray('\nAvailable layouts:'));
+      console.log('  grid - Grid layout (default)');
+      console.log('  list - List layout');
+      const layout = await question('Layout (grid): ') || 'grid';
+      
+      console.log(chalk.gray('\nAvailable sections:'));
+      builder.sections.forEach((section, index) => {
+        console.log(`  ${index + 1}. ${section.title} (${section.category}) - ID: ${section.id}`);
+      });
+      
+      const sectionIdsInput = await question('Section IDs to include (comma-separated, or leave empty for featured): ');
+      let sections;
+      
+      if (sectionIdsInput.trim()) {
+        const sectionIds = sectionIdsInput.split(',').map(id => id.trim());
+        sections = builder.sections.filter(s => sectionIds.includes(s.id));
+      } else {
+        sections = builder.getFeaturedSections();
+      }
+      
+      if (sections.length === 0) {
+        console.log(chalk.yellow('No sections found. Building with featured sections...'));
+        sections = builder.getFeaturedSections();
+      }
+      
+      console.log(chalk.blue(`\nBuilding page with ${sections.length} sections...`));
+      
+      // Build the page
+      await builder.buildDemoPage({
+        title,
+        description,
+        sections,
+        layout
+      });
+      
+      console.log(chalk.green('\n✅ Demo page built successfully!'));
+      console.log(chalk.blue('\nNext steps:'));
+      console.log('1. Check the generated-demos directory for your new page');
+      console.log('2. Open the page in your browser to test');
+      
+    } catch (error) {
+      console.error(chalk.red('Error building demo page:'), error.message);
+    }
+    
+    rl.close();
+  }
 }

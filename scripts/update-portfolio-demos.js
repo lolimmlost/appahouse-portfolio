@@ -152,17 +152,17 @@ class PortfolioDemoUpdater {
    * Generate HTML for a single demo card
    */
   generateDemoCardHtml(demo) {
-    const embedContent = demo.embedUrl 
-      ? `<div class="aspect-w-16 aspect-h-9 bg-gray-200 dark:bg-gray-700 rounded-md mb-4 overflow-hidden">
-          <iframe 
-            src="${demo.embedUrl}" 
+    const embedContent = demo.embedUrl
+      ? `<div class="bg-gray-200 dark:bg-gray-700 rounded-md mb-4 overflow-hidden" style="height: 600px;">
+          <iframe
+            src="${demo.embedUrl}"
             class="w-full h-full border-0"
             allowfullscreen
             loading="lazy"
             title="${demo.title}">
           </iframe>
         </div>`
-      : `<div class="aspect-w-16 aspect-h-9 bg-gray-200 dark:bg-gray-700 rounded-md mb-4 flex items-center justify-center">
+      : `<div class="bg-gray-200 dark:bg-gray-700 rounded-md mb-4 flex items-center justify-center" style="height: 500px;">
           <div class="text-center">
             <svg class="w-12 h-12 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
@@ -178,8 +178,11 @@ class PortfolioDemoUpdater {
       </span>`
     ).join(' ');
 
-    const fullscreenLink = demo.fullscreenUrl 
-      ? `<a href="${demo.fullscreenUrl}" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+    const fullscreenLink = demo.fullscreenUrl || demo.embedUrl
+      ? `<a href="${demo.fullscreenUrl || demo.embedUrl}" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300 flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+          </svg>
           Full Screen
         </a>`
       : '';

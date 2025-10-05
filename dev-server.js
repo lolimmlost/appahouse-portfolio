@@ -4,10 +4,11 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+const os = require('os');
 
 // Configuration
 const PORT = 8000;
-const HOST = 'localhost';
+const HOST = '0.0.0.0';
 
 // MIME types for different file extensions
 const MIME_TYPES = {
@@ -99,13 +100,33 @@ const server = http.createServer((request, response) => {
 server.listen(PORT, HOST, () => {
   console.log(`\n🚀 Development server running at http://${HOST}:${PORT}/\n`);
   console.log(`📁 Serving files from: ${__dirname}\n`);
+  
+  // Get local IP address for LAN access
+  const interfaces = os.networkInterfaces();
+  let localIP = null;
+  
+  for (const name of Object.keys(interfaces)) {
+    for (const interface of interfaces[name]) {
+      // Skip over internal (i.e., 127.0.0.1) and non-IPv4 addresses
+      if (interface.family === 'IPv4' && !interface.internal) {
+        localIP = interface.address;
+        break;
+      }
+    }
+    if (localIP) break;
+  }
+  
+  if (localIP) {
+    console.log(`🌐 LAN access: http://${localIP}:${PORT}/\n`);
+  }
+  
   console.log('Press Ctrl+C to stop the server\n');
   
-  // Open the browser automatically
-  const open = process.platform === 'darwin' ? 'open' : 
+  // Open the browser automatically with localhost
+  const open = process.platform === 'darwin' ? 'open' :
                process.platform === 'win32' ? 'start' : 'xdg-open';
   
-  require('child_process').exec(`${open} http://${HOST}:${PORT}/`);
+  require('child_process').exec(`${open} http://localhost:${PORT}/`);
 });
 
 // Handle server errors

@@ -10,7 +10,7 @@
     "Shadcn",
     "Tailwind"
   ],
-  "embedUrl": "https://dev2.appahouse.com",
+  "embedUrl": "http://10.0.0.30:4173",
   "fullscreenUrl": "",
   "thumbnail": "",
   "featured": true,

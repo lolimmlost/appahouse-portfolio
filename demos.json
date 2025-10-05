@@ -1,40 +1,6 @@
 {
   "sections": [
     {
-      "id": "florist-website-demo",
-      "title": "Florist Website Demo",
-      "description": "Explore the custom website built for Indigo Sun Florals with online ordering capabilities.",
-      "category": "E-commerce",
-      "technologies": [
-        "Tanstack Start",
-        "Docker"
-      ],
-      "embedUrl": "",
-      "fullscreenUrl": "",
-      "thumbnail": "/assets/images/florist-demo-thumb.jpg",
-      "featured": true,
-      "status": "active",
-      "createdAt": "2025-10-05T02:03:23.311Z",
-      "updatedAt": "2025-10-05T02:03:23.311Z"
-    },
-    {
-      "id": "task-management-app-demo",
-      "title": "Task Management App Demo",
-      "description": "Experience real-time collaboration in our task management application.",
-      "category": "Productivity",
-      "technologies": [
-        "Tanstack Start",
-        "WebSocket"
-      ],
-      "embedUrl": "",
-      "fullscreenUrl": "",
-      "thumbnail": "/assets/images/task-app-demo-thumb.jpg",
-      "featured": true,
-      "status": "active",
-      "createdAt": "2025-10-05T02:03:23.311Z",
-      "updatedAt": "2025-10-05T02:03:23.311Z"
-    },
-    {
       "id": "hk-schedules",
       "title": "HK-Schedules",
       "description": "Housekeeping Schedule Manager and Printing!",
@@ -46,7 +12,7 @@
         "Shadcn",
         "Tailwind"
       ],
-      "embedUrl": "https://dev2.appahouse.com",
+      "embedUrl": "http://10.0.0.30:4173",
       "fullscreenUrl": "",
       "thumbnail": "",
       "featured": true,
@@ -56,8 +22,7 @@
     }
   ],
   "categories": [
-    "E-commerce",
     "Productivity"
   ],
-  "lastUpdated": "2025-10-05T02:11:59.526Z"
+  "lastUpdated": "2025-10-05T03:37:22.472Z"
 }
