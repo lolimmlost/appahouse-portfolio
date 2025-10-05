@@ -1,28 +1,33 @@
 {
   "sections": [
     {
-      "id": "hk-schedules",
-      "title": "HK-Schedules",
-      "description": "Housekeeping Schedule Manager and Printing!",
+      "id": "housekeeping-scheduler",
+      "title": "Housekeeping Scheduler",
+      "description": "A modern web application for managing housekeeper schedules with CSV import/export capabilities, built with React, TypeScript, Tailwind CSS, and shadcn/ui components.",
       "category": "Productivity",
       "technologies": [
         "React",
         "Typescript",
         "Vite",
         "Shadcn",
-        "Tailwind"
+        "Tailwind",
+        "Lucide",
+        "Express",
+        "Esbuild",
+        "PostCSS",
+        "Cloudflare Tunnel"
       ],
       "embedUrl": "http://10.0.0.30:4173",
-      "fullscreenUrl": "",
+      "fullscreenUrl": "https://hk.appahouse.com",
       "thumbnail": "",
       "featured": true,
       "status": "active",
-      "createdAt": "2025-10-05T02:11:59.525Z",
-      "updatedAt": "2025-10-05T02:11:59.526Z"
+      "createdAt": "2025-10-05T04:23:04.631Z",
+      "updatedAt": "2025-10-05T04:23:04.631Z"
     }
   ],
   "categories": [
     "Productivity"
   ],
-  "lastUpdated": "2025-10-05T03:37:22.472Z"
+  "lastUpdated": "2025-10-05T04:23:04.632Z"
 }
