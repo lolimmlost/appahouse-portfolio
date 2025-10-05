@@ -1,0 +1,20 @@
+{
+  "id": "hk-schedules",
+  "title": "HK-Schedules",
+  "description": "Housekeeping Schedule Manager and Printing!",
+  "category": "Productivity",
+  "technologies": [
+    "React",
+    "Typescript",
+    "Vite",
+    "Shadcn",
+    "Tailwind"
+  ],
+  "embedUrl": "https://dev2.appahouse.com",
+  "fullscreenUrl": "",
+  "thumbnail": "",
+  "featured": true,
+  "status": "active",
+  "createdAt": "2025-10-05T02:11:59.525Z",
+  "updatedAt": "2025-10-05T02:11:59.526Z"
+}

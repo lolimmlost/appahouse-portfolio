@@ -68,6 +68,27 @@ class ProjectGenerator {
     const featuredAnswer = await question('Is this a featured project? (y/n): ');
     projectInfo.featured = featuredAnswer.toLowerCase() === 'y' || featuredAnswer.toLowerCase() === 'yes';
     
+    // Project status
+    console.log('\nProject status options:');
+    console.log('1. in-progress - Currently being developed');
+    console.log('2. completed - Finished and deployed');
+    console.log('3. archived - No longer maintained');
+    const statusAnswer = await question('Select project status (1-3, default: 2): ') || '2';
+    
+    switch (statusAnswer) {
+      case '1':
+        projectInfo.status = 'in-progress';
+        break;
+      case '2':
+        projectInfo.status = 'completed';
+        break;
+      case '3':
+        projectInfo.status = 'archived';
+        break;
+      default:
+        projectInfo.status = 'completed';
+    }
+    
     // Technologies
     const techAnswer = await question('Technologies (comma-separated, e.g., React, Node.js, MongoDB): ');
     projectInfo.technologies = techAnswer.split(',').map(tech => tech.trim()).filter(tech => tech);
@@ -158,6 +179,7 @@ Key takeaways and insights from the project.
     template = template.replace(/"Web Development"/g, `"${projectInfo.category}"`);
     template = template.replace(/\["React", "Node.js", "MongoDB"\]/g, JSON.stringify(projectInfo.technologies));
     template = template.replace(/true/g, projectInfo.featured);
+    template = template.replace(/"completed"/g, `"${projectInfo.status}"`);
     template = template.replace(/"\/assets\/images\/project-thumb.jpg"/g, `"${projectInfo.thumbnail}"`);
     template = template.replace(/"https:\/\/example.com"/g, `"${projectInfo.liveDemo || ''}"`);
     template = template.replace(/"https:\/\/github.com\/user\/repo"/g, `"${projectInfo.repository || ''}"`);
@@ -194,6 +216,7 @@ Key takeaways and insights from the project.
       developmentTime: projectInfo.developmentTime,
       linesOfCode: projectInfo.linesOfCode,
       images: projectInfo.images,
+      status: projectInfo.status,
       overview: projectInfo.description,
       challenge: "Detailed description of the problem or challenge.",
       solution: "Explanation of the technical solution and approach.",

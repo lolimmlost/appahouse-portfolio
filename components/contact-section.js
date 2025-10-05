@@ -164,7 +164,7 @@ class ContactSection {
                   <input type="checkbox" id="privacy" name="privacy" required 
                          class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
                   <label for="privacy" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
-                    I agree to the <a href="#" class="text-primary-600 hover:text-primary-500">privacy policy</a> *
+                    I agree to the <a href="https://formspree.io/legal/privacy-policy/" class="text-primary-600 hover:text-primary-500">privacy policy</a> *
                   </label>
                 </div>
                 

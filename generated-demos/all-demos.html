@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Demos - AppaHouse Portfolio</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <meta name="description" content="Complete collection of interactive demos and experiments">
+  <link rel="stylesheet" href="../css/output.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .demo-embed {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 0.5rem;
+    }
+    .demo-embed iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .demo-placeholder {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 500;
+      min-height: 300px;
+      border-radius: 0.5rem;
+    }
+    .demo-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+    .demo-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .demo-card {
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+    .demo-card:hover {
+      transform: translateY(-2px);
+    }
+    .dark .demo-card {
+      background: #1f2937;
+    }
+    .tech-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.5rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: #dbeafe;
+      color: #1e40af;
+    }
+    .dark .tech-badge {
+      background: #1e3a8a;
+      color: #dbeafe;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased bg-gray-50 dark:bg-gray-900">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-sm dark:border-gray-700 dark:bg-gray-900/80">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <div class="flex items-center">
+          <a href="../index.html" class="text-xl font-bold text-primary-600 dark:text-primary-400">AppaHouse</a>
+        </div>
+        
+        <nav class="hidden md:flex md:items-center md:space-x-6">
+          <a href="../index.html#home" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Home</a>
+          <a href="../index.html#projects" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Projects</a>
+          <a href="../index.html#demos" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Demos</a>
+          <a href="../index.html#contact" class="text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Page Header -->
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
+          All Demos
+        </h1>
+        <p class="mt-4 text-xl text-gray-500 dark:text-gray-400">
+          Complete collection of interactive demos and experiments
+        </p>
+      </div>
+
+      <!-- Demo Sections -->
+      <div class="demo-grid">
+        
+      <div class="demo-card">
+        <div class="p-6">
+          <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Florist Website Demo</h3>
+          <p class="text-base text-gray-500 dark:text-gray-400 mb-4">
+            Explore the custom website built for Indigo Sun Florals with online ordering capabilities.
+          </p>
+          
+          <div class="demo-placeholder">
+          <div class="text-center">
+            <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            <p>Demo Embed</p>
+            <p class="text-sm opacity-75">Embed URL not configured</p>
+          </div>
+        </div>
+          
+          <div class="flex justify-between items-center mt-4">
+            <div class="flex space-x-2">
+              <span class="tech-badge">Tanstack Start</span> <span class="tech-badge">Docker</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    
+      <div class="demo-card">
+        <div class="p-6">
+          <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Task Management App Demo</h3>
+          <p class="text-base text-gray-500 dark:text-gray-400 mb-4">
+            Experience real-time collaboration in our task management application.
+          </p>
+          
+          <div class="demo-placeholder">
+          <div class="text-center">
+            <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            <p>Demo Embed</p>
+            <p class="text-sm opacity-75">Embed URL not configured</p>
+          </div>
+        </div>
+          
+          <div class="flex justify-between items-center mt-4">
+            <div class="flex space-x-2">
+              <span class="tech-badge">Tanstack Start</span> <span class="tech-badge">WebSocket</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    
+      <div class="demo-card">
+        <div class="p-6">
+          <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">HK-Schedules</h3>
+          <p class="text-base text-gray-500 dark:text-gray-400 mb-4">
+            Housekeeping Schedule Manager and Printing!
+          </p>
+          
+          <div class="demo-embed">
+          <iframe src="https://dev2.appahouse.com" allowfullscreen></iframe>
+        </div>
+          
+          <div class="flex justify-between items-center mt-4">
+            <div class="flex space-x-2">
+              <span class="tech-badge">React</span> <span class="tech-badge">Typescript</span> <span class="tech-badge">Vite</span> <span class="tech-badge">Shadcn</span> <span class="tech-badge">Tailwind</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    
+      </div>
+
+      
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <p>&copy; 2025 AppaHouse. All rights reserved.</p>
+        <div class="mt-4 flex justify-center space-x-4">
+          <a href="../index.html" class="text-gray-400 hover:text-white">Back to Portfolio</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../js/main.js"></script>
+  <script src="../js/dark-mode.js"></script>
+  <script>
+    // Initialize dark mode
+    document.addEventListener('DOMContentLoaded', function() {
+      // Dark mode toggle functionality
+      const darkModeToggle = document.getElementById('dark-mode-toggle');
+      if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', function() {
+          document.documentElement.classList.toggle('dark');
+          localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+        });
+      }
+
+      // Load dark mode preference
+      if (localStorage.getItem('darkMode') === 'true') {
+        document.documentElement.classList.add('dark');
+      }
+    });
+  </script>
+</body>
+</html>

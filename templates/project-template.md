@@ -5,6 +5,7 @@ date: "YYYY-MM-DD"
 category: "Web Development"
 technologies: ["React", "Node.js", "MongoDB"]
 featured: true
+status: "completed"
 thumbnail: "/assets/images/project-thumb.jpg"
 liveDemo: "https://example.com"
 repository: "https://github.com/user/repo"

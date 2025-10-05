@@ -28,6 +28,7 @@ The project management system allows you to:
    - Repository URL (optional)
    - Development time
    - Lines of code
+   - Project status (in-progress, completed, archived)
    - Technologies used
    - Project images
 
@@ -117,6 +118,7 @@ Key takeaways and insights from the project.
 - `repository`: URL to source code repository (optional)
 - `developmentTime`: Development duration (e.g., "3 months")
 - `linesOfCode`: Number of lines of code (e.g., "15000")
+- `status`: Project status (in-progress, completed, archived)
 - `images`: Array of project image paths
 
 ### Content Sections
@@ -258,6 +260,15 @@ npm run project:update:all
 
 # Update specific project
 npm run project:update:single <project-id>
+
+# Validate projects
+npm run project:validate:all
+npm run project:validate:single <project-id>
+
+# Backup and restore
+npm run project:backup
+npm run project:restore <backup-path>
+npm run project:list-backups
 ```
 
 ## Integration with Website
@@ -272,8 +283,74 @@ The project management system integrates seamlessly with:
 
 ## Next Steps
 
+## Project Validation
+
+The project management system includes validation to ensure data integrity:
+
+### Validation Features
+- Required field validation (title, date, category, technologies)
+- Date format validation (YYYY-MM-DD)
+- URL validation for live demo and repository links
+- Image path validation
+- Content section validation
+- Status validation (in-progress, completed, archived)
+
+### Running Validation
+```bash
+# Validate all projects
+npm run project:validate:all
+
+# Validate a specific project
+npm run project:validate:single my-project
+```
+
+### Validation Output
+- ✅ Success: No issues found
+- ❌ Errors: Critical issues that must be fixed
+- ⚠️ Warnings: Recommended improvements
+
+## Backup and Restore
+
+The system automatically creates backups before updating projects:
+
+### Automatic Backups
+- Backups are created before running update operations
+- Backups are stored in the `backups/` directory
+- Backup files include timestamp in the filename
+- Example: `backups/projects-2023-12-01T14-30-00.json`
+
+### Manual Backup Operations
+```bash
+# Create a manual backup
+npm run project:backup
+
+# List available backups
+npm run project:list-backups
+
+# Restore from a backup
+npm run project:restore backups/projects-2023-12-01T14-30-00.json
+```
+
+## Project Status Management
+
+Projects can have one of three statuses:
+
+### Status Types
+1. **in-progress**: Currently being developed
+2. **completed**: Finished and deployed
+3. **archived**: No longer maintained
+
+### Setting Status
+- Status is set when creating a new project
+- Can be updated by editing the project's markdown file
+- Status is validated to ensure it's one of the allowed values
+
+## Next Steps
+
 1. Create your first project with `npm run project:new`
 2. Add high-quality images to `assets/images/`
 3. Write detailed case studies
-4. Test the project display on your website
-5. Iterate and improve based on feedback
+4. Validate your projects with `npm run project:validate:all`
+5. Test the project display on your website
+6. Create backups before major updates with `npm run project:backup`
+7. Iterate and improve based on feedback

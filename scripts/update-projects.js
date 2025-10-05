@@ -59,6 +59,9 @@ class ProjectUpdater {
   updateAllProjects() {
     console.log('🔄 Updating projects from markdown files...\n');
     
+    // Create backup before updating
+    const backupPath = this.createBackup();
+    
     if (!fs.existsSync(this.projectsDir)) {
       console.log('❌ Projects directory not found:', this.projectsDir);
       return;
@@ -106,6 +109,7 @@ class ProjectUpdater {
         linesOfCode: data.linesOfCode || 'Unknown',
         images: Array.isArray(data.images) ? data.images : [],
         client: data.client || null,
+        status: data.status || 'completed',
         overview: sections.overview || 'No overview available',
         challenge: sections.challenge || 'No challenge information available',
         solution: sections.solution || 'No solution information available',
@@ -146,6 +150,10 @@ class ProjectUpdater {
     console.log(`📁 Projects database: ${this.projectsJsonPath}`);
     console.log(`🏷️  Categories: ${projectsData.categories.length}`);
     console.log(`🔧 Technologies: ${projectsData.technologies.length}`);
+    
+    if (backupPath) {
+      console.log(`💾 Backup available: ${backupPath}`);
+    }
   }
 
   extractSections(content) {
@@ -192,6 +200,9 @@ class ProjectUpdater {
     
     console.log(`🔄 Updating project: ${projectId}`);
     
+    // Create backup before updating
+    const backupPath = this.createBackup();
+    
     // Read existing projects.json
     let projectsData = { projects: [], categories: [], technologies: [] };
     if (fs.existsSync(this.projectsJsonPath)) {
@@ -222,6 +233,7 @@ class ProjectUpdater {
       linesOfCode: data.linesOfCode || 'Unknown',
       images: Array.isArray(data.images) ? data.images : [],
       client: data.client || null,
+      status: data.status || 'completed',
       overview: sections.overview || 'No overview available',
       challenge: sections.challenge || 'No challenge information available',
       solution: sections.solution || 'No solution information available',
@@ -261,6 +273,75 @@ class ProjectUpdater {
     fs.writeFileSync(this.projectsJsonPath, JSON.stringify(projectsData, null, 2));
     
     console.log(`🎉 Project "${updatedProject.title}" updated successfully!`);
+    
+    if (backupPath) {
+      console.log(`💾 Backup available: ${backupPath}`);
+    }
+  }
+
+  createBackup() {
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    const backupDir = path.join(__dirname, '..', 'backups');
+    
+    // Create backups directory if it doesn't exist
+    if (!fs.existsSync(backupDir)) {
+      fs.mkdirSync(backupDir, { recursive: true });
+    }
+    
+    const backupPath = path.join(backupDir, `projects-${timestamp}.json`);
+    
+    if (fs.existsSync(this.projectsJsonPath)) {
+      fs.copyFileSync(this.projectsJsonPath, backupPath);
+      console.log(`💾 Backup created: ${backupPath}`);
+      return backupPath;
+    }
+    
+    return null;
+  }
+
+  restoreFromBackup(backupPath) {
+    if (!fs.existsSync(backupPath)) {
+      console.log(`❌ Backup file not found: ${backupPath}`);
+      return false;
+    }
+    
+    try {
+      fs.copyFileSync(backupPath, this.projectsJsonPath);
+      console.log(`✅ Restored from backup: ${backupPath}`);
+      return true;
+    } catch (error) {
+      console.error(`❌ Failed to restore from backup: ${error.message}`);
+      return false;
+    }
+  }
+
+  listBackups() {
+    const backupDir = path.join(__dirname, '..', 'backups');
+    
+    if (!fs.existsSync(backupDir)) {
+      console.log('No backups directory found.');
+      return;
+    }
+    
+    const backups = fs.readdirSync(backupDir)
+      .filter(file => file.startsWith('projects-') && file.endsWith('.json'))
+      .sort()
+      .reverse();
+    
+    if (backups.length === 0) {
+      console.log('No backups found.');
+      return;
+    }
+    
+    console.log('\n📦 Available Backups:');
+    console.log('=====================');
+    
+    backups.forEach((backup, index) => {
+      const backupPath = path.join(backupDir, backup);
+      const stats = fs.statSync(backupPath);
+      const date = new Date(stats.mtime).toLocaleString();
+      console.log(`${index + 1}. ${backup} (${date})`);
+    });
   }
 }
 
@@ -268,6 +349,7 @@ class ProjectUpdater {
 function main() {
   const command = process.argv[2];
   const projectId = process.argv[3];
+  const backupPath = process.argv[3];
   const updater = new ProjectUpdater();
   
   switch (command) {
@@ -282,15 +364,33 @@ function main() {
       }
       updater.updateSingleProject(projectId);
       break;
+    case 'backup':
+      updater.createBackup();
+      break;
+    case 'restore':
+      if (!backupPath) {
+        console.log('❌ Please provide a backup file path');
+        console.log('Usage: node scripts/update-projects.js restore <backup-path>');
+        process.exit(1);
+      }
+      updater.restoreFromBackup(backupPath);
+      break;
+    case 'list-backups':
+      updater.listBackups();
+      break;
     default:
       console.log('Project Updater\n');
       console.log('Usage:');
-      console.log('  npm run project:update:all    - Update all projects from markdown files');
+      console.log('  npm run project:update:all        - Update all projects from markdown files');
       console.log('  npm run project:update:single <id> - Update a single project');
+      console.log('  npm run project:backup             - Create a backup of projects.json');
+      console.log('  npm run project:restore <path>     - Restore from backup');
+      console.log('  npm run project:list-backups       - List available backups');
       console.log('');
       console.log('Examples:');
       console.log('  node scripts/update-projects.js all');
       console.log('  node scripts/update-projects.js single my-project');
+      console.log('  node scripts/update-projects.js restore backups/projects-2023-01-01T12-00-00.json');
   }
 }
 
