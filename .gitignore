@@ -83,3 +83,12 @@ jspm_packages/
 
 # TernJS port file
 .tern-port
+
+# Configuration files with sensitive data
+config/contact-config.js
+config/github-config.js
+config/api-keys.js
+config/secrets.js
+
+# Keep example files but ignore actual config files
+!config/*.example.js
