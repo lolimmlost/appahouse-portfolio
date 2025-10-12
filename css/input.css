@@ -15,68 +15,92 @@
 
 @layer components {
   .btn {
-    @apply px-4 py-2 rounded-md font-medium transition-colors duration-200;
+    @apply px-4 py-2 rounded-md font-medium transition-all duration-200 transform hover:scale-105 active:scale-95;
   }
-  
+
   .btn-primary {
-    @apply btn bg-primary-600 text-white hover:bg-primary-700 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+    @apply btn bg-primary-600 text-white hover:bg-primary-700 hover:shadow-lg focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
   }
-  
+
   .btn-secondary {
-    @apply btn bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+    @apply btn bg-gray-200 text-gray-800 hover:bg-gray-300 hover:shadow-md dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
   }
-  
+
   .card {
-    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-shadow duration-200 hover:shadow-lg;
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl;
   }
-  
+
   .skill-bar {
-    @apply h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden;
+    @apply h-2.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden relative;
   }
-  
+
   .skill-progress {
-    @apply h-full bg-primary-500 rounded-full transition-all duration-500 ease-out;
+    @apply h-full rounded-full transition-all duration-1000 ease-out relative;
   }
-  
+
+  .skill-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .skill-item {
+    @apply transition-all duration-300 hover:translate-x-1;
+  }
+
+  .skill-icon {
+    @apply inline-block transition-transform duration-300 group-hover:scale-125;
+  }
+
   /* Project specific styles */
   .project-card {
-    @apply transform transition-all duration-300 hover:scale-[1.02];
+    @apply transform transition-all duration-300 hover:scale-[1.02] hover:z-10;
   }
-  
+
   .project-filter {
-    @apply transition-all duration-200;
+    @apply transition-all duration-200 hover:shadow-md;
   }
-  
+
   .project-filter.active {
-    @apply bg-primary-600 text-white border-primary-600;
+    @apply bg-primary-600 text-white border-primary-600 shadow-lg scale-105;
   }
-  
+
   .line-clamp-1 {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
   }
-  
+
   .line-clamp-2 {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
   }
-  
+
   .line-clamp-3 {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
   }
-  
+
   /* Dark mode prose styling for project detail pages */
   .dark .prose {
     @apply text-gray-300;
   }
-  
+
   .dark .prose h1,
   .dark .prose h2,
   .dark .prose h3,
@@ -85,42 +109,83 @@
   .dark .prose h6 {
     @apply text-white;
   }
-  
+
   .dark .prose p {
     @apply text-gray-300;
   }
-  
+
   .dark .prose strong {
     @apply text-white;
   }
-  
+
   .dark .prose em {
     @apply text-gray-200;
   }
-  
+
   .dark .prose a {
     @apply text-primary-400 hover:text-primary-300;
   }
-  
+
   .dark .prose ul,
   .dark .prose ol {
     @apply text-gray-300;
   }
-  
+
   .dark .prose li {
     @apply text-gray-300;
   }
-  
+
   .dark .prose blockquote {
     @apply text-gray-300 border-gray-600;
   }
-  
+
   .dark .prose code {
     @apply text-gray-200 bg-gray-800;
   }
-  
+
   .dark .prose pre {
     @apply bg-gray-800 text-gray-200;
+  }
+}
+
+/* Enhanced animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
   }
 }
 

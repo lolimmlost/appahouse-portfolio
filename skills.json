@@ -1,0 +1,85 @@
+{
+  "skillCategories": [
+    {
+      "id": "frontend",
+      "title": "Frontend",
+      "icon": "code",
+      "skills": [
+        {
+          "name": "React",
+          "level": 90,
+          "color": "#61DAFB"
+        },
+        {
+          "name": "TypeScript",
+          "level": 85,
+          "color": "#3178C6"
+        },
+        {
+          "name": "Tailwind CSS",
+          "level": 95,
+          "color": "#06B6D4"
+        },
+        {
+          "name": "Next.js",
+          "level": 80,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "id": "backend",
+      "title": "Backend",
+      "icon": "server",
+      "skills": [
+        {
+          "name": "Node.js",
+          "level": 85,
+          "color": "#339933"
+        },
+        {
+          "name": "Tanstack Start",
+          "level": 80,
+          "color": "#FF4154"
+        },
+        {
+          "name": "Docker",
+          "level": 75,
+          "color": "#2496ED"
+        },
+        {
+          "name": "PostgreSQL",
+          "level": 70,
+          "color": "#4169E1"
+        }
+      ]
+    },
+    {
+      "id": "tools",
+      "title": "Tools & Other",
+      "icon": "tool",
+      "skills": [
+        {
+          "name": "Git",
+          "level": 90,
+          "color": "#F05032"
+        },
+        {
+          "name": "CI/CD",
+          "level": 70,
+          "color": "#2088FF"
+        },
+        {
+          "name": "Cloud Services",
+          "level": 65,
+          "color": "#FF9900"
+        },
+        {
+          "name": "Drizzle ORM",
+          "level": 75,
+          "color": "#C5F74F"
+        }
+      ]
+    }
+  ]
+}

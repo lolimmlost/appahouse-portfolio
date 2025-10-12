@@ -50,53 +50,98 @@ class CaseStudiesManager {
   }
 
   createCaseStudyCard(caseStudy) {
-    const technologies = caseStudy.technologies.map(tech => 
-      `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+    const technologies = caseStudy.technologies.map(tech =>
+      `<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 transition-all duration-200 hover:scale-105">
         ${tech}
       </span>`
     ).join('');
 
     return `
-      <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+      <div class="bg-white dark:bg-gray-900 rounded-xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
         <div class="md:flex">
-          <div class="md:shrink-0">
-            <div class="h-48 w-full object-cover md:h-full md:w-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-              <img src="${caseStudy.thumbnail}" alt="${caseStudy.title}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="hidden text-gray-500 dark:text-gray-400">
-                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          <div class="md:shrink-0 relative group">
+            <div class="h-64 w-full object-cover md:h-full md:w-80 bg-gradient-to-br from-primary-100 to-primary-200 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center overflow-hidden">
+              <img src="${caseStudy.thumbnail}" alt="${caseStudy.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="hidden text-gray-400 dark:text-gray-500">
+                <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                 </svg>
               </div>
             </div>
-          </div>
-          <div class="p-8">
-            <div class="uppercase tracking-wide text-sm text-primary-600 dark:text-primary-400 font-semibold">
-              ${caseStudy.category}
-            </div>
-            <a href="case-study.html?id=${caseStudy.id}" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline dark:text-white">
-              ${caseStudy.title}
-            </a>
-            <p class="mt-2 text-gray-500 dark:text-gray-400">
-              ${caseStudy.excerpt}
-            </p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              ${technologies}
-            </div>
-            <div class="text-sm text-gray-500 dark:text-gray-400 mb-4">
-              <span class="inline-flex items-center">
-                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            ${caseStudy.featured ? `
+              <div class="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
+                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                 </svg>
-                ${new Date(caseStudy.date).toLocaleDateString()}
-              </span>
+                Featured
+              </div>
+            ` : ''}
+          </div>
+          <div class="p-8 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <span class="uppercase tracking-wide text-sm text-primary-600 dark:text-primary-400 font-bold px-3 py-1 bg-primary-50 dark:bg-primary-900/30 rounded-full">
+                  ${caseStudy.category}
+                </span>
+                ${caseStudy.client ? `
+                  <span class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                    </svg>
+                    ${caseStudy.client}
+                  </span>
+                ` : ''}
+              </div>
+
+              <a href="case-study.html?id=${caseStudy.id}" class="block mt-2 text-2xl leading-tight font-bold text-gray-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400 transition-colors duration-200">
+                ${caseStudy.title}
+              </a>
+
+              <p class="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                ${caseStudy.excerpt || caseStudy.challenge?.substring(0, 150) + '...' || 'View the full case study to learn more about this project.'}
+              </p>
+
+              <div class="mt-5 flex flex-wrap gap-2">
+                ${technologies}
+              </div>
             </div>
-            <div class="flex flex-wrap gap-3">
-              <a href="case-study.html?id=${caseStudy.id}" class="btn btn-primary">Read Case Study</a>
-              ${caseStudy.liveDemo ? `
-                <a href="${caseStudy.liveDemo.startsWith('http') ? caseStudy.liveDemo : 'https://' + caseStudy.liveDemo}" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
-                  Live Demo
+
+            <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+                  <span class="inline-flex items-center gap-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    ${new Date(caseStudy.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                  </span>
+                  ${caseStudy.developmentTime ? `
+                    <span class="inline-flex items-center gap-1">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                      ${caseStudy.developmentTime}
+                    </span>
+                  ` : ''}
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-3">
+                <a href="case-study.html?id=${caseStudy.id}" class="btn btn-primary flex items-center gap-2 group">
+                  Read Case Study
+                  <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                  </svg>
                 </a>
-              ` : ''}
+                ${caseStudy.liveDemo ? `
+                  <a href="${caseStudy.liveDemo.startsWith('http') ? caseStudy.liveDemo : 'https://' + caseStudy.liveDemo}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary flex items-center gap-2 group">
+                    Live Demo
+                    <svg class="w-4 h-4 transition-transform duration-200 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                  </a>
+                ` : ''}
+              </div>
             </div>
           </div>
         </div>
