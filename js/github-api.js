@@ -159,61 +159,60 @@ graph.forEach(week => {
 });
 
 // Generate HTML for the graph
-let html = '<div class="mt-4">';
-html += '<div class="text-xs text-gray-500 dark:text-gray-400 mb-2">Contributions in the last 3 months</div>';
-html += '<div class="text-xs text-gray-400 dark:text-gray-500 mb-2 italic">Note: GitHub API only shows recent activity</div>';
-html += '<div class="flex flex-wrap gap-1">';
+let html = '<div class="mt-6">';
+html += '<div class="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 uppercase tracking-wide">Contributions (Last 3 Months)</div>';
+html += '<div class="text-xs text-gray-500 dark:text-gray-400 mb-4 font-medium">Note: GitHub API shows recent activity only</div>';
 
 // Month labels
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const currentMonth = new Date().getMonth();
-html += '<div class="w-full flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">';
+html += '<div class="w-full flex justify-between text-xs font-bold text-gray-700 dark:text-gray-300 mb-3">';
 for (let i = 0; i < 3; i++) {
   const monthIndex = (currentMonth - i + 12) % 12;
-  html += `<span class="w-24 text-right">${months[monthIndex]}</span>`;
+  html += `<span class="uppercase">${months[monthIndex]}</span>`;
 }
 html += '</div>';
 
 // Contribution squares
-html += '<div class="flex flex-wrap gap-1">';
+html += '<div class="flex flex-wrap gap-1.5">';
 for (let week = 0; week < weeks; week++) {
   for (let day = 0; day < daysInWeek; day++) {
     const contributions = graph[weeks - 1 - week][day];
     let level = 0;
-    
+
     if (contributions > 0) {
       level = Math.min(4, Math.ceil((contributions / maxContributions) * 4));
     }
-    
+
     const colors = [
-      'bg-gray-100 dark:bg-gray-800',
-      'bg-green-100 dark:bg-green-900',
-      'bg-green-300 dark:bg-green-700',
-      'bg-green-500 dark:bg-green-500',
-      'bg-green-700 dark:bg-green-300'
+      'bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600',
+      'bg-primary-100 dark:bg-primary-900 border-primary-400 dark:border-primary-700',
+      'bg-primary-300 dark:bg-primary-700 border-primary-500 dark:border-primary-500',
+      'bg-primary-500 dark:bg-primary-500 border-primary-700 dark:border-primary-300',
+      'bg-primary-700 dark:bg-primary-300 border-primary-900 dark:border-primary-100'
     ];
-    
-    html += `<div class="w-3 h-3 rounded-sm ${colors[level]}" title="${contributions} contributions"></div>`;
+
+    html += `<div class="w-8 h-8 border-2 ${colors[level]} transition-all hover:scale-110" title="${contributions} contributions"></div>`;
   }
 }
 html += '</div>';
 
 // Legend
-html += '<div class="flex items-center justify-end mt-2 text-xs text-gray-500 dark:text-gray-400">';
-html += '<span class="mr-2">Less</span>';
-html += '<div class="flex gap-1">';
+html += '<div class="flex items-center justify-end mt-4 text-xs font-bold text-gray-700 dark:text-gray-300">';
+html += '<span class="mr-3 uppercase">Less</span>';
+html += '<div class="flex gap-1.5">';
 for (let i = 0; i < 5; i++) {
   const colors = [
-    'bg-gray-100 dark:bg-gray-800',
-    'bg-green-100 dark:bg-green-900',
-    'bg-green-300 dark:bg-green-700',
-    'bg-green-500 dark:bg-green-500',
-    'bg-green-700 dark:bg-green-300'
+    'bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600',
+    'bg-primary-100 dark:bg-primary-900 border-primary-400 dark:border-primary-700',
+    'bg-primary-300 dark:bg-primary-700 border-primary-500 dark:border-primary-500',
+    'bg-primary-500 dark:bg-primary-500 border-primary-700 dark:border-primary-300',
+    'bg-primary-700 dark:bg-primary-300 border-primary-900 dark:border-primary-100'
   ];
-  html += `<div class="w-3 h-3 rounded-sm ${colors[i]}"></div>`;
+  html += `<div class="w-6 h-6 border-2 ${colors[i]}"></div>`;
 }
 html += '</div>';
-html += '<span class="ml-2">More</span>';
+html += '<span class="ml-3 uppercase">More</span>';
 html += '</div>';
 
 html += '</div>';
@@ -415,20 +414,20 @@ function displayGitHubActivity(userData, reposData, events, isCached = false, is
 
 // Create HTML for the user profile section
 let html = `
-  <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-6">
-    <img src="${userData.avatar_url}" alt="${userData.login}" class="w-20 h-20 rounded-full">
+  <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8">
+    <img src="${userData.avatar_url}" alt="${userData.login}" class="w-24 h-24 border-4 border-black shadow-brutal-sm">
     <div class="text-center sm:text-left">
-      <h3 class="text-xl font-bold text-gray-900 dark:text-white">${userData.name || userData.login}</h3>
-      <p class="text-gray-600 dark:text-gray-400 mb-2">${userData.bio || 'No bio available'}</p>
-      <div class="flex justify-center sm:justify-start gap-4 text-sm">
-        <div class="text-gray-600 dark:text-gray-400">
-          <span class="font-semibold text-gray-900 dark:text-white">${userData.public_repos}</span> repos
+      <h3 class="text-2xl font-black text-gray-900 dark:text-white uppercase tracking-tight">${userData.name || userData.login}</h3>
+      <p class="text-gray-700 dark:text-gray-300 mb-4 font-medium">${userData.bio || 'No bio available'}</p>
+      <div class="flex justify-center sm:justify-start gap-6 text-sm font-bold">
+        <div class="text-gray-700 dark:text-gray-300">
+          <span class="text-lg text-gray-900 dark:text-white">${userData.public_repos}</span> REPOS
         </div>
-        <div class="text-gray-600 dark:text-gray-400">
-          <span class="font-semibold text-gray-900 dark:text-white">${userData.followers}</span> followers
+        <div class="text-gray-700 dark:text-gray-300">
+          <span class="text-lg text-gray-900 dark:text-white">${userData.followers}</span> FOLLOWERS
         </div>
-        <div class="text-gray-600 dark:text-gray-400">
-          <span class="font-semibold text-gray-900 dark:text-white">${userData.following}</span> following
+        <div class="text-gray-700 dark:text-gray-300">
+          <span class="text-lg text-gray-900 dark:text-white">${userData.following}</span> FOLLOWING
         </div>
       </div>
     </div>
@@ -440,16 +439,16 @@ html += createContributionGraph(events);
 
 // Add tabs for different sections
 html += `
-  <div class="mt-6">
-    <div class="border-b border-gray-200 dark:border-gray-700">
-      <nav class="-mb-px flex space-x-8" aria-label="Tabs">
-        <button onclick="showTab('repositories')" id="repositories-tab" class="tab-button active border-primary-500 text-primary-600 dark:text-primary-400 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm">
+  <div class="mt-8">
+    <div class="border-b-4 border-black dark:border-gray-600">
+      <nav class="-mb-1 flex space-x-4" aria-label="Tabs">
+        <button onclick="showTab('repositories')" id="repositories-tab" class="tab-button active border-b-4 border-primary-500 bg-primary-400 text-black whitespace-nowrap py-3 px-6 font-bold text-sm uppercase tracking-wide">
           Repositories
         </button>
-        <button onclick="showTab('activity')" id="activity-tab" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm">
+        <button onclick="showTab('activity')" id="activity-tab" class="tab-button border-b-4 border-transparent text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 whitespace-nowrap py-3 px-6 font-bold text-sm uppercase tracking-wide">
           Activity
         </button>
-        <button onclick="showTab('languages')" id="languages-tab" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm">
+        <button onclick="showTab('languages')" id="languages-tab" class="tab-button border-b-4 border-transparent text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 whitespace-nowrap py-3 px-6 font-bold text-sm uppercase tracking-wide">
           Languages
         </button>
       </nav>
@@ -472,20 +471,20 @@ if (sortedRepos.length > 0) {
     const repoDetails = reposData.find(r => r.name === repo);
     
     html += `
-      <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+      <div class="border-3 border-black dark:border-gray-600 p-5 shadow-brutal-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all bg-white dark:bg-gray-800">
         <div class="flex justify-between items-start">
-          <div>
-            <h4 class="font-medium text-gray-900 dark:text-white">${repo}</h4>
-            ${repoDetails && repoDetails.description ? `<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">${repoDetails.description}</p>` : ''}
-            <div class="flex items-center gap-3 mt-2">
+          <div class="flex-1">
+            <h4 class="font-black text-lg text-gray-900 dark:text-white uppercase">${repo}</h4>
+            ${repoDetails && repoDetails.description ? `<p class="text-sm text-gray-700 dark:text-gray-300 mt-2 font-medium">${repoDetails.description}</p>` : ''}
+            <div class="flex items-center gap-4 mt-3">
               ${repoDetails && repoDetails.language ? `
                 <div class="flex items-center">
-                  <span class="w-3 h-3 rounded-full mr-1" style="background-color: ${getLanguageColor(repoDetails.language)}"></span>
-                  <span class="text-xs text-gray-500 dark:text-gray-400">${repoDetails.language}</span>
+                  <span class="w-4 h-4 border-2 border-black mr-2" style="background-color: ${getLanguageColor(repoDetails.language)}"></span>
+                  <span class="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase">${repoDetails.language}</span>
                 </div>
               ` : ''}
               ${repoDetails && repoDetails.stargazers_count > 0 ? `
-                <div class="flex items-center text-xs text-gray-500 dark:text-gray-400">
+                <div class="flex items-center text-xs font-bold text-gray-700 dark:text-gray-300">
                   <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
@@ -494,10 +493,11 @@ if (sortedRepos.length > 0) {
               ` : ''}
             </div>
           </div>
-          <div class="text-right">
-            <div class="text-sm font-medium text-gray-700 dark:text-gray-300">${commitCount} commits</div>
-            <div class="w-24 bg-gray-200 rounded-full h-2 mt-1 dark:bg-gray-700">
-              <div class="bg-primary-600 h-2 rounded-full transition-all duration-500 ease-out" style="width: ${percentage}%"></div>
+          <div class="text-right ml-4">
+            <div class="text-sm font-black text-gray-900 dark:text-white">${commitCount}</div>
+            <div class="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase">Commits</div>
+            <div class="w-28 bg-gray-200 dark:bg-gray-700 border-2 border-black h-3 mt-2">
+              <div class="bg-primary-500 h-full border-r-2 border-black transition-all duration-500 ease-out" style="width: ${percentage}%"></div>
             </div>
           </div>
         </div>
@@ -534,22 +534,22 @@ if (recentEvents.length > 0) {
         const repoName = event.repo.name.split('/')[1];
         const commitCount = event.payload.commits ? event.payload.commits.length : 0;
         eventHtml = `
-          <div class="flex items-start">
+          <div class="flex items-start border-3 border-black dark:border-gray-600 p-4 bg-green-50 dark:bg-green-900/20 shadow-brutal-sm">
             <div class="flex-shrink-0">
-              <div class="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
-                <svg class="w-4 h-4 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+              <div class="w-12 h-12 bg-primary-400 border-3 border-black flex items-center justify-center">
+                <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                  <path stroke-linecap="square" stroke-linejoin="miter" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
                 </svg>
               </div>
             </div>
-            <div class="ml-3">
-              <p class="text-sm text-gray-900 dark:text-white">
-                Pushed <span class="font-medium">${commitCount} commit${commitCount !== 1 ? 's' : ''}</span> to 
-                <a href="https://github.com/${event.repo.name}" target="_blank" rel="noopener noreferrer" class="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+            <div class="ml-4 flex-1">
+              <p class="text-sm font-bold text-gray-900 dark:text-white">
+                PUSHED <span class="text-primary-600 dark:text-primary-400">${commitCount} COMMIT${commitCount !== 1 ? 'S' : ''}</span> TO
+                <a href="https://github.com/${event.repo.name}" target="_blank" rel="noopener noreferrer" class="font-black underline hover:text-primary-600 dark:hover:text-primary-400">
                   ${repoName}
                 </a>
               </p>
-              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${formatRelativeTime(event.created_at)}</p>
+              <p class="text-xs font-bold text-gray-700 dark:text-gray-300 mt-2 uppercase">${formatRelativeTime(event.created_at)}</p>
             </div>
           </div>
         `;
@@ -561,25 +561,25 @@ if (recentEvents.length > 0) {
         const issueTitle = event.payload.issue.title;
         const issueNumber = event.payload.issue.number;
         eventHtml = `
-          <div class="flex items-start">
+          <div class="flex items-start border-3 border-black dark:border-gray-600 p-4 bg-accent-50 dark:bg-accent-900/20 shadow-brutal-sm">
             <div class="flex-shrink-0">
-              <div class="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center">
-                <svg class="w-4 h-4 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              <div class="w-12 h-12 bg-accent-400 border-3 border-black flex items-center justify-center">
+                <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                  <path stroke-linecap="square" stroke-linejoin="miter" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
               </div>
             </div>
-            <div class="ml-3">
-              <p class="text-sm text-gray-900 dark:text-white">
-                ${issueAction.charAt(0).toUpperCase() + issueAction.slice(1)} issue 
-                <a href="${event.payload.issue.html_url}" target="_blank" rel="noopener noreferrer" class="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+            <div class="ml-4 flex-1">
+              <p class="text-sm font-bold text-gray-900 dark:text-white">
+                ${issueAction.toUpperCase()} ISSUE
+                <a href="${event.payload.issue.html_url}" target="_blank" rel="noopener noreferrer" class="font-black underline hover:text-accent-600 dark:hover:text-accent-400">
                   #${issueNumber} ${issueTitle}
-                </a> in 
-                <a href="https://github.com/${event.repo.name}" target="_blank" rel="noopener noreferrer" class="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+                </a> IN
+                <a href="https://github.com/${event.repo.name}" target="_blank" rel="noopener noreferrer" class="font-black underline hover:text-accent-600 dark:hover:text-accent-400">
                   ${issueRepo}
                 </a>
               </p>
-              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${formatRelativeTime(event.created_at)}</p>
+              <p class="text-xs font-bold text-gray-700 dark:text-gray-300 mt-2 uppercase">${formatRelativeTime(event.created_at)}</p>
             </div>
           </div>
         `;
@@ -591,25 +591,25 @@ if (recentEvents.length > 0) {
         const prTitle = event.payload.pull_request.title;
         const prNumber = event.payload.pull_request.number;
         eventHtml = `
-          <div class="flex items-start">
+          <div class="flex items-start border-3 border-black dark:border-gray-600 p-4 bg-purple-50 dark:bg-purple-900/20 shadow-brutal-sm">
             <div class="flex-shrink-0">
-              <div class="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center">
-                <svg class="w-4 h-4 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              <div class="w-12 h-12 bg-purple-400 border-3 border-black flex items-center justify-center">
+                <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                  <path stroke-linecap="square" stroke-linejoin="miter" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                 </svg>
               </div>
             </div>
-            <div class="ml-3">
-              <p class="text-sm text-gray-900 dark:text-white">
-                ${prAction.charAt(0).toUpperCase() + prAction.slice(1)} pull request 
-                <a href="${event.payload.pull_request.html_url}" target="_blank" rel="noopener noreferrer" class="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+            <div class="ml-4 flex-1">
+              <p class="text-sm font-bold text-gray-900 dark:text-white">
+                ${prAction.toUpperCase()} PULL REQUEST
+                <a href="${event.payload.pull_request.html_url}" target="_blank" rel="noopener noreferrer" class="font-black underline hover:text-purple-600 dark:hover:text-purple-400">
                   #${prNumber} ${prTitle}
-                </a> in 
-                <a href="https://github.com/${event.repo.name}" target="_blank" rel="noopener noreferrer" class="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+                </a> IN
+                <a href="https://github.com/${event.repo.name}" target="_blank" rel="noopener noreferrer" class="font-black underline hover:text-purple-600 dark:hover:text-purple-400">
                   ${prRepo}
                 </a>
               </p>
-              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${formatRelativeTime(event.created_at)}</p>
+              <p class="text-xs font-bold text-gray-700 dark:text-gray-300 mt-2 uppercase">${formatRelativeTime(event.created_at)}</p>
             </div>
           </div>
         `;
@@ -619,22 +619,22 @@ if (recentEvents.length > 0) {
         if (event.payload.ref_type === 'repository') {
           const createdRepo = event.repo.name.split('/')[1];
           eventHtml = `
-            <div class="flex items-start">
+            <div class="flex items-start border-3 border-black dark:border-gray-600 p-4 bg-blue-50 dark:bg-blue-900/20 shadow-brutal-sm">
               <div class="flex-shrink-0">
-                <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                  <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                <div class="w-12 h-12 bg-blue-400 border-3 border-black flex items-center justify-center">
+                  <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                    <path stroke-linecap="square" stroke-linejoin="miter" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                   </svg>
                 </div>
               </div>
-              <div class="ml-3">
-                <p class="text-sm text-gray-900 dark:text-white">
-                  Created repository 
-                  <a href="https://github.com/${event.repo.name}" target="_blank" rel="noopener noreferrer" class="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+              <div class="ml-4 flex-1">
+                <p class="text-sm font-bold text-gray-900 dark:text-white">
+                  CREATED REPOSITORY
+                  <a href="https://github.com/${event.repo.name}" target="_blank" rel="noopener noreferrer" class="font-black underline hover:text-blue-600 dark:hover:text-blue-400">
                     ${createdRepo}
                   </a>
                 </p>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${formatRelativeTime(event.created_at)}</p>
+                <p class="text-xs font-bold text-gray-700 dark:text-gray-300 mt-2 uppercase">${formatRelativeTime(event.created_at)}</p>
               </div>
             </div>
           `;
@@ -758,8 +758,8 @@ window.showTab = function(tabName) {
   // Remove active class from all tab buttons
   const tabButtons = document.querySelectorAll('.tab-button');
   tabButtons.forEach(button => {
-    button.classList.remove('active', 'border-primary-500', 'text-primary-600', 'dark:text-primary-400');
-    button.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:text-gray-400', 'dark:hover:text-gray-300', 'dark:hover:border-gray-600');
+    button.classList.remove('active', 'border-primary-500', 'bg-primary-400', 'text-black');
+    button.classList.add('border-transparent', 'text-gray-700', 'hover:bg-gray-100', 'dark:text-gray-300', 'dark:hover:bg-gray-700');
   });
 
   // Show the selected tab content
@@ -767,8 +767,8 @@ window.showTab = function(tabName) {
 
   // Add active class to the selected tab button
   const activeTab = document.getElementById(`${tabName}-tab`);
-  activeTab.classList.add('active', 'border-primary-500', 'text-primary-600', 'dark:text-primary-400');
-  activeTab.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:text-gray-400', 'dark:hover:text-gray-300', 'dark:hover:border-gray-600');
+  activeTab.classList.add('active', 'border-primary-500', 'bg-primary-400', 'text-black');
+  activeTab.classList.remove('border-transparent', 'text-gray-700', 'hover:bg-gray-100', 'dark:text-gray-300', 'dark:hover:bg-gray-700');
 };
 
 // Fetch GitHub activity when the page loads
