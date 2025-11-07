@@ -15,64 +15,48 @@
 
 @layer components {
   .btn {
-    @apply px-4 py-2 rounded-md font-medium transition-all duration-200 transform hover:scale-105 active:scale-95;
+    @apply px-6 py-3 font-bold border-3 border-black transition-all duration-200 uppercase tracking-wide;
   }
 
   .btn-primary {
-    @apply btn bg-primary-600 text-white hover:bg-primary-700 hover:shadow-lg focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+    @apply btn bg-primary-400 text-black hover:bg-primary-500 shadow-brutal hover:translate-x-1 hover:translate-y-1 hover:shadow-brutal-sm;
   }
 
   .btn-secondary {
-    @apply btn bg-gray-200 text-gray-800 hover:bg-gray-300 hover:shadow-md dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+    @apply btn bg-white text-black hover:bg-gray-100 shadow-brutal-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-none dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 dark:border-gray-600;
   }
 
   .card {
-    @apply bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl;
+    @apply bg-white dark:bg-gray-800 border-4 border-black shadow-brutal overflow-hidden transition-all duration-200 hover:translate-x-2 hover:translate-y-2 hover:shadow-none;
   }
 
   .skill-bar {
-    @apply h-2.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden relative;
+    @apply h-4 bg-gray-200 dark:bg-gray-700 border-2 border-black overflow-hidden relative;
   }
 
   .skill-progress {
-    @apply h-full rounded-full transition-all duration-1000 ease-out relative;
-  }
-
-  .skill-progress::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    animation: shimmer 2s infinite;
-  }
-
-  @keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+    @apply h-full border-r-2 border-black transition-all duration-1000 ease-out relative;
   }
 
   .skill-item {
-    @apply transition-all duration-300 hover:translate-x-1;
+    @apply transition-all duration-200;
   }
 
   .skill-icon {
-    @apply inline-block transition-transform duration-300 group-hover:scale-125;
+    @apply inline-block;
   }
 
   /* Project specific styles */
   .project-card {
-    @apply transform transition-all duration-300 hover:scale-[1.02] hover:z-10;
+    @apply transition-all duration-200 hover:translate-x-2 hover:translate-y-2 hover:shadow-none hover:z-10;
   }
 
   .project-filter {
-    @apply transition-all duration-200 hover:shadow-md;
+    @apply transition-all duration-200 border-3 border-black;
   }
 
   .project-filter.active {
-    @apply bg-primary-600 text-white border-primary-600 shadow-lg scale-105;
+    @apply bg-primary-400 text-black border-black shadow-brutal-sm;
   }
 
   .line-clamp-1 {
