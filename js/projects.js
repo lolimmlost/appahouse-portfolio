@@ -191,7 +191,7 @@ class ProjectsShowcase {
 
   createProjectCard(project) {
     const technologies = project.technologies.slice(0, 3).map(tech =>
-      `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 transition-all duration-200 hover:scale-105">
+      `<span class="inline-flex items-center px-2.5 py-1 text-xs font-bold bg-white dark:bg-gray-700 border-2 border-black text-gray-900 dark:text-white uppercase tracking-wide shadow-brutal-sm transition-all duration-200 hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
         ${tech}
       </span>`
     ).join('');
@@ -201,7 +201,7 @@ class ProjectsShowcase {
     return `
       <div class="project-card card overflow-hidden group" data-project-id="${project.id}">
         <div class="relative h-56 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-gray-700 dark:to-gray-800 overflow-hidden">
-          <img src="${project.thumbnail}" alt="${project.title}" class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <img src="${project.thumbnail}" alt="${project.title}" class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="hidden absolute inset-0 items-center justify-center text-gray-400 dark:text-gray-500">
             <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -209,7 +209,7 @@ class ProjectsShowcase {
           </div>
 
           ${project.featured ? `
-            <div class="absolute top-3 right-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-lg flex items-center gap-1 animate-pulse">
+            <div class="absolute top-3 right-3 bg-primary-400 text-black text-xs font-black px-3 py-1.5 border-3 border-black shadow-brutal-sm uppercase tracking-wide flex items-center gap-1">
               <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
               </svg>
@@ -222,7 +222,7 @@ class ProjectsShowcase {
 
         <div class="p-6">
           <div class="mb-3">
-            <span class="inline-block text-xs font-semibold text-primary-600 dark:text-primary-400 uppercase tracking-wide px-2 py-1 bg-primary-50 dark:bg-primary-900/30 rounded">
+            <span class="inline-block text-xs font-bold text-black dark:text-white uppercase tracking-wide px-3 py-1 bg-primary-400 dark:bg-primary-500 border-2 border-black">
               ${project.category || 'Project'}
             </span>
           </div>
@@ -238,14 +238,14 @@ class ProjectsShowcase {
           <div class="flex flex-wrap gap-2 mb-4">
             ${technologies}
             ${extraTechCount > 0 ? `
-              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
-                +${extraTechCount} more
+              <span class="inline-flex items-center px-2.5 py-1 text-xs font-bold bg-gray-200 dark:bg-gray-700 border-2 border-black text-gray-900 dark:text-white uppercase tracking-wide">
+                +${extraTechCount}
               </span>
             ` : ''}
           </div>
 
-          <div class="pt-4 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between">
-            <div class="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+          <div class="pt-4 border-t-3 border-black flex items-center justify-between">
+            <div class="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1 font-bold uppercase tracking-wide">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
               </svg>
@@ -253,14 +253,14 @@ class ProjectsShowcase {
             </div>
 
             <div class="flex items-center gap-2">
-              <a href="project.html?id=${project.id}" class="inline-flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 transition-colors duration-200 group/link">
-                View Details
-                <svg class="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <a href="project.html?id=${project.id}" class="inline-flex items-center gap-1 text-sm font-bold text-black dark:text-white bg-primary-400 dark:bg-primary-500 px-3 py-1.5 border-2 border-black shadow-brutal-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200 uppercase tracking-wide">
+                View
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
               </a>
               ${project.liveDemo ? `
-                <a href="${project.liveDemo.startsWith('http') ? project.liveDemo : 'https://' + project.liveDemo}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-600 hover:bg-primary-200 dark:bg-primary-900/30 dark:text-primary-400 dark:hover:bg-primary-900/50 transition-all duration-200 hover:scale-110" title="Live Demo">
+                <a href="${project.liveDemo.startsWith('http') ? project.liveDemo : 'https://' + project.liveDemo}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-700 border-3 border-black shadow-brutal-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200" title="Live Demo">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                   </svg>
@@ -292,9 +292,9 @@ class ProjectsShowcase {
 
     // Get all unique technologies from projects
     const allTechnologies = [...new Set(this.projects.flatMap(project => project.technologies))];
-    
+
     const filterHTML = allTechnologies.map(tech => `
-      <button class="project-filter px-3 py-1 text-sm rounded-full border border-gray-300 dark:border-gray-600 hover:bg-primary-100 dark:hover:bg-primary-900 transition-colors" data-technology="${tech}">
+      <button class="project-filter px-3 py-1.5 text-xs font-bold uppercase tracking-wide border-3 border-black bg-white dark:bg-gray-800 text-black dark:text-white hover:bg-primary-400 dark:hover:bg-primary-500 shadow-brutal-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200" data-technology="${tech}">
         ${tech}
       </button>
     `).join('');
@@ -302,8 +302,8 @@ class ProjectsShowcase {
     filterContainer.innerHTML = `
       <div class="flex flex-wrap gap-2">
         ${filterHTML}
-        <button id="clear-filters" class="px-3 py-1 text-sm rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors" style="display: none;">
-          Clear Filters
+        <button id="clear-filters" class="px-3 py-1.5 text-xs font-bold uppercase tracking-wide border-3 border-black bg-gray-200 dark:bg-gray-700 text-black dark:text-white shadow-brutal-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200" style="display: none;">
+          Clear
         </button>
       </div>
     `;

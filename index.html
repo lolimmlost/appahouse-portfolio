@@ -67,13 +67,13 @@
     <!-- Mobile Navigation -->
     <div id="mobile-menu" class="hidden md:hidden">
       <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-        <a href="#home" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Home</a>
-        <a href="#projects" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Projects</a>
-        <a href="#skills" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Skills</a>
-        <a href="#case-studies" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Case Studies</a>
-        <a href="#demos" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Demos</a>
-        <a href="#blog" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Blog</a>
-        <a href="#contact" class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-primary-400">Contact</a>
+        <a href="#home" class="block px-3 py-2 text-base font-bold uppercase tracking-wide text-gray-700 hover:bg-primary-400 hover:text-black dark:text-gray-300 dark:hover:bg-primary-500 border-2 border-transparent hover:border-black">Home</a>
+        <a href="#projects" class="block px-3 py-2 text-base font-bold uppercase tracking-wide text-gray-700 hover:bg-primary-400 hover:text-black dark:text-gray-300 dark:hover:bg-primary-500 border-2 border-transparent hover:border-black">Projects</a>
+        <a href="#skills" class="block px-3 py-2 text-base font-bold uppercase tracking-wide text-gray-700 hover:bg-primary-400 hover:text-black dark:text-gray-300 dark:hover:bg-primary-500 border-2 border-transparent hover:border-black">Skills</a>
+        <a href="#case-studies" class="block px-3 py-2 text-base font-bold uppercase tracking-wide text-gray-700 hover:bg-primary-400 hover:text-black dark:text-gray-300 dark:hover:bg-primary-500 border-2 border-transparent hover:border-black">Case Studies</a>
+        <a href="#demos" class="block px-3 py-2 text-base font-bold uppercase tracking-wide text-gray-700 hover:bg-primary-400 hover:text-black dark:text-gray-300 dark:hover:bg-primary-500 border-2 border-transparent hover:border-black">Demos</a>
+        <a href="#blog" class="block px-3 py-2 text-base font-bold uppercase tracking-wide text-gray-700 hover:bg-primary-400 hover:text-black dark:text-gray-300 dark:hover:bg-primary-500 border-2 border-transparent hover:border-black">Blog</a>
+        <a href="#contact" class="block px-3 py-2 text-base font-bold uppercase tracking-wide text-gray-700 hover:bg-primary-400 hover:text-black dark:text-gray-300 dark:hover:bg-primary-500 border-2 border-transparent hover:border-black">Contact</a>
         
         <!-- Dark Mode Toggle for Mobile -->
         <div class="flex items-center px-3 py-2">
@@ -104,17 +104,13 @@
           <p class="mt-3 max-w-md mx-auto text-base text-gray-500 dark:text-gray-400 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
             Building modern web applications with cutting-edge technologies. Explore my projects, case studies, and live demos.
           </p>
-          <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
-            <div class="rounded-md shadow">
-              <a href="#projects" class="btn btn-primary w-full flex items-center justify-center px-8 py-3 text-base font-medium md:py-4 md:text-lg md:px-10">
-                View Projects
-              </a>
-            </div>
-            <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-              <a href="#contact" class="btn btn-secondary w-full flex items-center justify-center px-8 py-3 text-base font-medium md:py-4 md:text-lg md:px-10">
-                Get in Touch
-              </a>
-            </div>
+          <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8 gap-3">
+            <a href="#projects" class="btn btn-primary w-full flex items-center justify-center px-8 py-3 text-base font-medium md:py-4 md:text-lg md:px-10">
+              View Projects
+            </a>
+            <a href="#contact" class="btn btn-secondary w-full flex items-center justify-center px-8 py-3 text-base font-medium md:py-4 md:text-lg md:px-10">
+              Get in Touch
+            </a>
           </div>
         </div>
         
@@ -168,7 +164,7 @@
         <div id="skills-container" class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           <!-- Skills will be dynamically loaded here -->
           <div class="col-span-full text-center py-12">
-            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
+            <div class="animate-spin h-12 w-12 border-b-4 border-black dark:border-white mx-auto"></div>
             <p class="mt-4 text-gray-500 dark:text-gray-400">Loading skills...</p>
           </div>
         </div>
@@ -189,7 +185,7 @@
         
         <!-- Project Filters and Search -->
         <div class="mt-8 max-w-4xl mx-auto">
-          <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+          <div class="bg-white dark:bg-gray-800 border-4 border-black shadow-brutal p-6">
             <div class="flex flex-col md:flex-row gap-4">
               <!-- Search -->
               <div class="flex-1">
@@ -197,22 +193,22 @@
                   <input
                     type="text"
                     id="project-search"
-                    placeholder="Search projects..."
-                    class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                    placeholder="SEARCH PROJECTS..."
+                    class="w-full pl-10 pr-4 py-3 border-3 border-black font-bold uppercase tracking-wide focus:outline-none focus:ring-0 dark:bg-gray-700 dark:text-white placeholder:text-gray-500"
                   >
                   <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    <svg class="h-5 w-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                   </div>
                 </div>
               </div>
-              
+
               <!-- Sort -->
               <div class="md:w-48">
                 <select
                   id="project-sort"
-                  class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                  class="w-full px-4 py-3 border-3 border-black font-bold uppercase tracking-wide focus:outline-none focus:ring-0 dark:bg-gray-700 dark:text-white"
                 >
                   <option value="recent">Most Recent</option>
                   <option value="featured">Featured First</option>
@@ -220,10 +216,10 @@
                 </select>
               </div>
             </div>
-            
+
             <!-- Technology Filters -->
             <div class="mt-4">
-              <h3 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Filter by Technology:</h3>
+              <h3 class="text-sm font-bold text-gray-900 dark:text-white mb-3 uppercase tracking-wide">Filter by Technology:</h3>
               <div id="project-filters" class="flex flex-wrap gap-2">
                 <!-- Filters will be dynamically added here -->
               </div>
@@ -235,7 +231,7 @@
         <div id="projects-container" class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           <!-- Projects will be dynamically loaded here -->
           <div class="col-span-full text-center py-12">
-            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
+            <div class="animate-spin h-12 w-12 border-b-4 border-black dark:border-white mx-auto"></div>
             <p class="mt-4 text-gray-500 dark:text-gray-400">Loading projects...</p>
           </div>
         </div>
@@ -257,7 +253,7 @@
         <div id="case-studies-container" class="mt-12 space-y-12">
           <!-- Case studies will be dynamically loaded here -->
           <div class="text-center py-12">
-            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
+            <div class="animate-spin h-12 w-12 border-b-4 border-black dark:border-white mx-auto"></div>
             <p class="mt-4 text-gray-500 dark:text-gray-400">Loading case studies...</p>
           </div>
         </div>
@@ -278,19 +274,19 @@
         
         <div class="mt-12 grid gap-8 md:grid-cols-2">
           
-          <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+          <div class="bg-white dark:bg-gray-900 border-4 border-black shadow-brutal overflow-hidden">
             <div class="p-6">
-              <div class="flex justify-between items-start mb-2">
-                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Housekeeping Scheduler</h3>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-          🟢 Active
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-black text-gray-900 dark:text-white uppercase tracking-tight">Housekeeping Scheduler</h3>
+                <span class="inline-flex items-center px-3 py-1 text-xs font-black bg-green-400 text-black border-2 border-black uppercase tracking-wide">
+          Active
         </span>
               </div>
-              <p class="text-base text-gray-500 dark:text-gray-400 mb-4">
+              <p class="text-base text-gray-700 dark:text-gray-300 mb-4 font-medium">
                 A modern web application for managing housekeeper schedules with CSV import/export capabilities, built with React, TypeScript, Tailwind CSS, and shadcn/ui components.
               </p>
-              
-              <div class="bg-gray-200 dark:bg-gray-700 rounded-md mb-4 overflow-hidden" style="height: 600px;">
+
+              <div class="bg-gray-200 dark:bg-gray-700 border-3 border-black mb-4 overflow-hidden" style="height: 600px;">
             <iframe
               src="https://hk.appahouse.com"
               class="w-full h-full border-0"
@@ -302,50 +298,34 @@
               
               <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
                 <div class="flex flex-wrap gap-2">
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-        React
-      </span> <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-        Typescript
-      </span> <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-        Vite
-      </span> <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-        Shadcn
-      </span> <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-        Tailwind
-      </span> <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-        Lucide
-      </span> <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-        Express
-      </span> <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-        Esbuild
-      </span> <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-        PostCSS
-      </span> <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-        Cloudflare Tunnel
-      </span>
+                  <span class="inline-flex items-center px-2.5 py-1 text-xs font-bold bg-white dark:bg-gray-700 border-2 border-black text-gray-900 dark:text-white uppercase tracking-wide">React</span>
+                  <span class="inline-flex items-center px-2.5 py-1 text-xs font-bold bg-white dark:bg-gray-700 border-2 border-black text-gray-900 dark:text-white uppercase tracking-wide">Typescript</span>
+                  <span class="inline-flex items-center px-2.5 py-1 text-xs font-bold bg-white dark:bg-gray-700 border-2 border-black text-gray-900 dark:text-white uppercase tracking-wide">Vite</span>
+                  <span class="inline-flex items-center px-2.5 py-1 text-xs font-bold bg-white dark:bg-gray-700 border-2 border-black text-gray-900 dark:text-white uppercase tracking-wide">Shadcn</span>
+                  <span class="inline-flex items-center px-2.5 py-1 text-xs font-bold bg-white dark:bg-gray-700 border-2 border-black text-gray-900 dark:text-white uppercase tracking-wide">Tailwind</span>
                 </div>
-                <a href="https://hk.appahouse.com" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300 flex items-center gap-1">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+                <a href="https://hk.appahouse.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-black text-black bg-primary-400 border-3 border-black shadow-brutal-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all uppercase tracking-wide">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
           </svg>
-          Full Screen
+          View
         </a>
               </div>
             </div>
           </div>
-          <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+          <div class="bg-white dark:bg-gray-900 border-4 border-black shadow-brutal overflow-hidden">
             <div class="p-6">
-              <div class="flex justify-between items-start mb-2">
-                <h3 class="text-lg font-medium text-gray-900 dark:text-white">MSL AppaHouse</h3>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-          🟢 Active
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-black text-gray-900 dark:text-white uppercase tracking-tight">MSL AppaHouse</h3>
+                <span class="inline-flex items-center px-3 py-1 text-xs font-black bg-green-400 text-black border-2 border-black uppercase tracking-wide">
+          Active
         </span>
               </div>
-              <p class="text-base text-gray-500 dark:text-gray-400 mb-4">
+              <p class="text-base text-gray-700 dark:text-gray-300 mb-4 font-medium">
                 Local development demo for MSL AppaHouse project
               </p>
               
-              <div class="bg-gray-200 dark:bg-gray-700 rounded-md mb-4 overflow-hidden" style="height: 600px;">
+              <div class="bg-gray-200 dark:bg-gray-700 border-3 border-black mb-4 overflow-hidden" style="height: 600px;">
             <iframe
               src="https://msl.appahouse.com"
               class="w-full h-full border-0"
@@ -357,7 +337,7 @@
               
               <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
                 <div class="flex flex-wrap gap-2">
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+                  <span class="inline-flex items-center px-2.5 py-1 text-xs font-bold bg-white dark:bg-gray-700 border-2 border-black text-gray-900 dark:text-white uppercase tracking-wide">
         React
       </span> <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
         Node.js
@@ -376,19 +356,19 @@
               </div>
             </div>
           </div>
-          <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+          <div class="bg-white dark:bg-gray-900 border-4 border-black shadow-brutal overflow-hidden">
             <div class="p-6">
-              <div class="flex justify-between items-start mb-2">
-                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Timesheet Calculator</h3>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-          🟢 Active
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-black text-gray-900 dark:text-white uppercase tracking-tight">Timesheet Calculator</h3>
+                <span class="inline-flex items-center px-3 py-1 text-xs font-black bg-green-400 text-black border-2 border-black uppercase tracking-wide">
+          Active
         </span>
               </div>
-              <p class="text-base text-gray-500 dark:text-gray-400 mb-4">
+              <p class="text-base text-gray-700 dark:text-gray-300 mb-4 font-medium">
                 A web application for calculating and managing timesheets with automated calculations and reporting features.
               </p>
               
-              <div class="bg-gray-200 dark:bg-gray-700 rounded-md mb-4 overflow-hidden" style="height: 600px;">
+              <div class="bg-gray-200 dark:bg-gray-700 border-3 border-black mb-4 overflow-hidden" style="height: 600px;">
             <iframe
               src="https://schedule.appahouse.com"
               class="w-full h-full border-0"
@@ -400,7 +380,7 @@
               
               <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
                 <div class="flex flex-wrap gap-2">
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+                  <span class="inline-flex items-center px-2.5 py-1 text-xs font-bold bg-white dark:bg-gray-700 border-2 border-black text-gray-900 dark:text-white uppercase tracking-wide">
         React
       </span> <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
         Node.js
@@ -419,19 +399,19 @@
               </div>
             </div>
           </div>
-          <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+          <div class="bg-white dark:bg-gray-900 border-4 border-black shadow-brutal overflow-hidden">
             <div class="p-6">
-              <div class="flex justify-between items-start mb-2">
-                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Indigo Sun Florals</h3>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-          🟢 Active
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-black text-gray-900 dark:text-white uppercase tracking-tight">Indigo Sun Florals</h3>
+                <span class="inline-flex items-center px-3 py-1 text-xs font-black bg-green-400 text-black border-2 border-black uppercase tracking-wide">
+          Active
         </span>
               </div>
-              <p class="text-base text-gray-500 dark:text-gray-400 mb-4">
+              <p class="text-base text-gray-700 dark:text-gray-300 mb-4 font-medium">
                 Web-Based E-commerce Platform
               </p>
               
-              <div class="bg-gray-200 dark:bg-gray-700 rounded-md mb-4 overflow-hidden" style="height: 600px;">
+              <div class="bg-gray-200 dark:bg-gray-700 border-3 border-black mb-4 overflow-hidden" style="height: 600px;">
             <iframe
               src="https://dev1.appahouse.com/products"
               class="w-full h-full border-0"
@@ -443,7 +423,7 @@
               
               <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
                 <div class="flex flex-wrap gap-2">
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+                  <span class="inline-flex items-center px-2.5 py-1 text-xs font-bold bg-white dark:bg-gray-700 border-2 border-black text-gray-900 dark:text-white uppercase tracking-wide">
         React 19 + React Compiler
       </span> <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
         TanStack Start + Router + Query
@@ -480,7 +460,7 @@
     <section id="blog" class="py-16 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto text-center mb-12">
-          <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-4">
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-400 dark:bg-primary-500 border-3 border-black shadow-brutal-sm mb-4">
             <svg class="w-5 h-5 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
             </svg>
@@ -497,7 +477,7 @@
         <div id="blog-posts" class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           <!-- Blog posts will be dynamically loaded here -->
           <div class="col-span-full text-center py-12">
-            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
+            <div class="animate-spin h-12 w-12 border-b-4 border-black dark:border-white mx-auto"></div>
             <p class="mt-4 text-gray-500 dark:text-gray-400">Loading blog posts...</p>
           </div>
         </div>
@@ -528,27 +508,27 @@
         <div class="max-w-4xl mx-auto">
           <div class="grid md:grid-cols-2 gap-8">
             <!-- Contact Form -->
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8">
+            <div class="bg-white dark:bg-gray-800 border-4 border-black shadow-brutal p-8">
               <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send a Message</h3>
               <form id="contact-form" action="https://formspree.io/f/your-form-id" method="POST" class="space-y-6">
                 <div>
                   <label for="name" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Name</label>
-                  <input type="text" name="name" id="name" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-600 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:bg-gray-700 dark:text-white transition-all duration-200">
+                  <input type="text" name="name" id="name" required class="w-full px-4 py-3 border-3 border-black focus:outline-none dark:bg-gray-700 dark:text-white font-bold uppercase tracking-wide">
                 </div>
 
                 <div>
                   <label for="email" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Email</label>
-                  <input type="email" name="email" id="email" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-600 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:bg-gray-700 dark:text-white transition-all duration-200">
+                  <input type="email" name="email" id="email" required class="w-full px-4 py-3 border-3 border-black focus:outline-none dark:bg-gray-700 dark:text-white font-bold">
                 </div>
 
                 <div>
                   <label for="subject" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Subject</label>
-                  <input type="text" name="subject" id="subject" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-600 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:bg-gray-700 dark:text-white transition-all duration-200">
+                  <input type="text" name="subject" id="subject" required class="w-full px-4 py-3 border-3 border-black focus:outline-none dark:bg-gray-700 dark:text-white font-bold">
                 </div>
 
                 <div>
                   <label for="message" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Message</label>
-                  <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-600 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:bg-gray-700 dark:text-white transition-all duration-200 resize-none"></textarea>
+                  <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 border-3 border-black focus:outline-none dark:bg-gray-700 dark:text-white font-medium resize-none"></textarea>
                 </div>
 
                 <div>
@@ -566,11 +546,11 @@
 
             <!-- Contact Info -->
             <div class="space-y-6">
-              <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8">
+              <div class="bg-white dark:bg-gray-800 border-4 border-black shadow-brutal p-8">
                 <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Contact Information</h3>
                 <div class="space-y-4">
                   <div class="flex items-start gap-4">
-                    <div class="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
+                    <div class="flex-shrink-0 w-12 h-12 bg-primary-400 dark:bg-primary-500 border-3 border-black flex items-center justify-center">
                       <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                       </svg>
@@ -582,7 +562,7 @@
                   </div>
 
                   <div class="flex items-start gap-4">
-                    <div class="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
+                    <div class="flex-shrink-0 w-12 h-12 bg-primary-400 dark:bg-primary-500 border-3 border-black flex items-center justify-center">
                       <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -595,7 +575,7 @@
                   </div>
 
                   <div class="flex items-start gap-4">
-                    <div class="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
+                    <div class="flex-shrink-0 w-12 h-12 bg-primary-400 dark:bg-primary-500 border-3 border-black flex items-center justify-center">
                       <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                       </svg>
@@ -609,15 +589,15 @@
               </div>
 
               <!-- Social Links -->
-              <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8">
+              <div class="bg-white dark:bg-gray-800 border-4 border-black shadow-brutal p-8">
                 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Connect With Me</h3>
                 <div class="flex gap-4">
-                  <a href="#" class="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-all duration-200 group">
+                  <a href="#" class="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-white dark:bg-gray-700 border-3 border-black shadow-brutal-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200 group font-bold uppercase tracking-wide">
                     <svg class="w-5 h-5 text-gray-700 dark:text-gray-300 group-hover:text-primary-600 dark:group-hover:text-primary-400" fill="currentColor" viewBox="0 0 24 24">
                       <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
                     </svg>
                   </a>
-                  <a href="#" class="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-all duration-200 group">
+                  <a href="#" class="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-white dark:bg-gray-700 border-3 border-black shadow-brutal-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200 group font-bold uppercase tracking-wide">
                     <svg class="w-5 h-5 text-gray-700 dark:text-gray-300 group-hover:text-primary-600 dark:group-hover:text-primary-400" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                     </svg>

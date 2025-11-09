@@ -1,5 +1,4 @@
 {
-  "note": "Skill levels are relative indicators of proficiency and comfort, not quantifiable percentages haha",
   "skillCategories": [
     {
       "id": "frontend",
@@ -8,22 +7,18 @@
       "skills": [
         {
           "name": "React",
-          "level": 65,
           "color": "#61DAFB"
         },
         {
           "name": "TypeScript",
-          "level": 60,
           "color": "#3178C6"
         },
         {
           "name": "Tailwind CSS",
-          "level": 70,
           "color": "#06B6D4"
         },
         {
           "name": "Next.js",
-          "level": 65,
           "color": "#000000"
         }
       ]
@@ -35,22 +30,18 @@
       "skills": [
         {
           "name": "Node.js",
-          "level": 65,
           "color": "#339933"
         },
         {
           "name": "Tanstack Start",
-          "level": 80,
           "color": "#FF4154"
         },
         {
           "name": "Docker",
-          "level": 75,
           "color": "#2496ED"
         },
         {
           "name": "PostgreSQL",
-          "level": 65,
           "color": "#4169E1"
         }
       ]
@@ -62,22 +53,18 @@
       "skills": [
         {
           "name": "Git",
-          "level": 65,
           "color": "#F05032"
         },
         {
           "name": "CI/CD",
-          "level": 40,
           "color": "#2088FF"
         },
         {
           "name": "Cloud Services",
-          "level": 50,
           "color": "#FF9900"
         },
         {
           "name": "Drizzle ORM",
-          "level": 65,
           "color": "#C5F74F"
         }
       ]
