@@ -13,7 +13,6 @@ class SkillsManager {
     try {
       await this.loadSkills();
       this.renderSkills();
-      this.animateSkillBars();
     } catch (error) {
       console.error('Error initializing skills:', error);
       this.showError('Failed to load skills. Please try again later.');
@@ -52,17 +51,9 @@ class SkillsManager {
 
   createSkillCategoryCard(category) {
     const skillsHTML = category.skills.map(skill => `
-      <div class="skill-item" data-skill-level="${skill.level}">
-        <div class="flex justify-between mb-2">
-          <span class="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
-            <span class="skill-icon" style="color: ${skill.color}">●</span>
-            ${skill.name}
-          </span>
-          <span class="text-sm font-medium text-gray-700 dark:text-gray-300">${skill.level}%</span>
-        </div>
-        <div class="skill-bar">
-          <div class="skill-progress" style="width: 0%; background-color: ${skill.color};" data-target-width="${skill.level}%"></div>
-        </div>
+      <div class="skill-badge" style="--skill-color: ${skill.color}">
+        <span class="skill-dot" style="background-color: ${skill.color}"></span>
+        <span class="skill-name">${skill.name}</span>
       </div>
     `).join('');
 
@@ -70,9 +61,9 @@ class SkillsManager {
       <div class="card p-6 transform transition-all duration-300 hover:scale-105">
         <div class="flex items-center gap-3 mb-6">
           ${this.getIconSVG(category.icon)}
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">${category.title}</h3>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white uppercase tracking-wide">${category.title}</h3>
         </div>
-        <div class="space-y-5">
+        <div class="flex flex-wrap gap-3">
           ${skillsHTML}
         </div>
       </div>
@@ -102,28 +93,6 @@ class SkillsManager {
     return icons[iconType] || icons.code;
   }
 
-  animateSkillBars() {
-    // Intersection Observer to animate skill bars when they come into view
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const skillBars = entry.target.querySelectorAll('.skill-progress');
-          skillBars.forEach((bar, index) => {
-            setTimeout(() => {
-              const targetWidth = bar.getAttribute('data-target-width');
-              bar.style.width = targetWidth;
-            }, index * 100); // Stagger animation
-          });
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
-
-    const skillsContainer = document.getElementById('skills-container');
-    if (skillsContainer) {
-      observer.observe(skillsContainer);
-    }
-  }
 
   showError(message) {
     const container = document.getElementById('skills-container');

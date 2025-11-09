@@ -30,20 +30,16 @@
     @apply bg-white dark:bg-gray-800 border-4 border-black shadow-brutal overflow-hidden transition-all duration-200 hover:translate-x-2 hover:translate-y-2 hover:shadow-none;
   }
 
-  .skill-bar {
-    @apply h-4 bg-gray-200 dark:bg-gray-700 border-2 border-black overflow-hidden relative;
+  .skill-badge {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-700 border-3 border-black shadow-brutal-sm transition-all duration-200 hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
   }
 
-  .skill-progress {
-    @apply h-full border-r-2 border-black transition-all duration-1000 ease-out relative;
+  .skill-dot {
+    @apply w-3 h-3 border-2 border-black;
   }
 
-  .skill-item {
-    @apply transition-all duration-200;
-  }
-
-  .skill-icon {
-    @apply inline-block;
+  .skill-name {
+    @apply font-bold text-sm text-gray-900 dark:text-white uppercase tracking-wide;
   }
 
   /* Project specific styles */

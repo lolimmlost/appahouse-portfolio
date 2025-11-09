@@ -51,16 +51,16 @@ class CaseStudiesManager {
 
   createCaseStudyCard(caseStudy) {
     const technologies = caseStudy.technologies.map(tech =>
-      `<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 transition-all duration-200 hover:scale-105">
+      `<span class="inline-flex items-center px-3 py-1 text-xs font-bold bg-white dark:bg-gray-700 border-2 border-black text-gray-900 dark:text-white uppercase tracking-wide shadow-brutal-sm transition-all duration-200 hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
         ${tech}
       </span>`
     ).join('');
 
     return `
-      <div class="bg-white dark:bg-gray-900 rounded-xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+      <div class="bg-white dark:bg-gray-900 border-4 border-black shadow-brutal overflow-hidden transform transition-all duration-300 hover:translate-x-2 hover:translate-y-2 hover:shadow-none">
         <div class="md:flex">
           <div class="md:shrink-0 relative group">
-            <div class="h-64 w-full object-cover md:h-full md:w-80 bg-gradient-to-br from-primary-100 to-primary-200 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center overflow-hidden">
+            <div class="h-64 w-full object-cover md:h-full md:w-80 bg-gradient-to-br from-primary-100 to-primary-200 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center overflow-hidden border-r-4 border-black">
               <img src="${caseStudy.thumbnail}" alt="${caseStudy.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
               <div class="hidden text-gray-400 dark:text-gray-500">
                 <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,7 +69,7 @@ class CaseStudiesManager {
               </div>
             </div>
             ${caseStudy.featured ? `
-              <div class="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
+              <div class="absolute top-4 right-4 bg-primary-400 text-black text-xs font-black px-3 py-1.5 border-3 border-black shadow-brutal-sm uppercase tracking-wide flex items-center gap-1">
                 <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                 </svg>
@@ -80,7 +80,7 @@ class CaseStudiesManager {
           <div class="p-8 flex flex-col justify-between">
             <div>
               <div class="flex items-center gap-3 mb-3">
-                <span class="uppercase tracking-wide text-sm text-primary-600 dark:text-primary-400 font-bold px-3 py-1 bg-primary-50 dark:bg-primary-900/30 rounded-full">
+                <span class="uppercase tracking-wide text-xs text-black dark:text-white font-black px-3 py-1.5 bg-primary-400 dark:bg-primary-500 border-2 border-black">
                   ${caseStudy.category}
                 </span>
                 ${caseStudy.client ? `
@@ -93,11 +93,11 @@ class CaseStudiesManager {
                 ` : ''}
               </div>
 
-              <a href="case-study.html?id=${caseStudy.id}" class="block mt-2 text-2xl leading-tight font-bold text-gray-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400 transition-colors duration-200">
+              <a href="case-study.html?id=${caseStudy.id}" class="block mt-2 text-2xl leading-tight font-black text-gray-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400 transition-colors duration-200 uppercase tracking-tight">
                 ${caseStudy.title}
               </a>
 
-              <p class="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p class="mt-3 text-base text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
                 ${caseStudy.excerpt || caseStudy.challenge?.substring(0, 150) + '...' || 'View the full case study to learn more about this project.'}
               </p>
 
@@ -106,19 +106,19 @@ class CaseStudiesManager {
               </div>
             </div>
 
-            <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+            <div class="mt-6 pt-6 border-t-3 border-black">
               <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+                <div class="flex items-center gap-4 text-sm text-gray-700 dark:text-gray-300 font-bold uppercase tracking-wide">
                   <span class="inline-flex items-center gap-1">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
                     ${new Date(caseStudy.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                   </span>
                   ${caseStudy.developmentTime ? `
                     <span class="inline-flex items-center gap-1">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                       </svg>
                       ${caseStudy.developmentTime}
                     </span>
