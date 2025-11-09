@@ -26,6 +26,44 @@
       "updatedAt": "2025-10-05T04:38:59.437Z"
     },
     {
+      "id": "msl-appahouse",
+      "title": "MSL AppaHouse",
+      "description": "Local development demo for MSL AppaHouse project",
+      "category": "Development",
+      "technologies": [
+        "React",
+        "Node.js",
+        "Express",
+        "Local Development"
+      ],
+      "embedUrl": "https://msl.appahouse.com",
+      "fullscreenUrl": "https://msl.appahouse.com",
+      "thumbnail": "",
+      "featured": true,
+      "status": "active",
+      "createdAt": "2025-11-09T05:03:00.000Z",
+      "updatedAt": "2025-11-09T05:03:00.000Z"
+    },
+    {
+      "id": "timesheet-calculator",
+      "title": "Timesheet Calculator",
+      "description": "A web application for calculating and managing timesheets with automated calculations and reporting features.",
+      "category": "Productivity",
+      "technologies": [
+        "React",
+        "Node.js",
+        "Express",
+        "Timesheet Management"
+      ],
+      "embedUrl": "https://schedule.appahouse.com",
+      "fullscreenUrl": "https://schedule.appahouse.com",
+      "thumbnail": "",
+      "featured": true,
+      "status": "active",
+      "createdAt": "2025-11-09T05:09:00.000Z",
+      "updatedAt": "2025-11-09T05:09:00.000Z"
+    },
+    {
       "id": "indigo-sun-florals",
       "title": "Indigo Sun Florals",
       "description": "Web-Based E-commerce Platform",
@@ -48,7 +86,8 @@
   ],
   "categories": [
     "Productivity",
-    "E-commerce"
+    "E-commerce",
+    "Development"
   ],
   "lastUpdated": "2025-10-05T04:57:16.996Z"
 }

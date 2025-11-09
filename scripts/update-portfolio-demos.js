@@ -152,16 +152,36 @@ class PortfolioDemoUpdater {
    * Generate HTML for a single demo card
    */
   generateDemoCardHtml(demo) {
+    // Check if this is a local HTTP URL that might cause mixed content issues
+    const isLocalHttp = demo.embedUrl && (demo.embedUrl.startsWith('http://localhost') || demo.embedUrl.startsWith('http://10.') || demo.embedUrl.startsWith('http://192.168.') || demo.embedUrl.startsWith('http://127.'));
+    
     const embedContent = demo.embedUrl
-      ? `<div class="bg-gray-200 dark:bg-gray-700 rounded-md mb-4 overflow-hidden" style="height: 600px;">
-          <iframe
-            src="${demo.embedUrl}"
-            class="w-full h-full border-0"
-            allowfullscreen
-            loading="lazy"
-            title="${demo.title}">
-          </iframe>
-        </div>`
+      ? (isLocalHttp
+        ? `<div class="bg-gray-200 dark:bg-gray-700 rounded-md mb-4 overflow-hidden" style="height: 600px;">
+            <div class="h-full flex flex-col items-center justify-center p-6 text-center">
+              <svg class="w-12 h-12 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              <p class="text-gray-600 dark:text-gray-300 mb-2 font-medium">Local Development Demo</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">This demo runs on a local server and cannot be embedded due to security restrictions.</p>
+              <a href="${demo.embedUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+                Open Demo in New Tab
+              </a>
+              <p class="text-xs text-gray-400 dark:text-gray-500 mt-2">${demo.embedUrl}</p>
+            </div>
+          </div>`
+        : `<div class="bg-gray-200 dark:bg-gray-700 rounded-md mb-4 overflow-hidden" style="height: 600px;">
+            <iframe
+              src="${demo.embedUrl}"
+              class="w-full h-full border-0"
+              allowfullscreen
+              loading="lazy"
+              title="${demo.title}">
+            </iframe>
+          </div>`)
       : `<div class="bg-gray-200 dark:bg-gray-700 rounded-md mb-4 flex items-center justify-center" style="height: 500px;">
           <div class="text-center">
             <svg class="w-12 h-12 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
