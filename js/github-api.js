@@ -173,8 +173,19 @@ for (let i = 0; i < 3; i++) {
 }
 html += '</div>';
 
-// Contribution squares
-html += '<div class="flex flex-wrap gap-0.5 sm:gap-1 md:gap-1.5">';
+// Contribution squares - using CSS grid for proper layout
+html += '<div class="overflow-x-auto">';
+html += '<div class="inline-grid grid-rows-7 grid-flow-col gap-0.5 sm:gap-1">';
+
+const colors = [
+  'bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600',
+  'bg-primary-100 dark:bg-primary-900 border-primary-400 dark:border-primary-700',
+  'bg-primary-300 dark:bg-primary-700 border-primary-500 dark:border-primary-500',
+  'bg-primary-500 dark:bg-primary-500 border-primary-700 dark:border-primary-300',
+  'bg-primary-700 dark:bg-primary-300 border-primary-900 dark:border-primary-100'
+];
+
+// Iterate weeks first (columns), then days (rows)
 for (let week = 0; week < weeks; week++) {
   for (let day = 0; day < daysInWeek; day++) {
     const contributions = graph[weeks - 1 - week][day];
@@ -184,35 +195,28 @@ for (let week = 0; week < weeks; week++) {
       level = Math.min(4, Math.ceil((contributions / maxContributions) * 4));
     }
 
-    const colors = [
-      'bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600',
-      'bg-primary-100 dark:bg-primary-900 border-primary-400 dark:border-primary-700',
-      'bg-primary-300 dark:bg-primary-700 border-primary-500 dark:border-primary-500',
-      'bg-primary-500 dark:bg-primary-500 border-primary-700 dark:border-primary-300',
-      'bg-primary-700 dark:bg-primary-300 border-primary-900 dark:border-primary-100'
-    ];
-
-    html += `<div class="w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 border sm:border-2 ${colors[level]} transition-all hover:scale-110" title="${contributions} contributions"></div>`;
+    html += `<div class="w-3 h-3 sm:w-4 sm:h-4 border ${colors[level]} transition-all hover:scale-110" title="${contributions} contributions"></div>`;
   }
 }
+html += '</div>';
 html += '</div>';
 
 // Legend
 html += '<div class="flex items-center justify-end mt-4 text-xs font-bold text-gray-700 dark:text-gray-300">';
-html += '<span class="mr-2 sm:mr-3 uppercase text-xs sm:text-sm">Less</span>';
-html += '<div class="flex gap-0.5 sm:gap-1 md:gap-1.5">';
+html += '<span class="mr-2 uppercase text-xs">Less</span>';
+html += '<div class="flex gap-0.5 sm:gap-1">';
+const legendColors = [
+  'bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600',
+  'bg-primary-100 dark:bg-primary-900 border-primary-400 dark:border-primary-700',
+  'bg-primary-300 dark:bg-primary-700 border-primary-500 dark:border-primary-500',
+  'bg-primary-500 dark:bg-primary-500 border-primary-700 dark:border-primary-300',
+  'bg-primary-700 dark:bg-primary-300 border-primary-900 dark:border-primary-100'
+];
 for (let i = 0; i < 5; i++) {
-  const colors = [
-    'bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600',
-    'bg-primary-100 dark:bg-primary-900 border-primary-400 dark:border-primary-700',
-    'bg-primary-300 dark:bg-primary-700 border-primary-500 dark:border-primary-500',
-    'bg-primary-500 dark:bg-primary-500 border-primary-700 dark:border-primary-300',
-    'bg-primary-700 dark:bg-primary-300 border-primary-900 dark:border-primary-100'
-  ];
-  html += `<div class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 border sm:border-2 ${colors[i]}"></div>`;
+  html += `<div class="w-3 h-3 sm:w-4 sm:h-4 border ${legendColors[i]}"></div>`;
 }
 html += '</div>';
-html += '<span class="ml-2 sm:ml-3 uppercase text-xs sm:text-sm">More</span>';
+html += '<span class="ml-2 uppercase text-xs">More</span>';
 html += '</div>';
 
 html += '</div>';
