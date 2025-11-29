@@ -116,109 +116,37 @@ const colors = {
 return colors[language] || '#586069';
 }
 
-// Function to create contribution graph
+// Function to create contribution graph using GitHub's embedded calendar
 function createContributionGraph(events) {
-// Get the last 12 weeks (3 months) - GitHub API limitation
-const weeks = 12;
-const daysInWeek = 7;
-const graph = [];
+  const isDarkMode = document.documentElement.classList.contains('dark') ||
+                     window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-// Initialize graph with zeros
-for (let i = 0; i < weeks; i++) {
-  const week = [];
-  for (let j = 0; j < daysInWeek; j++) {
-    week.push(0);
-  }
-  graph.push(week);
-}
+  // Generate HTML with link to full contribution graph on GitHub
+  let html = '<div class="mt-6">';
+  html += '<div class="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 uppercase tracking-wide">Contribution Graph</div>';
 
-// Count contributions for each day
-events.forEach(event => {
-  if (event.type === 'PushEvent' || event.type === 'IssuesEvent' ||
-      event.type === 'PullRequestEvent' || event.type === 'CreateEvent') {
-    const eventDate = new Date(event.created_at);
-    const daysAgo = Math.floor((new Date() - eventDate) / (1000 * 60 * 60 * 24));
-    
-    if (daysAgo < weeks * daysInWeek) {
-      const weekIndex = Math.floor(daysAgo / daysInWeek);
-      const dayIndex = daysInWeek - 1 - (daysAgo % daysInWeek);
-      
-      if (weekIndex < weeks && dayIndex >= 0 && dayIndex < daysInWeek) {
-        graph[weekIndex][dayIndex]++;
-      }
-    }
-  }
-});
+  // Use ghchart.rshah.org for the contribution graph image
+  const chartUrl = `https://ghchart.rshah.org/${githubUsername}`;
 
-// Find max contributions for scaling
-let maxContributions = 1;
-graph.forEach(week => {
-  week.forEach(day => {
-    if (day > maxContributions) maxContributions = day;
-  });
-});
+  html += `
+    <div class="w-full border-3 border-black dark:border-gray-600 bg-white dark:bg-gray-800 p-4 overflow-x-auto">
+      <img
+        src="${chartUrl}"
+        alt="GitHub Contribution Graph for ${githubUsername}"
+        class="w-full min-w-[700px] h-auto"
+        style="filter: ${isDarkMode ? 'brightness(0.8) contrast(1.2)' : 'none'};"
+        onerror="this.parentElement.innerHTML='<p class=\\'text-center text-gray-500 dark:text-gray-400 py-4\\'>Unable to load contribution graph. <a href=\\'https://github.com/${githubUsername}\\' class=\\'underline\\'>View on GitHub</a></p>'"
+      />
+    </div>
+    <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center font-medium">
+      <a href="https://github.com/${githubUsername}" target="_blank" rel="noopener noreferrer" class="underline hover:text-primary-500">
+        View full contribution history on GitHub
+      </a>
+    </p>
+  `;
 
-// Generate HTML for the graph
-let html = '<div class="mt-6">';
-html += '<div class="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 uppercase tracking-wide">Contributions (Last 3 Months)</div>';
-html += '<div class="text-xs text-gray-500 dark:text-gray-400 mb-4 font-medium">Note: GitHub API shows recent activity only</div>';
-
-// Month labels
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const currentMonth = new Date().getMonth();
-html += '<div class="w-full flex justify-between text-xs font-bold text-gray-700 dark:text-gray-300 mb-3">';
-for (let i = 0; i < 3; i++) {
-  const monthIndex = (currentMonth - i + 12) % 12;
-  html += `<span class="uppercase">${months[monthIndex]}</span>`;
-}
-html += '</div>';
-
-// Contribution squares
-html += '<div class="flex flex-wrap gap-0.5 sm:gap-1 md:gap-1.5">';
-for (let week = 0; week < weeks; week++) {
-  for (let day = 0; day < daysInWeek; day++) {
-    const contributions = graph[weeks - 1 - week][day];
-    let level = 0;
-
-    if (contributions > 0) {
-      level = Math.min(4, Math.ceil((contributions / maxContributions) * 4));
-    }
-
-    const colors = [
-      'bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600',
-      'bg-primary-100 dark:bg-primary-900 border-primary-400 dark:border-primary-700',
-      'bg-primary-300 dark:bg-primary-700 border-primary-500 dark:border-primary-500',
-      'bg-primary-500 dark:bg-primary-500 border-primary-700 dark:border-primary-300',
-      'bg-primary-700 dark:bg-primary-300 border-primary-900 dark:border-primary-100'
-    ];
-
-    html += `<div class="w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 border sm:border-2 ${colors[level]} transition-all hover:scale-110" title="${contributions} contributions"></div>`;
-  }
-}
-html += '</div>';
-
-// Legend
-html += '<div class="flex items-center justify-end mt-4 text-xs font-bold text-gray-700 dark:text-gray-300">';
-html += '<span class="mr-2 sm:mr-3 uppercase text-xs sm:text-sm">Less</span>';
-html += '<div class="flex gap-0.5 sm:gap-1 md:gap-1.5">';
-for (let i = 0; i < 5; i++) {
-  const colors = [
-    'bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600',
-    'bg-primary-100 dark:bg-primary-900 border-primary-400 dark:border-primary-700',
-    'bg-primary-300 dark:bg-primary-700 border-primary-500 dark:border-primary-500',
-    'bg-primary-500 dark:bg-primary-500 border-primary-700 dark:border-primary-300',
-    'bg-primary-700 dark:bg-primary-300 border-primary-900 dark:border-primary-100'
-  ];
-  html += `<div class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 border sm:border-2 ${colors[i]}"></div>`;
-}
-html += '</div>';
-html += '<span class="ml-2 sm:ml-3 uppercase text-xs sm:text-sm">More</span>';
-html += '</div>';
-
-html += '</div>';
-return html;
-
-
+  html += '</div>';
+  return html;
 }
 
 // Function to fetch GitHub user data
@@ -373,24 +301,11 @@ function displayGitHubActivity(userData, reposData, events, isCached = false, is
   const prEvents = events.filter(event => event.type === 'PullRequestEvent');
   const createEvents = events.filter(event => event.type === 'CreateEvent' && event.payload.ref_type === 'repository');
 
-  // Create a map of repositories and their commit counts
-  const repoCommitMap = {};
-
-  pushEvents.forEach(event => {
-    const repoName = event.repo.name.split('/')[1];
-    const commitCount = event.payload.commits ? event.payload.commits.length : 0;
-    
-    if (repoCommitMap[repoName]) {
-      repoCommitMap[repoName] += commitCount;
-    } else {
-      repoCommitMap[repoName] = commitCount;
-    }
-  });
-
-  // Sort repositories by commit count (descending)
-  const sortedRepos = Object.entries(repoCommitMap)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5); // Show top 5 repositories
+  // Get top repositories sorted by recent update
+  const sortedRepos = reposData
+    .filter(repo => !repo.fork) // Exclude forks
+    .sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at))
+    .slice(0, 5); // Show top 5 recently updated repositories
 
   // Calculate language statistics
   const languageStats = {};
@@ -462,52 +377,48 @@ html += `
 
 // Add top repositories
 if (sortedRepos.length > 0) {
-  sortedRepos.forEach(([repo, commitCount]) => {
-    // Calculate percentage for the progress bar
-    const maxCommits = Math.max(...sortedRepos.map(([_, count]) => count));
-    const percentage = Math.round((commitCount / maxCommits) * 100);
-    
-    // Find repository details
-    const repoDetails = reposData.find(r => r.name === repo);
-    
+  sortedRepos.forEach(repo => {
+    const lastUpdated = formatRelativeTime(repo.pushed_at);
+
     html += `
-      <div class="border-3 border-black dark:border-gray-600 p-5 shadow-brutal-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all bg-white dark:bg-gray-800">
+      <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="block border-3 border-black dark:border-gray-600 p-5 shadow-brutal-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all bg-white dark:bg-gray-800">
         <div class="flex justify-between items-start">
           <div class="flex-1">
-            <h4 class="font-black text-lg text-gray-900 dark:text-white uppercase">${repo}</h4>
-            ${repoDetails && repoDetails.description ? `<p class="text-sm text-gray-700 dark:text-gray-300 mt-2 font-medium">${repoDetails.description}</p>` : ''}
+            <h4 class="font-black text-lg text-gray-900 dark:text-white uppercase">${repo.name}</h4>
+            ${repo.description ? `<p class="text-sm text-gray-700 dark:text-gray-300 mt-2 font-medium">${repo.description}</p>` : ''}
             <div class="flex items-center gap-4 mt-3">
-              ${repoDetails && repoDetails.language ? `
+              ${repo.language ? `
                 <div class="flex items-center">
-                  <span class="w-4 h-4 border-2 border-black mr-2" style="background-color: ${getLanguageColor(repoDetails.language)}"></span>
-                  <span class="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase">${repoDetails.language}</span>
+                  <span class="w-4 h-4 border-2 border-black mr-2" style="background-color: ${getLanguageColor(repo.language)}"></span>
+                  <span class="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase">${repo.language}</span>
                 </div>
               ` : ''}
-              ${repoDetails && repoDetails.stargazers_count > 0 ? `
-                <div class="flex items-center text-xs font-bold text-gray-700 dark:text-gray-300">
-                  <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                  ${repoDetails.stargazers_count}
-                </div>
-              ` : ''}
+              <div class="flex items-center text-xs font-bold text-gray-700 dark:text-gray-300">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                ${repo.stargazers_count}
+              </div>
+              <div class="flex items-center text-xs font-bold text-gray-700 dark:text-gray-300">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                ${repo.forks_count}
+              </div>
             </div>
           </div>
           <div class="text-right ml-4">
-            <div class="text-sm font-black text-gray-900 dark:text-white">${commitCount}</div>
-            <div class="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase">Commits</div>
-            <div class="w-28 bg-gray-200 dark:bg-gray-700 border-2 border-black h-3 mt-2">
-              <div class="bg-primary-500 h-full border-r-2 border-black transition-all duration-500 ease-out" style="width: ${percentage}%"></div>
-            </div>
+            <div class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Updated</div>
+            <div class="text-sm font-black text-gray-900 dark:text-white">${lastUpdated}</div>
           </div>
         </div>
-      </div>
+      </a>
     `;
   });
 } else {
   html += `
     <div class="text-center py-4">
-      <p class="text-gray-500 dark:text-gray-400">No recent repository activity</p>
+      <p class="text-gray-500 dark:text-gray-400">No repositories found</p>
     </div>
   `;
 }
@@ -532,7 +443,7 @@ if (recentEvents.length > 0) {
     switch (event.type) {
       case 'PushEvent':
         const repoName = event.repo.name.split('/')[1];
-        const commitCount = event.payload.commits ? event.payload.commits.length : 0;
+        const commitCount = event.payload.commits ? event.payload.commits.length : event.payload.size || 1;
         eventHtml = `
           <div class="flex items-start border-3 border-black dark:border-gray-600 p-4 bg-green-50 dark:bg-green-900/20 shadow-brutal-sm">
             <div class="flex-shrink-0">
@@ -544,7 +455,7 @@ if (recentEvents.length > 0) {
             </div>
             <div class="ml-4 flex-1">
               <p class="text-sm font-bold text-gray-900 dark:text-white">
-                PUSHED <span class="text-primary-600 dark:text-primary-400">${commitCount} COMMIT${commitCount !== 1 ? 'S' : ''}</span> TO
+                PUSHED TO
                 <a href="https://github.com/${event.repo.name}" target="_blank" rel="noopener noreferrer" class="font-black underline hover:text-primary-600 dark:hover:text-primary-400">
                   ${repoName}
                 </a>
@@ -588,8 +499,9 @@ if (recentEvents.length > 0) {
       case 'PullRequestEvent':
         const prRepo = event.repo.name.split('/')[1];
         const prAction = event.payload.action === 'opened' ? 'opened' : event.payload.action === 'closed' ? 'closed' : 'updated';
-        const prTitle = event.payload.pull_request.title;
-        const prNumber = event.payload.pull_request.number;
+        const prTitle = event.payload.pull_request?.title || 'Pull Request';
+        const prNumber = event.payload.pull_request?.number || event.payload.number || '';
+        const prUrl = event.payload.pull_request?.html_url || `https://github.com/${event.repo.name}/pull/${prNumber}`;
         eventHtml = `
           <div class="flex items-start border-3 border-black dark:border-gray-600 p-4 bg-purple-50 dark:bg-purple-900/20 shadow-brutal-sm">
             <div class="flex-shrink-0">
@@ -602,8 +514,8 @@ if (recentEvents.length > 0) {
             <div class="ml-4 flex-1">
               <p class="text-sm font-bold text-gray-900 dark:text-white">
                 ${prAction.toUpperCase()} PULL REQUEST
-                <a href="${event.payload.pull_request.html_url}" target="_blank" rel="noopener noreferrer" class="font-black underline hover:text-purple-600 dark:hover:text-purple-400">
-                  #${prNumber} ${prTitle}
+                <a href="${prUrl}" target="_blank" rel="noopener noreferrer" class="font-black underline hover:text-purple-600 dark:hover:text-purple-400">
+                  ${prNumber ? '#' + prNumber : ''} ${prTitle}
                 </a> IN
                 <a href="https://github.com/${event.repo.name}" target="_blank" rel="noopener noreferrer" class="font-black underline hover:text-purple-600 dark:hover:text-purple-400">
                   ${prRepo}
