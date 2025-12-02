@@ -121,6 +121,9 @@ function createContributionGraph(events) {
   const isDarkMode = document.documentElement.classList.contains('dark') ||
                      window.matchMedia('(prefers-color-scheme: dark)').matches;
 
+  // Check if mobile (less than 640px)
+  const isMobile = window.innerWidth < 640;
+
   // Generate HTML with link to full contribution graph on GitHub
   let html = '<div class="mt-6">';
   html += '<div class="text-sm font-bold text-gray-800 dark:text-gray-200 mb-3 uppercase tracking-wide">Contribution Graph</div>';
@@ -128,16 +131,38 @@ function createContributionGraph(events) {
   // Use ghchart.rshah.org for the contribution graph image
   const chartUrl = `https://ghchart.rshah.org/${githubUsername}`;
 
+  if (isMobile) {
+    // Mobile: Show only last ~4 months by using a scrolled container
+    html += `
+      <div class="w-full border-3 border-black dark:border-gray-600 bg-white dark:bg-gray-800 p-2 overflow-hidden max-w-full">
+        <div style="width: 100%; overflow: hidden;">
+          <div id="contrib-graph-container" style="width: 720px; margin-left: -480px;">
+            <img
+              src="${chartUrl}"
+              alt="GitHub Contribution Graph for ${githubUsername}"
+              style="width: 720px; height: auto; display: block; filter: ${isDarkMode ? 'brightness(0.8) contrast(1.2)' : 'none'};"
+              onerror="this.parentElement.parentElement.innerHTML='<p style=\\'text-align:center;padding:1rem;color:#888;\\'>Unable to load graph</p>'"
+            />
+          </div>
+        </div>
+      </div>
+    `;
+  } else {
+    // Desktop: Show full graph with scroll
+    html += `
+      <div class="w-full border-3 border-black dark:border-gray-600 bg-white dark:bg-gray-800 p-4 overflow-x-auto max-w-full">
+        <img
+          src="${chartUrl}"
+          alt="GitHub Contribution Graph for ${githubUsername}"
+          class="h-auto min-w-[700px] w-full"
+          style="filter: ${isDarkMode ? 'brightness(0.8) contrast(1.2)' : 'none'};"
+          onerror="this.parentElement.innerHTML='<p class=\\'text-center text-gray-500 dark:text-gray-400 py-4\\'>Unable to load contribution graph. <a href=\\'https://github.com/${githubUsername}\\' class=\\'underline\\'>View on GitHub</a></p>'"
+        />
+      </div>
+    `;
+  }
+
   html += `
-    <div class="w-full border-3 border-black dark:border-gray-600 bg-white dark:bg-gray-800 p-4 overflow-x-auto">
-      <img
-        src="${chartUrl}"
-        alt="GitHub Contribution Graph for ${githubUsername}"
-        class="w-full min-w-[700px] h-auto"
-        style="filter: ${isDarkMode ? 'brightness(0.8) contrast(1.2)' : 'none'};"
-        onerror="this.parentElement.innerHTML='<p class=\\'text-center text-gray-500 dark:text-gray-400 py-4\\'>Unable to load contribution graph. <a href=\\'https://github.com/${githubUsername}\\' class=\\'underline\\'>View on GitHub</a></p>'"
-      />
-    </div>
     <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center font-medium">
       <a href="https://github.com/${githubUsername}" target="_blank" rel="noopener noreferrer" class="underline hover:text-primary-500">
         View full contribution history on GitHub
@@ -329,20 +354,20 @@ function displayGitHubActivity(userData, reposData, events, isCached = false, is
 
 // Create HTML for the user profile section
 let html = `
-  <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8">
-    <img src="${userData.avatar_url}" alt="${userData.login}" class="w-24 h-24 border-4 border-black shadow-brutal-sm">
-    <div class="text-center sm:text-left">
-      <h3 class="text-2xl font-black text-gray-900 dark:text-white uppercase tracking-tight">${userData.name || userData.login}</h3>
-      <p class="text-gray-700 dark:text-gray-300 mb-4 font-medium">${userData.bio || 'No bio available'}</p>
-      <div class="flex justify-center sm:justify-start gap-6 text-sm font-bold">
+  <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 mb-8">
+    <img src="${userData.avatar_url}" alt="${userData.login}" class="w-20 h-20 sm:w-24 sm:h-24 border-4 border-black shadow-brutal-sm flex-shrink-0">
+    <div class="text-center sm:text-left min-w-0 flex-1">
+      <h3 class="text-xl sm:text-2xl font-black text-gray-900 dark:text-white uppercase tracking-tight break-words">${userData.name || userData.login}</h3>
+      <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-4 font-medium">${userData.bio || 'No bio available'}</p>
+      <div class="flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-6 text-xs sm:text-sm font-bold">
         <div class="text-gray-700 dark:text-gray-300">
-          <span class="text-lg text-gray-900 dark:text-white">${userData.public_repos}</span> REPOS
+          <span class="text-base sm:text-lg text-gray-900 dark:text-white">${userData.public_repos}</span> REPOS
         </div>
         <div class="text-gray-700 dark:text-gray-300">
-          <span class="text-lg text-gray-900 dark:text-white">${userData.followers}</span> FOLLOWERS
+          <span class="text-base sm:text-lg text-gray-900 dark:text-white">${userData.followers}</span> FOLLOWERS
         </div>
         <div class="text-gray-700 dark:text-gray-300">
-          <span class="text-lg text-gray-900 dark:text-white">${userData.following}</span> FOLLOWING
+          <span class="text-base sm:text-lg text-gray-900 dark:text-white">${userData.following}</span> FOLLOWING
         </div>
       </div>
     </div>
@@ -356,15 +381,15 @@ html += createContributionGraph(events);
 html += `
   <div class="mt-8">
     <div class="border-b-4 border-black dark:border-gray-600">
-      <nav class="-mb-1 flex space-x-4" aria-label="Tabs">
-        <button onclick="showTab('repositories')" id="repositories-tab" class="tab-button active border-b-4 border-primary-500 bg-primary-400 text-black whitespace-nowrap py-3 px-6 font-bold text-sm uppercase tracking-wide">
-          Repositories
+      <nav class="-mb-1 flex" aria-label="Tabs">
+        <button onclick="showTab('repositories')" id="repositories-tab" class="tab-button active border-b-4 border-primary-500 bg-primary-400 text-black flex-1 py-2 sm:py-3 px-1 sm:px-6 font-bold text-xs sm:text-sm uppercase tracking-wide text-center">
+          Repos
         </button>
-        <button onclick="showTab('activity')" id="activity-tab" class="tab-button border-b-4 border-transparent text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 whitespace-nowrap py-3 px-6 font-bold text-sm uppercase tracking-wide">
+        <button onclick="showTab('activity')" id="activity-tab" class="tab-button border-b-4 border-transparent text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 flex-1 py-2 sm:py-3 px-1 sm:px-6 font-bold text-xs sm:text-sm uppercase tracking-wide text-center">
           Activity
         </button>
-        <button onclick="showTab('languages')" id="languages-tab" class="tab-button border-b-4 border-transparent text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 whitespace-nowrap py-3 px-6 font-bold text-sm uppercase tracking-wide">
-          Languages
+        <button onclick="showTab('languages')" id="languages-tab" class="tab-button border-b-4 border-transparent text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 flex-1 py-2 sm:py-3 px-1 sm:px-6 font-bold text-xs sm:text-sm uppercase tracking-wide text-center">
+          Langs
         </button>
       </nav>
     </div>
@@ -381,35 +406,35 @@ if (sortedRepos.length > 0) {
     const lastUpdated = formatRelativeTime(repo.pushed_at);
 
     html += `
-      <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="block border-3 border-black dark:border-gray-600 p-5 shadow-brutal-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all bg-white dark:bg-gray-800">
-        <div class="flex justify-between items-start">
-          <div class="flex-1">
-            <h4 class="font-black text-lg text-gray-900 dark:text-white uppercase">${repo.name}</h4>
-            ${repo.description ? `<p class="text-sm text-gray-700 dark:text-gray-300 mt-2 font-medium">${repo.description}</p>` : ''}
-            <div class="flex items-center gap-4 mt-3">
-              ${repo.language ? `
-                <div class="flex items-center">
-                  <span class="w-4 h-4 border-2 border-black mr-2" style="background-color: ${getLanguageColor(repo.language)}"></span>
-                  <span class="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase">${repo.language}</span>
-                </div>
-              ` : ''}
-              <div class="flex items-center text-xs font-bold text-gray-700 dark:text-gray-300">
-                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-                ${repo.stargazers_count}
-              </div>
-              <div class="flex items-center text-xs font-bold text-gray-700 dark:text-gray-300">
-                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-                ${repo.forks_count}
-              </div>
+      <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="block border-3 border-black dark:border-gray-600 p-3 sm:p-5 shadow-brutal-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all bg-white dark:bg-gray-800">
+        <div class="flex flex-col gap-3">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-2">
+            <h4 class="font-black text-base sm:text-lg text-gray-900 dark:text-white uppercase break-words min-w-0">${repo.name}</h4>
+            <div class="text-left sm:text-right flex-shrink-0">
+              <span class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Updated </span>
+              <span class="text-xs font-black text-gray-900 dark:text-white">${lastUpdated}</span>
             </div>
           </div>
-          <div class="text-right ml-4">
-            <div class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Updated</div>
-            <div class="text-sm font-black text-gray-900 dark:text-white">${lastUpdated}</div>
+          ${repo.description ? `<p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 font-medium line-clamp-2">${repo.description}</p>` : ''}
+          <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+            ${repo.language ? `
+              <div class="flex items-center">
+                <span class="w-3 h-3 sm:w-4 sm:h-4 border-2 border-black mr-1.5 sm:mr-2 flex-shrink-0" style="background-color: ${getLanguageColor(repo.language)}"></span>
+                <span class="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase">${repo.language}</span>
+              </div>
+            ` : ''}
+            <div class="flex items-center text-xs font-bold text-gray-700 dark:text-gray-300">
+              <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              ${repo.stargazers_count}
+            </div>
+            <div class="flex items-center text-xs font-bold text-gray-700 dark:text-gray-300">
+              <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+              ${repo.forks_count}
+            </div>
           </div>
         </div>
       </a>
