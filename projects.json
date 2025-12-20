@@ -1,39 +1,150 @@
 {
   "projects": [
     {
-      "id": "test-case-study",
-      "title": "test case study",
-      "description": "# Project Overview",
-      "thumbnail": "/assets/images/placeholder.jpg",
+      "id": "indigo-sun-florals",
+      "title": "Indigo Sun Florals",
+      "description": "Full-stack e-commerce platform for a local florist with seasonal inventory management, custom arrangement builder, subscription services, and secure checkout. Built iteratively with lessons learned from previous projects.",
+      "thumbnail": "/assets/images/indigo-sun-florals-thumb.jpg",
       "featured": true,
-      "date": "2025-10-04",
-      "category": "Web Development",
+      "date": "2025-10-05",
+      "category": "E-commerce",
       "technologies": [
-        "Tanstack Start",
-        "Postgres",
-        "Drizzle ORM"
+        "React 19",
+        "TanStack Start",
+        "PostgreSQL",
+        "Drizzle ORM",
+        "Tailwind CSS v4",
+        "Better Auth"
       ],
-      "liveDemo": "dev1.appahouse.com",
+      "liveDemo": "https://dev1.appahouse.com/products",
       "repository": null,
       "developmentTime": "2 Weeks",
-      "linesOfCode": "10000",
-      "images": [],
-      "client": "Indigo Sun Florals",
-      "overview": "full website design and hosting",
-      "challenge": "Detailed description of the problem or challenge.",
-      "solution": "Explanation of the technical solution and approach.",
-      "developmentProcess": "Step-by-step breakdown of the development process.",
-      "technicalImplementation": "Detailed technical information about the implementation.",
-      "results": "Metrics, results, and impact of the project.",
-      "lessonsLearned": "Key takeaways and insights from the project."
+      "linesOfCode": "8341"
+    },
+    {
+      "id": "aidj-music-interface",
+      "title": "AIDJ Music Library",
+      "description": "Privacy-focused music library interface integrating with Navidrome for self-hosted streaming. Features comprehensive CI/CD pipeline with security scanning and 80%+ code coverage requirements - reflecting my commitment to code quality learned through trial and error.",
+      "thumbnail": "/assets/images/aidj-thumb.jpg",
+      "featured": true,
+      "date": "2025-11-04",
+      "category": "Web Application",
+      "technologies": [
+        "React 19",
+        "TanStack Start",
+        "PostgreSQL",
+        "Drizzle ORM",
+        "Tailwind CSS v4",
+        "Better Auth",
+        "Navidrome API",
+        "GitHub Actions"
+      ],
+      "liveDemo": null,
+      "repository": null,
+      "developmentTime": "4 Weeks",
+      "linesOfCode": "15000+"
+    },
+    {
+      "id": "mc-server-list",
+      "title": "Minecraft Server List",
+      "description": "Community-driven server listing platform featuring a transparent multi-factor ranking algorithm, real-time server pinging via minecraft-protocol, voting system with rate limiting, and admin moderation tools. Designed for fairness over paid promotions.",
+      "thumbnail": "/assets/images/mc-server-list-thumb.jpg",
+      "featured": true,
+      "date": "2025-11-28",
+      "category": "Web Application",
+      "technologies": [
+        "React 19",
+        "TanStack Start",
+        "PostgreSQL",
+        "Drizzle ORM",
+        "Tailwind CSS v4",
+        "Better Auth",
+        "minecraft-protocol"
+      ],
+      "liveDemo": null,
+      "repository": null,
+      "developmentTime": "3 Weeks",
+      "linesOfCode": "12000+"
+    },
+    {
+      "id": "hk-schedules",
+      "title": "Housekeeping Scheduler",
+      "description": "Purpose-built scheduling tool that replaced error-prone spreadsheet workflows. Features drag-and-drop scheduling, CSV import/export, and real-time sync. Deployed via Docker with Cloudflare Tunnel for secure remote access.",
+      "thumbnail": "/assets/images/hk-schedules-thumb.jpg",
+      "featured": true,
+      "date": "2025-10-16",
+      "category": "Productivity",
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Vite",
+        "shadcn/ui",
+        "Tailwind CSS",
+        "Express",
+        "Docker"
+      ],
+      "liveDemo": "https://hk.appahouse.com",
+      "repository": null,
+      "developmentTime": "2 Weeks",
+      "linesOfCode": "5000+"
+    },
+    {
+      "id": "timesheet-calculator",
+      "title": "Timesheet Calculator",
+      "description": "Lightweight timesheet management app with automated hour calculations, overtime tracking, and export capabilities. Built to solve a real workplace need with minimal complexity.",
+      "thumbnail": "/assets/images/timesheet-thumb.jpg",
+      "featured": false,
+      "date": "2025-11-06",
+      "category": "Productivity",
+      "technologies": [
+        "React 19",
+        "Vite",
+        "Tailwind CSS",
+        "Lucide React"
+      ],
+      "liveDemo": "https://schedule.appahouse.com",
+      "repository": null,
+      "developmentTime": "1 Week",
+      "linesOfCode": "2000+"
+    },
+    {
+      "id": "financial-planner",
+      "title": "Financial Planner",
+      "description": "Comprehensive financial planning application with budgeting tools, investment tracking, and real-time stock data via API integration. Expanding my skills beyond JavaScript into Python and Django.",
+      "thumbnail": "/assets/images/financial-planner-thumb.jpg",
+      "featured": false,
+      "date": "2025-11-28",
+      "category": "Web Application",
+      "technologies": [
+        "Python",
+        "Django",
+        "PostgreSQL",
+        "REST API"
+      ],
+      "liveDemo": null,
+      "repository": null,
+      "developmentTime": "Ongoing",
+      "linesOfCode": "5000+"
     }
   ],
   "categories": [
-    "Web Development"
+    "E-commerce",
+    "Web Application",
+    "Productivity"
   ],
   "technologies": [
+    "React 19",
+    "TanStack Start",
+    "PostgreSQL",
     "Drizzle ORM",
-    "Postgres",
-    "Tanstack Start"
+    "Tailwind CSS",
+    "Better Auth",
+    "TypeScript",
+    "Docker",
+    "Vite",
+    "shadcn/ui",
+    "Python",
+    "Django",
+    "GitHub Actions"
   ]
 }

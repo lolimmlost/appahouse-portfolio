@@ -4,9 +4,10 @@
       "id": "frontend",
       "title": "Frontend",
       "icon": "code",
+      "description": "Building responsive, accessible user interfaces with modern frameworks",
       "skills": [
         {
-          "name": "React",
+          "name": "React 19",
           "color": "#61DAFB"
         },
         {
@@ -14,12 +15,16 @@
           "color": "#3178C6"
         },
         {
-          "name": "Tailwind CSS",
+          "name": "Tailwind CSS v4",
           "color": "#06B6D4"
         },
         {
-          "name": "Next.js",
+          "name": "shadcn/ui",
           "color": "#000000"
+        },
+        {
+          "name": "Vite",
+          "color": "#646CFF"
         }
       ]
     },
@@ -27,47 +32,85 @@
       "id": "backend",
       "title": "Backend",
       "icon": "server",
+      "description": "Full-stack development with type-safe APIs and robust data management",
       "skills": [
+        {
+          "name": "TanStack Start",
+          "color": "#FF4154"
+        },
         {
           "name": "Node.js",
           "color": "#339933"
         },
         {
-          "name": "Tanstack Start",
-          "color": "#FF4154"
+          "name": "PostgreSQL",
+          "color": "#4169E1"
         },
+        {
+          "name": "Drizzle ORM",
+          "color": "#C5F74F"
+        },
+        {
+          "name": "Better Auth",
+          "color": "#8B5CF6"
+        },
+        {
+          "name": "Python/Django",
+          "color": "#092E20"
+        }
+      ]
+    },
+    {
+      "id": "devops",
+      "title": "DevOps & Infrastructure",
+      "icon": "cloud",
+      "description": "Self-hosting, containerization, and deployment automation",
+      "skills": [
         {
           "name": "Docker",
           "color": "#2496ED"
         },
         {
-          "name": "PostgreSQL",
-          "color": "#4169E1"
+          "name": "Cloudflare",
+          "color": "#F38020"
+        },
+        {
+          "name": "Vercel",
+          "color": "#000000"
+        },
+        {
+          "name": "GitHub Actions",
+          "color": "#2088FF"
         }
       ]
     },
     {
       "id": "tools",
-      "title": "Tools & Other",
+      "title": "Version Control & Testing",
       "icon": "tool",
+      "description": "Every mistake on GitHub taught me something valuable - from messy commit histories to proper branching strategies",
       "skills": [
         {
-          "name": "Git",
+          "name": "Git/GitHub",
           "color": "#F05032"
         },
         {
-          "name": "CI/CD",
-          "color": "#2088FF"
+          "name": "Vitest",
+          "color": "#6E9F18"
         },
         {
-          "name": "Cloud Services",
-          "color": "#FF9900"
+          "name": "Playwright",
+          "color": "#45BA4B"
         },
         {
-          "name": "Drizzle ORM",
-          "color": "#C5F74F"
+          "name": "ESLint/Prettier",
+          "color": "#4B32C3"
         }
       ]
     }
-  ]
+  ],
+  "learningPhilosophy": {
+    "title": "Learning Through Doing",
+    "description": "My GitHub history shows real growth - early commits with messy histories, learning to write better commit messages, implementing proper CI/CD, and building increasingly complex projects. Every mistake became a lesson that made the next project better."
+  }
 }

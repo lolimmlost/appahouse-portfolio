@@ -388,50 +388,76 @@ class BlogRenderer {
   // Enhanced markdown to HTML converter with better formatting
   markdownToHtml(markdown) {
     let html = markdown;
-    
-    // Headers
+
+    // IMPORTANT: Process code blocks FIRST to protect their content from other transformations
+    // Store code blocks temporarily with placeholders
+    const codeBlocks = [];
+    html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
+      const language = lang || 'text';
+      const escapedCode = this.escapeHtml(code.trim());
+      const placeholder = `__CODE_BLOCK_${codeBlocks.length}__`;
+      codeBlocks.push(`<div class="code-block-wrapper relative my-6 rounded-xl overflow-hidden border border-gray-700 shadow-lg">
+        <div class="code-block-header flex items-center justify-between px-4 py-3 bg-gray-800 border-b border-gray-700">
+          <div class="flex items-center gap-2">
+            <div class="flex gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-red-500"></span>
+              <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+              <span class="w-3 h-3 rounded-full bg-green-500"></span>
+            </div>
+            <span class="text-xs font-medium text-gray-400 uppercase tracking-wide ml-2">${language}</span>
+          </div>
+          <button class="copy-code-btn flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 bg-gray-700 hover:bg-gray-600 text-gray-300 hover:text-white rounded-md transition-all duration-200 border border-gray-600 hover:border-gray-500" data-code="${escapedCode.replace(/"/g, '&quot;')}">
+            <svg class="w-4 h-4 copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+            </svg>
+            <span class="copy-text">Copy</span>
+          </button>
+        </div>
+        <div class="code-block-content relative">
+          <pre class="bg-gray-900 text-gray-100 p-4 overflow-x-auto text-sm leading-relaxed m-0"><code class="language-${language} font-mono">${escapedCode}</code></pre>
+        </div>
+      </div>`);
+      return placeholder;
+    });
+
+    // Now process headers (code blocks are protected)
     html = html.replace(/^#### (.*$)/gim, '<h4 class="text-xl font-semibold mt-6 mb-3 text-gray-900 dark:text-white">$1</h4>');
     html = html.replace(/^### (.*$)/gim, '<h3 class="text-2xl font-semibold mt-8 mb-4 text-gray-900 dark:text-white">$1</h3>');
     html = html.replace(/^## (.*$)/gim, '<h2 class="text-3xl font-semibold mt-10 mb-5 text-gray-900 dark:text-white">$1</h2>');
     html = html.replace(/^# (.*$)/gim, '<h1 class="text-4xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">$1</h1>');
-    
-    // Code blocks with syntax highlighting
-    html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
-      const language = lang || 'text';
-      const escapedCode = this.escapeHtml(code.trim());
-      return `<div class="relative my-6">
-        <div class="flex items-center justify-between px-4 py-2 bg-gray-800 text-gray-200 text-sm font-mono rounded-t-lg">
-          <span class="text-xs">${language}</span>
-          <button class="copy-code-btn text-xs px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded transition-colors" data-code="${escapedCode.replace(/"/g, '"')}">Copy</button>
-        </div>
-        <pre class="bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto"><code class="language-${language}">${escapedCode}</code></pre>
-      </div>`;
-    });
-    
-    // Inline code
+
+    // Inline code (but not inside code block placeholders)
     html = html.replace(/`([^`]*)`/g, '<code class="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-1 py-0.5 rounded text-sm font-mono">$1</code>');
-    
+
     // Bold
     html = html.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900 dark:text-white">$1</strong>');
-    
+
     // Italic
     html = html.replace(/\*(.*?)\*/g, '<em class="italic text-gray-800 dark:text-gray-200">$1</em>');
-    
+
     // Links
     html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300 underline" target="_blank" rel="noopener noreferrer">$1</a>');
-    
+
     // Blockquotes
     html = html.replace(/^> (.*$)/gim, '<blockquote class="border-l-4 border-primary-500 pl-4 my-4 italic text-gray-700 dark:text-gray-300">$1</blockquote>');
-    
+
     // Horizontal rules
     html = html.replace(/^---$/gim, '<hr class="my-8 border-gray-200 dark:border-gray-700">');
-    
+
+    // Process tables before lists to avoid conflicts
+    html = this.processTables(html);
+
     // Lists (both ordered and unordered)
     html = this.processLists(html);
-    
+
     // Process paragraphs
     html = this.processParagraphs(html);
-    
+
+    // Restore code blocks from placeholders
+    codeBlocks.forEach((block, index) => {
+      html = html.replace(`__CODE_BLOCK_${index}__`, block);
+    });
+
     return html;
   }
 
@@ -488,8 +514,109 @@ class BlogRenderer {
     if (inList) {
       result.push(`</${listType}>`);
     }
-    
+
     return result.join('\n');
+  }
+
+  // Process markdown tables
+  processTables(html) {
+    const lines = html.split('\n');
+    const result = [];
+    let inTable = false;
+    let tableRows = [];
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+
+      // Check if this is a table row (starts and ends with |)
+      if (line.startsWith('|') && line.endsWith('|')) {
+        // Skip separator rows (|---|---|)
+        if (line.match(/^\|[\s\-:|]+\|$/)) {
+          continue;
+        }
+
+        if (!inTable) {
+          inTable = true;
+          tableRows = [];
+        }
+
+        // Parse cells
+        const cells = line.split('|').slice(1, -1).map(cell => cell.trim());
+        tableRows.push(cells);
+      } else {
+        // If we were in a table, render it now
+        if (inTable && tableRows.length > 0) {
+          result.push(this.renderTable(tableRows));
+          inTable = false;
+          tableRows = [];
+        }
+        result.push(lines[i]);
+      }
+    }
+
+    // Handle table at end of content
+    if (inTable && tableRows.length > 0) {
+      result.push(this.renderTable(tableRows));
+    }
+
+    return result.join('\n');
+  }
+
+  // Render a table from rows
+  renderTable(rows) {
+    if (rows.length === 0) return '';
+
+    const headerRow = rows[0];
+    const bodyRows = rows.slice(1);
+
+    let tableHtml = `<div class="table-wrapper my-6 overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+      <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <thead class="bg-gray-50 dark:bg-gray-800">
+          <tr>`;
+
+    headerRow.forEach(cell => {
+      const processedCell = this.processInlineElements(cell);
+      tableHtml += `<th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">${processedCell}</th>`;
+    });
+
+    tableHtml += `</tr>
+        </thead>
+        <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">`;
+
+    bodyRows.forEach((row, index) => {
+      const rowClass = index % 2 === 0 ? '' : 'bg-gray-50 dark:bg-gray-800/50';
+      tableHtml += `<tr class="${rowClass}">`;
+      row.forEach(cell => {
+        const processedCell = this.processInlineElements(cell);
+        tableHtml += `<td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">${processedCell}</td>`;
+      });
+      tableHtml += '</tr>';
+    });
+
+    tableHtml += `</tbody>
+      </table>
+    </div>`;
+
+    return tableHtml;
+  }
+
+  // Process inline elements (code, bold, italic, links) in text
+  processInlineElements(text) {
+    let result = text;
+
+    // Inline code
+    result = result.replace(/`([^`]*)`/g, '<code class="bg-gray-100 dark:bg-gray-700 text-primary-600 dark:text-primary-400 px-1.5 py-0.5 rounded text-xs font-mono">$1</code>');
+
+    // Bold
+    result = result.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold">$1</strong>');
+
+    // Italic
+    result = result.replace(/\*(.*?)\*/g, '<em class="italic">$1</em>');
+
+    // Links
+    result = result.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300 underline" target="_blank" rel="noopener noreferrer">$1</a>');
+
+    return result;
   }
 
   // Process paragraphs
@@ -510,7 +637,11 @@ class BlogRenderer {
           trimmed.startsWith('<ol') ||
           trimmed.startsWith('<blockquote') ||
           trimmed.startsWith('<hr') ||
-          trimmed.startsWith('<div')) {
+          trimmed.startsWith('<div') ||
+          trimmed.startsWith('<table') ||
+          trimmed.startsWith('<pre') ||
+          trimmed.startsWith('<li') ||
+          trimmed.startsWith('</')) {
         result.push(block);
       } else {
         // Wrap in paragraph tags
@@ -531,25 +662,53 @@ class BlogRenderer {
   // Add copy code functionality to code blocks
   addCopyCodeFunctionality(container) {
     const copyButtons = container.querySelectorAll('.copy-code-btn');
-    
+
     copyButtons.forEach(button => {
       button.addEventListener('click', () => {
         const code = button.getAttribute('data-code');
-        
+        const copyIcon = button.querySelector('.copy-icon');
+        const copyText = button.querySelector('.copy-text');
+
         // Copy to clipboard
         navigator.clipboard.writeText(code).then(() => {
-          // Update button text
-          const originalText = button.textContent;
-          button.textContent = 'Copied!';
-          button.classList.add('bg-green-600');
-          
+          // Update button appearance
+          button.classList.remove('bg-gray-700', 'hover:bg-gray-600', 'border-gray-600');
+          button.classList.add('bg-green-600', 'border-green-500', 'text-white');
+
+          // Update icon to checkmark
+          if (copyIcon) {
+            copyIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>';
+          }
+
+          // Update text
+          if (copyText) {
+            copyText.textContent = 'Copied!';
+          }
+
           // Reset after 2 seconds
           setTimeout(() => {
-            button.textContent = originalText;
-            button.classList.remove('bg-green-600');
+            button.classList.remove('bg-green-600', 'border-green-500', 'text-white');
+            button.classList.add('bg-gray-700', 'hover:bg-gray-600', 'border-gray-600');
+
+            if (copyIcon) {
+              copyIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>';
+            }
+
+            if (copyText) {
+              copyText.textContent = 'Copy';
+            }
           }, 2000);
         }).catch(err => {
           console.error('Failed to copy code: ', err);
+          // Show error state
+          if (copyText) {
+            copyText.textContent = 'Failed';
+          }
+          setTimeout(() => {
+            if (copyText) {
+              copyText.textContent = 'Copy';
+            }
+          }, 2000);
         });
       });
     });

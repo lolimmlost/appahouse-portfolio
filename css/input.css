@@ -126,6 +126,66 @@
   .dark .prose pre {
     @apply bg-gray-800 text-gray-200;
   }
+
+  /* Blog code block styles */
+  .code-block-wrapper {
+    font-family: 'Fira Code', monospace;
+  }
+
+  .code-block-wrapper pre {
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .code-block-wrapper code {
+    font-family: 'Fira Code', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  .code-block-content pre::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .code-block-content pre::-webkit-scrollbar-track {
+    background: #1f2937;
+    border-radius: 4px;
+  }
+
+  .code-block-content pre::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 4px;
+  }
+
+  .code-block-content pre::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+  }
+
+  /* Table styles */
+  .table-wrapper {
+    @apply shadow-sm;
+  }
+
+  .table-wrapper table {
+    @apply text-left;
+  }
+
+  .table-wrapper code {
+    @apply bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-xs;
+  }
+
+  /* Blog content styles */
+  .blog-content h2 {
+    @apply scroll-mt-20;
+  }
+
+  .blog-content h3 {
+    @apply scroll-mt-20;
+  }
+
+  .blog-content h4 {
+    @apply scroll-mt-20;
+  }
 }
 
 /* Enhanced animations */
