@@ -58,7 +58,7 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "gray-matter": "^4.0.3",
-    "handlebars": "^4.7.8"
+    "handlebars": "^4.7.9"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
