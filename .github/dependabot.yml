@@ -13,3 +13,10 @@ updates:
     commit-message:
       prefix: "chore(deps)"
 
+    ignore:
+      # chalk 5+ is ESM-only; scripts use require('chalk')
+      - dependency-name: "chalk"
+        update-types: ["version-update:semver-major"]
+      # Tailwind v4 needs a manual migration (new CLI/PostCSS plugin, CSS-first config)
+      - dependency-name: "tailwindcss"
+        update-types: ["version-update:semver-major"]
